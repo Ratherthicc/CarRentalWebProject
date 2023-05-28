@@ -33,10 +33,16 @@ public class UserDAO {
 		return users;
 	}
 	
-	/***
-	 * Vraca sve proizvode.
-	 * @return
-	 */
+	public User addUser(User u) {
+		for(User user : users) {
+			if(user.getUsername().equals(u.getUsername()))return null;
+		}
+		users.add(u);
+		return u;
+	}
+	
+	
+	
 	public List<User> loadAll() {
 		String row;
 		try (BufferedReader csvReader = new BufferedReader(new FileReader(csvFilePath))){
@@ -97,7 +103,7 @@ public class UserDAO {
 			}
 			writer.write(line.toString());
             
-
+			//writer.close();
             System.out.println("Written to csv");
         } catch (IOException e) {
             System.err.println("Error writing to CSV file: " + e.getMessage());

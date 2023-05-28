@@ -47,9 +47,9 @@ public class UserService {
 	@POST
 	@Path("/")
 	@Produces(MediaType.APPLICATION_JSON)
-	public void nesto() {
+	public User nesto(User u) {
 		UserDAO dao = (UserDAO) ctx.getAttribute("UserDAO");
-		dao.saveAll();
+		return dao.addUser(u);
 		
 		
 	}
