@@ -41,6 +41,13 @@ public class UserDAO {
 		return u;
 	}
 	
+	public User findUser(String us,String pas) {
+		for(User user : users) {
+			if(user.getUsername().equals(us) && user.getPassword().equals(pas))return user;
+		}
+		return null;
+	}
+	
 	
 	
 	public List<User> loadAll() {

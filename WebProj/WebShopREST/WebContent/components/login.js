@@ -1,7 +1,8 @@
 Vue.component("login", {
 	data: function () {
 		    return {
-		      
+		      	username:"",
+		      	password:""
 		    }
 	},
 	template: ` 
@@ -10,16 +11,20 @@ Vue.component("login", {
             <table>
                 <tr>
                     <td><label>Username:</label></td>
-                    <td><input type="text" name="username"></td>
+                    <td><input type="text"  v-model="username"></td>
                 </tr>
                 <tr>
                     <td><label>Password:</label></td>
-                    <td><input type="password" name="password"></td>
+                    <td><input type="password"  v-model="password"></td>
                 </tr>
                 <tr>
                     <td></td>
-                    <td><input type="submit" value="login"></td>
+                    <td><input type="submit" value="login" v-on:click="loginWindow"></td>
                 </tr>
+                <tr>
+            <td colspan="2"><label name="loginErrorLabel" style="display:none;">Wrong pass or username!</label></td>
+
+        </tr>
             </table>
         </form>
         <form>
@@ -30,6 +35,19 @@ Vue.component("login", {
 	methods : {
 		registerUserWindow:function(){
 			router.push('/register');
+		},
+		loginWindow:function(){
+			event.preventDefault();
+			axios.get('rest/users/'+this.username+'/'+this.password)
+			.then(function (response) { 
+						if(response.data) router.push('/view');
+						else{
+							var labEl=document.getElementsByName('loginErrorLabel')[0];
+							labEl.style.display='inline';
+						}
+						})	
+			
+			
 		}
 		
 	},

@@ -10,6 +10,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -44,6 +45,17 @@ public class UserService {
 		
 		
 	}
+	
+	@GET
+	@Path("/{username}/{password}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public User find(@PathParam("username") String us,@PathParam("password") String pas) {
+		UserDAO dao = (UserDAO) ctx.getAttribute("UserDAO");
+		return dao.findUser(us,pas);
+		
+		
+	}
+	
 	@POST
 	@Path("/")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -53,6 +65,8 @@ public class UserService {
 		
 		
 	}
+	
+	
 }
 	
 	
