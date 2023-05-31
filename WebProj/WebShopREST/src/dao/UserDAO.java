@@ -41,6 +41,19 @@ public class UserDAO {
 		users.add(u);
 		return u;
 	}
+	public User updateUser(User u) {
+		for(User user : users) {
+			if(user.getUsername().equals(u.getUsername())) {
+				user.setFirst_name(u.getFirst_name());
+				user.setBirth_date(u.getBirth_date());
+				user.setGender(u.getGender());
+				user.setLast_name(u.getLast_name());
+				return user;
+			}
+		}
+		
+		return null;
+	}
 	
 	public User findUser(String us,String pas) {
 		for(User user : users) {
@@ -48,7 +61,12 @@ public class UserDAO {
 		}
 		return null;
 	}
-	
+	public User findUserByUsername(String username) {
+		for(User user : users) {
+			if(user.getUsername().equals(username))return user;
+		}
+		return null;
+	}
 	
 	
 	public List<User> loadAll() {
@@ -71,7 +89,7 @@ public class UserDAO {
 				else 
 					type=UserType.Administrator;
 				
-				User user=new User(data[0],data[1],data[2],data[3],gender,data[5],type);
+				User user=new User(data[0],data[1],data[2],data[3],gender,data[5],type,Integer.parseInt(data[7]),data[8]);
 				users.add(user);
 				
 			    
@@ -106,6 +124,10 @@ public class UserDAO {
 				line.append(user.getBirth_date());
 				line.append(",");
 				line.append(user.getType());
+				line.append(",");
+				line.append(user.getPoints());
+				line.append(",");
+				line.append(user.getRank());
 				line.append("\n");
 				
 			}

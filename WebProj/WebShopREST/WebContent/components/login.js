@@ -2,7 +2,8 @@ Vue.component("login", {
 	data: function () {
 		    return {
 		      	username:"",
-		      	password:""
+		      	password:"",
+		      	
 		    }
 	},
 	template: ` 
@@ -19,7 +20,7 @@ Vue.component("login", {
                 </tr>
                 <tr>
                     <td></td>
-                    <td><input type="submit" value="login" v-on:click="loginWindow"></td>
+                    <td><input type="submit" value="login" v-on:click="loginWindow(username)"></td>
                 </tr>
                 <tr>
             <td colspan="2"><label name="loginErrorLabel" style="display:none;">Wrong pass or username!</label></td>
@@ -36,11 +37,15 @@ Vue.component("login", {
 		registerUserWindow:function(){
 			router.push('/register');
 		},
-		loginWindow:function(){
+		loginWindow:function(username){
 			event.preventDefault();
 			axios.get('rest/users/'+this.username+'/'+this.password)
 			.then(function (response) { 
-						if(response.data) router.push('/view');
+						console.log(username);
+						if(response.data){
+							
+							router.push(`/view/${username}`);
+						} 
 						else{
 							var labEl=document.getElementsByName('loginErrorLabel')[0];
 							labEl.style.display='inline';

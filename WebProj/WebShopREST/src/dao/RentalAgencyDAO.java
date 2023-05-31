@@ -33,7 +33,7 @@ public class RentalAgencyDAO {
 	 */
 	public RentalAgencyDAO(String contextPath) {
 		this.csvFilePath = contextPath.replace("\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\WebShopREST\\", "\\WebProj\\WebShopREST\\WebContent\\data\\rentalagencies.csv");
-		System.out.println(csvFilePath);
+		
 		loadAll();
 	}
 	public Collection<RentalAgency> getAll() {

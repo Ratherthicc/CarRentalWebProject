@@ -32,12 +32,12 @@ public class RentalAgencyService {
 	public void init() {
 		if (ctx.getAttribute("RentalAgencyDAO") == null) {
 	    	String contextPath = ctx.getRealPath("");
-	    	System.out.println(contextPath);
+	    	
 			ctx.setAttribute("RentalAgencyDAO", new RentalAgencyDAO(contextPath));
 		}
 		if(ctx.getAttribute("LocationDAO") == null) {
 			String contextPath = ctx.getRealPath("");
-			System.out.println(contextPath);
+			
 			ctx.setAttribute("LocationDAO", new LocationDAO(contextPath));
 		}
 	}
