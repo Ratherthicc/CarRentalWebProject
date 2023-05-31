@@ -19,7 +19,7 @@ import model.User.UserType;
 
 public class UserDAO {
 	private List<User> users=new ArrayList<User>();
-	private String csvFilePath = "C:\\Users\\Legion\\Downloads\\WebProj\\WebShopREST\\WebContent\\data\\users.csv";
+	private String csvFilePath;
 	public UserDAO() {
 		
 	}
@@ -27,6 +27,7 @@ public class UserDAO {
 	 * @param contextPath
 	 */
 	public UserDAO(String contextPath) {
+		this.csvFilePath = contextPath.replace("\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\WebShopREST\\", "\\WebProj\\WebShopREST\\WebContent\\data\\users.csv");
 		loadAll();
 	}
 	public Collection<User> getAll() {
