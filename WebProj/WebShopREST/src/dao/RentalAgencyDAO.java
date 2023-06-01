@@ -43,7 +43,7 @@ public class RentalAgencyDAO {
 	
 	public List<RentalAgency> loadAll() {
 		String row;
-		try (BufferedReader csvReader = new BufferedReader(new FileReader(this.csvFilePath))){
+		try (BufferedReader csvReader = new BufferedReader(new FileReader(csvFilePath))){
 			rentalAgencies.clear();
 			while ((row = csvReader.readLine()) != null) {    
 				String[] data=row.split(",");

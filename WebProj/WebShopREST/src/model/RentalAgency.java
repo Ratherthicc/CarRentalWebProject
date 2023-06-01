@@ -25,6 +25,7 @@ public class RentalAgency {
 	public RentalAgency(int id, String name, LocalTime openingTime, LocalTime closingTime, AgencyState state,
 			URI logoURI, int rating, int locationId) {
 		super();
+		location = new Location();
 		this.id = id;
 		this.name = name;
 		this.openingTime = openingTime;

@@ -49,9 +49,10 @@ public class RentalAgencyService {
 		RentalAgencyDAO rentalAgencyDAO = (RentalAgencyDAO) ctx.getAttribute("RentalAgencyDAO");
 		LocationDAO locationDAO = (LocationDAO) ctx.getAttribute("LocationDAO");
 		
-		for (RentalAgency rentalAgency : rentalAgencyDAO.getAll()) {
+		Collection<RentalAgency> rentalAgencies = rentalAgencyDAO.getAll();
+		for (RentalAgency rentalAgency : rentalAgencies) {
 			rentalAgency.setLocation(locationDAO.GetById(rentalAgency.getLocation().getId()));
 		}
-		return rentalAgencyDAO.getAll();
+		return rentalAgencies;
 	}
 }

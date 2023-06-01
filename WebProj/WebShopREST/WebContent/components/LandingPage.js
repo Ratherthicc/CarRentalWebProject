@@ -23,9 +23,13 @@ Vue.component("landingpage", {
                 <th>Rating</th>
             </tr>
             <tr v-for="r in RentalAgencies" class="dataRow">
-                <td>a</td>
+                <td>
+                	<div class="imageContainer">
+            			<img v-bind:src="r.logoURI" class="rowDataImage"/>
+       				</div>
+                </td>
                 <td>{{r.name}}</td>
-                <td>{{r.location.street + ', ' + r.location.streetNumber}}</td>
+                <td>{{r.location.street + ', ' + r.location.streetNumber + ', ' + r.location.city}}</td>
                 <td>{{r.rating}}</td>
             </tr>
         </table>
@@ -41,6 +45,7 @@ Vue.component("landingpage", {
 		}
 	},
 	mounted () {
-		axios.get(`rest/rentalAgency/getAll`).then((response) => {this.RentalAgencies = response.data})
+		axios.get(`rest/rentalAgency/getAll`).then((response) => {this.RentalAgencies = response.data;
+																  this.RentalAgencies.sort((a, b) => b.state.localeCompare(a.state));})
     }
 });
