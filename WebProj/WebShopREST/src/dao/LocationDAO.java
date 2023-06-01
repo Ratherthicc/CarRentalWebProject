@@ -41,6 +41,7 @@ public class LocationDAO {
 			if(location.getId() == id)
 				return location;
 		}
+		
 		return null; 
 	}
 	

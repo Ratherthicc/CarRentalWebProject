@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -27,10 +28,7 @@ public class UserService {
 		
 	}
 	@PostConstruct
-	// ctx polje je null u konstruktoru, mora se pozvati nakon konstruktora (@PostConstruct anotacija)
 	public void init() {
-		// Ovaj objekat se instancira vi�e puta u toku rada aplikacije
-		// Inicijalizacija treba da se obavi samo jednom
 		if (ctx.getAttribute("UserDAO") == null) {
 	    	String contextPath = ctx.getRealPath("");
 			ctx.setAttribute("UserDAO", new UserDAO(contextPath));
@@ -42,6 +40,16 @@ public class UserService {
 	public Collection<User> login() {
 		UserDAO dao = (UserDAO) ctx.getAttribute("UserDAO");
 		return dao.getAll();
+		
+		
+	}
+	
+	@GET
+	@Path("/{username}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public User findu(@PathParam("username") String us) {
+		UserDAO dao = (UserDAO) ctx.getAttribute("UserDAO");
+		return dao.findUserByUsername(us);
 		
 		
 	}
@@ -62,6 +70,16 @@ public class UserService {
 	public User nesto(User u) {
 		UserDAO dao = (UserDAO) ctx.getAttribute("UserDAO");
 		return dao.addUser(u);
+		
+		
+	}
+	
+	@PUT
+	@Path("/")
+	@Produces(MediaType.APPLICATION_JSON)
+	public User nesto2(User u) {
+		UserDAO dao = (UserDAO) ctx.getAttribute("UserDAO");
+		return dao.updateUser(u);
 		
 		
 	}

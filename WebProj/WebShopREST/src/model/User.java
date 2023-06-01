@@ -1,6 +1,5 @@
 package model;
 
-import java.util.Date;
 
 
 
@@ -12,7 +11,38 @@ public class User {
 	private Gender gender;
 	private String birth_date;
 	private UserType type;
+	private int points;
+	private String rank;
 	
+	public User() {
+		
+	}
+	
+	public User(String username, String password, String first_name, String last_name, Gender gender, String birth_date,
+			UserType type, int points, String rank) {
+		this.username = username;
+		this.password = password;
+		this.first_name = first_name;
+		this.last_name = last_name;
+		this.gender = gender;
+		this.birth_date = birth_date;
+		this.type = type;
+		this.points = points;
+		this.rank = rank;
+	}
+
+	public int getPoints() {
+		return points;
+	}
+	public void setPoints(int points) {
+		this.points = points;
+	}
+	public String getRank() {
+		return rank;
+	}
+	public void setRank(String rank) {
+		this.rank = rank;
+	}
 	public enum Gender {
 		  Male,
 		  Female
@@ -23,19 +53,7 @@ public class User {
 		Administrator
 	}
 	
-	public User() {
-		
-	}
-	public User(String username, String password, String first_name, String last_name, Gender gender, String birth_date,
-			UserType type) {
-		this.username = username;
-		this.password = password;
-		this.first_name = first_name;
-		this.last_name = last_name;
-		this.gender = gender;
-		this.birth_date = birth_date;
-		this.type = type;
-	}
+	
 	public String getUsername() {
 		return username;
 	}

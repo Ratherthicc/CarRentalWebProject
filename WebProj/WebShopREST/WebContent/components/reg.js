@@ -9,9 +9,12 @@ Vue.component("register", {
 			        last_name: null,
 			        gender: null,
 			        birth_date: "",
-			        type: "Buyer"  
-			  		}
-			  		
+			        type: "Buyer"  ,
+			        points:0,
+			        rank:"Bronze"
+			  		},
+			  confirmpas:"",
+			  text:""
 			  		
 		    }
 	},
@@ -24,6 +27,10 @@ Vue.component("register", {
             <tr>
                 <td><label>Password:</label></td>
                 <td><input name="password" type="password" v-model="user.password"></td>
+            </tr>
+            <tr>
+                <td><label>Confirm password:</label></td>
+                <td><input name="confirmpassword" type="password" v-model="confirmpas"></td>
             </tr>
             <tr>
                 <td>First Name:</td>
@@ -51,7 +58,7 @@ Vue.component("register", {
                 <td><input type="submit" value="Register" v-on:click="registerUser"></td>
             </tr>
             <tr>
-            <td colspan="2"><label name="usernameLabel" style="display:none;">Please select a unique username!</label></td>
+            <td colspan="2">{{text}}</td>
 
         </tr>
         </table>
@@ -60,15 +67,22 @@ Vue.component("register", {
 	, 
 	methods : {
 		registerUser:function(){
-			axios.post('rest/users/',this.user)
-				.then(function (response) { 
-						if(response.data) router.push('/');
-						else {
-							var labEl=document.getElementsByName('usernameLabel')[0];
-							labEl.style.display='inline';
-							}
-					})
-					
+			this.text='';
+			
+			if(this.confirmpas==this.user.password){
+				axios.post('rest/users/',this.user)
+					.then(function (response) { 
+							if(response.data){
+								router.push('/');
+								return;	
+							} 
+						})
+						this.text='Please select a unique username!';
+			}
+			else{
+				this.text='Passwords dont match!';
+			}
+				
 		}
 		
 	},
