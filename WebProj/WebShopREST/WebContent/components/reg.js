@@ -3,10 +3,10 @@ Vue.component("register", {
 		    return {
 		      user:
 				  	{
-			        username: null,
-			        password: null,
-			        first_name: null,
-			        last_name: null,
+			        username: "",
+			        password: "",
+			        first_name: "",
+			        last_name: "",
 			        gender: null,
 			        birth_date: "",
 			        type: "Buyer"  ,

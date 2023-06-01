@@ -7,8 +7,10 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,16 +40,27 @@ public class UserDAO {
 		for(User user : users) {
 			if(user.getUsername().equals(u.getUsername()))return null;
 		}
+		if(!validateUser(u)) {
+			
+			return null;
+		}
 		users.add(u);
+		saveAll();
 		return u;
 	}
 	public User updateUser(User u) {
 		for(User user : users) {
 			if(user.getUsername().equals(u.getUsername())) {
+				if(!validateUser(u)) {
+					
+					return null;
+				}
 				user.setFirst_name(u.getFirst_name());
 				user.setBirth_date(u.getBirth_date());
 				user.setGender(u.getGender());
 				user.setLast_name(u.getLast_name());
+				
+				saveAll();
 				return user;
 			}
 		}
@@ -105,9 +118,9 @@ public class UserDAO {
 		return users;
 		
 	}
-	
 	public void saveAll() {
 		try (BufferedWriter writer = new BufferedWriter(new FileWriter(csvFilePath))) {
+			
 			StringBuilder line = new StringBuilder();
 			for(User user : users) {
 				
@@ -132,13 +145,48 @@ public class UserDAO {
 				
 			}
 			writer.write(line.toString());
-            
-			//writer.close();
-            System.out.println("Written to csv");
+			writer.close();
         } catch (IOException e) {
             System.err.println("Error writing to CSV file: " + e.getMessage());
         }
 		
+	}
+	
+	private boolean validateUser(User user) {
+		if(user.getUsername().isBlank() || user.getPassword().isBlank() || user.getFirst_name().isBlank() || user.getLast_name().isBlank()
+				|| !(user.getGender().equals(Gender.Male) || user.getGender().equals(Gender.Female) ) || user.getBirth_date().isBlank()) {
+			return false;
+		}
+		String regexUsername="[a-zA-Z].*";
+		if(!user.getUsername().matches(regexUsername)){
+			
+			return false;
+		}
+		
+		String regexName="[A-Z][a-z]+";
+		if(!user.getFirst_name().matches(regexName) || !user.getLast_name().matches(regexName) ) {
+			return false;
+		}
+		
+		String dateRegex="\\d{4}-\\d{2}-\\d{2}";
+		if(!user.getBirth_date().matches(dateRegex)) {
+			return false;
+		}
+		try {
+		LocalDate currentDate = LocalDate.now();
+		LocalDate l=LocalDate.parse(user.getBirth_date());
+		int comparison=l.compareTo(currentDate);
+		if (comparison >= 0) {
+			
+            return false;
+        }
+		}
+		catch (Exception e) {
+			System.out.println("date error");
+			return false;
+		}
+		
+		return true;
 	}
 	
 }
