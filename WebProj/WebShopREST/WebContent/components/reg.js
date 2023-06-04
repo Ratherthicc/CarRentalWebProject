@@ -90,8 +90,10 @@ Vue.component("register", {
 			
 			this.invalidPassword = (this.user.password === null) || (this.user.password.length < 6) || !(this.user.password === this.confirmpas);
 			
-			var currentDate = new Date().toLocaleDateString("en-IN");
-			this.invalidBirthDate = (this.user.birth_date >= currentDate) || (this.user.birth_date===null);
+			datum = new Date(this.user.birth_date);
+            var currentDate = new Date()
+
+            this.invalidBirthDate = (datum.getTime() > currentDate.getTime() || this.user.birth_date===null || (datum.toLocaleDateString("en-IN") === currentDate.toLocaleDateString("en-IN")))
 			
 			this.invalidGender = (this.user.gender === null) || (this.user.gender === "")
 			
