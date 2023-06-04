@@ -49,7 +49,7 @@ Vue.component("editview", {
             </td>
         </tr>
     </table>
-    {{user}}
+    
     </form>
     
     `

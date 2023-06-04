@@ -72,6 +72,8 @@ public class LocationDAO {
 		
 	}
 	
+	
+	
 	public void saveAll() {
 		try (BufferedWriter writer = new BufferedWriter(new FileWriter(csvFilePath))) {
 			StringBuilder line = new StringBuilder();
