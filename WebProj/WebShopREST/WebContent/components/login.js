@@ -3,35 +3,26 @@ Vue.component("login", {
 		    return {
 		      	username:"",
 		      	password:"",
+		      	invalidCredentials: false
 		      	
 		    }
 	},
 	template: ` 
-	<div>
-        <form>
-            <table>
-                <tr>
-                    <td><label>Username:</label></td>
-                    <td><input type="text"  v-model="username"></td>
-                </tr>
-                <tr>
-                    <td><label>Password:</label></td>
-                    <td><input type="password"  v-model="password"></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td><input type="submit" value="login" v-on:click="loginWindow(username)"></td>
-                </tr>
-                <tr>
-            <td colspan="2"><label name="loginErrorLabel" style="display:none;">Wrong pass or username!</label></td>
-
-        </tr>
-            </table>
+	<div class="login_form_div">
+        <form class="login_form">
+            <label class="login_label_header">Account Log In</label>
+            <br>
+            <label class="login_label">Username:</label>
+            <br><input class="login_input" v-model="username" type="text"/>
+            <br><label v-if="invalidCredentials" class="invalid_input_label">You entered wrong username!</label>
+            <br><label class="login_label" v-model="password">Password:</label>
+            <br><input class="login_input" type="password"/>
+            <br><label v-if="invalidCredentials" class="invalid_input_label">You entered wrong password!</label>
+            <input v-on:click="loginWindow(username)" class="login_button nav_button" type="submit" value="Log in">
+            <br><label class="register_message_label">Don't have an account? <a href="/WebShopREST/#/register">Register now</a></a></label>
         </form>
-        <form>
-        	<input type="submit" value="register" v-on:click="registerUserWindow">
-    	</form>
-    </div>`
+    </div>
+    `
 	, 
 	methods : {
 		registerUserWindow:function(){
@@ -39,6 +30,7 @@ Vue.component("login", {
 		},
 		loginWindow:function(username){
 			event.preventDefault();
+			var self = this;
 			axios.get('rest/users/'+this.username+'/'+this.password)
 			.then(function (response) { 
 						console.log(username);
@@ -47,8 +39,7 @@ Vue.component("login", {
 							router.push(`/view/${username}`);
 						} 
 						else{
-							var labEl=document.getElementsByName('loginErrorLabel')[0];
-							labEl.style.display='inline';
+							self.invalidCredentials = true;
 						}
 						})	
 			

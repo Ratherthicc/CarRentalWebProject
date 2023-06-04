@@ -8,79 +8,115 @@ Vue.component("register", {
 			        first_name: null,
 			        last_name: null,
 			        gender: null,
-			        birth_date: "",
+			        birth_date: null,
 			        type: "Buyer"  ,
 			        points:0,
 			        rank:"Bronze"
 			  		},
 			  confirmpas:"",
-			  text:""
-			  		
+			  invalidUsername: false,
+			  invalidPassword: false,
+			  invalidName: false,
+			  invalidSurname: false,
+			  invalidBirthDate: false,
+			  invalidGender: false	  		
 		    }
 	},
 	template: ` 
-		<table>
-            <tr>
-                <td><label>Username:</label></td>
-                <td><input type="text" v-model="user.username"></td>
-            </tr>
-            <tr>
-                <td><label>Password:</label></td>
-                <td><input name="password" type="password" v-model="user.password"></td>
-            </tr>
-            <tr>
-                <td><label>Confirm password:</label></td>
-                <td><input name="confirmpassword" type="password" v-model="confirmpas"></td>
-            </tr>
-            <tr>
-                <td>First Name:</td>
-                <td><input name="firstname" type="text" v-model="user.first_name"></td>
-            </tr>
-            <tr>
-                <td><label>Last Name:</label></td>
-                <td><input name="lastname" type="text" v-model="user.last_name"></td>
-            </tr>
-            <tr>
-                <td>Gender:</td>
-                <td>
-                    <select name="gender" v-model="user.gender">
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
+		 <div class="signup_form_div">
+        <form class="signup_form">
+            <label class="signup_label_header">Register account:</label>
+            <br>
+            
+            <label class="login_label">Username:</label>
+            <br><input v-model="user.username" class="login_input" type="text"/>
+             <br><label v-if="invalidUsername" class="invalid_input_label">Invalid username!</label>
+             
+            <br><label id="name_singup_label" class="login_label">Name:</label>
+            <label id="surname_signup_label" class="login_label">Surname:</label>
+            <br>
+            <div class="name_surname_div">
+                <input v-model="user.first_name" class="name_surname_input" type="text">
+                <input v-model="user.last_name" class="name_surname_input" type="text">
+            </div>
+                 <label v-if="invalidName" class="invalid_input_label">Invalid name!</label>
+                 <label style="left: 50.5%; position:absolute;" v-if="invalidSurname" class="invalid_input_label">Invalid surname!</label>
+            
+            <br><label class="login_label">Password:</label>
+            <br><input v-model="user.password" class="login_input" type="password"/>
+             <br><label v-if="invalidPassword" class="invalid_input_label">Password needs to have at least 6 characters!</label>
+            
+            <br><label class="login_label">Confirm password:</label>
+            <br><input v-model="confirmpas" class="login_input" type="password"/>
+             <br><label v-if="invalidPassword" class="invalid_input_label">Both passwords do not match!</label>
+            
+            <br><label class="login_label">Gender:</label>
+            <br><select v-model="user.gender" class="login_input" type="text">
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
                 </select>
-            </td>
-            </tr>
-            <tr>
-                <td><label>Date of birth:</label></td>
-                <td><input name="date" type="date" v-model="user.birth_date"></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td><input type="submit" value="Register" v-on:click="registerUser"></td>
-            </tr>
-            <tr>
-            <td colspan="2">{{text}}</td>
-
-        </tr>
-        </table>
-    	
+      		 <br><label v-if="invalidGender" class="invalid_input_label">You need to select gender!</label>
+                
+            <br><label class="login_label">Date of birth:</label>
+            <br><input v-model="user.birth_date" class="login_input" type="date"/>
+             <br><label v-if="invalidBirthDate" class="invalid_input_label">Invalid date of birth!</label>
+            
+            <br><input type="submit" class="nav_button login_button" v-on:click="registerUser" value="Sign up"/>
+             
+            
+            <br><label class="register_message_label">Already got an account? <a href="/WebShopREST/#/login">Log in</a></a></label>
+        </form>
+        </div>
     `
 	, 
 	methods : {
 		registerUser:function(){
-			this.text='';
+			event.preventDefault();
 			
-			if(this.confirmpas==this.user.password){
+			this.invalidName = false;
+			this.invalidSurname = false;
+			this.invalidUsername = false;
+			this.invalidBirthDate = false;
+			this.invalidPassword = false;
+			this.invalidGender = false;
+			
+			var rgUsername = /^[a-zA-Z0-9_-]{1,}$/;
+			this.invalidUsername = !rgUsername.test(this.user.username) || (this.user.username===null);
+			
+			var rgName = /^[a-zA-Z]{1,}$/;
+			this.invalidName = !rgName.test(this.user.first_name) || (this.user.first_name===null);
+			
+			this.invalidSurname = !rgName.test(this.user.last_name) || (this.user.last_name===null);
+			
+			this.invalidPassword = (this.user.password === null) || (this.user.password.length < 6) || !(this.user.password === this.confirmpas);
+			
+			var currentDate = new Date().toLocaleDateString("en-IN");
+			this.invalidBirthDate = (this.user.birth_date >= currentDate) || (this.user.birth_date===null);
+			
+			this.invalidGender = (this.user.gender === null) || (this.user.gender === "")
+			
+			var self = this;
+			
+			if(this.invalidGender || this.invalidUsername || this.invalidName || this.invalidSurname || this.invalidPassword || this.invalidBirthDate){
+				return;
+			} 
+			else{
 				axios.post('rest/users/',this.user)
 					.then(function (response) { 
 							if(response.data){
 								router.push('/');
+								self.invalidName = false;
+								self.invalidSurname = false;
+								self.invalidUsername = false;
+								self.invalidBirthDate = false;
+								self.invalidPassword = false;
+								self.invalidGender = false;
 								return;	
-							} 
-						})
-						this.text='Please select a unique username!';
-			}
-			else{
-				this.text='Passwords dont match!';
+							}
+							else{
+								alert("User with username " + self.user.username + " already exists!");
+							}})
+								
 			}
 				
 		}

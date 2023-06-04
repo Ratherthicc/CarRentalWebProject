@@ -117,3 +117,138 @@ tr.tableHeader{
     background-color: rgba(33, 1, 36, 1);
     color: #f7f9f7;
 }
+.login_form_div{
+	background-color: #dbf9f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+}
+.login_form{
+    font-family: "Poppins";
+    padding: 24px;
+    height: 55vh;
+    width: 50vh;
+    background-color: #F7F9F7;
+    border: rgba(33, 1, 36, 1) 1px solid;
+    box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.2);
+}
+.login_label_header{
+    font-size: 24px;
+    text-decoration: underline;
+    display: inline-block;
+    position: relative;
+    left: 20%;
+    margin-bottom: 15px;
+}
+.login_label{
+    display: inline-block;
+    position: relative;
+    left: 5%;
+    margin-top: 15px;
+    font-size: 14px;
+}
+.login_input{
+    display: inline-block;
+    position: relative;
+    left: 5%;
+    margin-top: 0px;
+    width: 280px;
+    right: 5%;
+    height: 24px;
+    border-radius: 10px;
+    border: rgba(33, 1, 36, 1) 1px solid;
+    text-indent: 8px;
+}
+.login_button{
+    display: inline-block;
+    position: relative;
+    margin-top: 15px;
+    font-size: 16px;
+    width: 180px;
+    left: 15%;
+    top: 1%;
+}
+.register_message_label{
+    font-size: 12px;
+    display: inline-block;
+    position: relative;
+    left: 14%;
+    margin-top: 12px;
+}
+.register_message_label a{
+    text-decoration: none;
+    color: #750D37;
+    cursor: pointer;
+}
+.invalid_input_label{
+    color: #750D37;
+    display: inline-block;
+    position: relative;
+    font-size: 10px;
+    left: 6%;
+}
+
+.signup_form_div{
+    font-family: "Poppins";
+    background-color: #dbf9f0;
+    height: 100vh;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
+.signup_form{
+    padding: 24px;
+    height: 90vh;
+    width: 50vh;
+    background-color: #F7F9F7;
+    border: rgba(33, 1, 36, 1) 1px solid;
+    box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.2);
+}
+.signup_label_header{
+    font-size: 24px;
+    text-decoration: underline;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    margin-bottom: 0px;
+}
+
+#name_signup_label{
+    margin-right: 50px;
+    display: inline-block;
+}
+#surname_signup_label{
+    display: inline-block;
+    margin-left: 102px;
+}
+
+.name_surname_input{
+    display: inline-block;
+    width: 135px;
+    position: relative;
+    border-radius: 10px;
+    border: rgba(33, 1, 36, 1) 1px solid;
+    text-indent: 8px;
+    height: 24px;
+}
+.name_surname_div{
+    display: flex;
+    justify-content:space-between;
+    margin-left: 15px;
+    margin-right: 25px;
+}
+.register_message_label{
+    font-size: 12px;
+    display: inline-block;
+    position: relative;
+    justify-content: center;
+    margin-top: 12px;
+    margin-left: 15px;
+}
+.register_message_label a{
+    text-decoration: none;
+    color: #750D37;
+    cursor: pointer;
+}

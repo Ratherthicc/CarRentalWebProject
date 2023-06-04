@@ -2,8 +2,10 @@ Vue.component("editview", {
 	data: function () {
 		    return {
 		      	username:null,
-		      	user:{}
-			  		
+		      	user:{},
+		      	invalidName: null,
+		      	invalidSurname: null,
+		      	invalidBirthDate: null
 		    }
 	},
 	template: ` 
@@ -11,11 +13,17 @@ Vue.component("editview", {
     <table>
         <tr>
             <td><label>First name:</label></td>
-            <td><input type="text" v-model="user.first_name"></td>
+            <td>
+            	<input type="text" v-model="user.first_name">
+            	<label v-if="invalidName" class="invalid_input_label">Invalid name!</label>
+            </td>
         </tr>
         <tr>
             <td><label>Last name:</label></td>
-            <td><input type="text" v-model="user.last_name"></td>
+            <td>
+            	<input type="text" v-model="user.last_name">
+            	<label v-if="invalidSurname" class="invalid_input_label">Invalid surname!</label>
+            </td>
         </tr>
         <tr>
             <td><label>Gender:</label></td>
@@ -28,7 +36,11 @@ Vue.component("editview", {
         </tr>
         <tr>
             <td><label>Date of birth:</label></td>
-            <td><input type="text" v-model="user.birth_date"></td>
+            <td>
+            	<input type="date" v-model="user.birth_date">
+            	<label v-if="invalidBirthDate" class="invalid_input_label">Invalid birth date!</label>
+            </td>
+            
         </tr>
         <tr>
             <td></td>
@@ -44,10 +56,33 @@ Vue.component("editview", {
 	, 
 	methods : {
 		ConfirmButton:function(username){
-			axios.put('rest/users/',this.user)
-			.then(response=>router.push(`/view/${username}`))
-		}
+			
+			this.invalidName = false;
+			this.invalidSurname = false;
+			this.invalidDateBirth = false;
 		
+			var rgName = /^[a-zA-Z]{1,}$/;
+			this.invalidName = !rgName.test(this.user.first_name) || (this.user.first_name===null);
+			
+			this.invalidSurname = !rgName.test(this.user.last_name) || (this.user.last_name===null);
+			
+			var currentDate = new Date().toLocaleDateString("en-IN");;
+			this.invalidBirthDate = (this.user.birth_date >= currentDate) || (this.user.birth_date===null);
+			
+			var self = this;
+			
+			if(this.invalidBirthDate || this.invalidSurname || this.invalidName){
+				return;
+			}
+			else{
+				axios.put('rest/users/',this.user).then(response=>{
+														router.push(`/view/${username}`);
+														self.invalidName = false;
+														self.invalidSurname = false;
+														self.invalidDateBirth = false;
+														})
+			}
+		}
 	},
 	mounted () {
 		
