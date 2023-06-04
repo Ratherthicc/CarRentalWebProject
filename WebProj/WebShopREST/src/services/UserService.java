@@ -55,7 +55,7 @@ public class UserService {
 	}
 	
 	@GET
-	@Path("/{username}/{password}")
+	@Path("/login/{username}/{password}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public User find(@PathParam("username") String us,@PathParam("password") String pas) {
 		UserDAO dao = (UserDAO) ctx.getAttribute("UserDAO");
