@@ -61,7 +61,7 @@ Vue.component("editview", {
 			this.invalidSurname = false;
 			this.invalidDateBirth = false;
 		
-			var rgName = /^[a-zA-Z]{1,}$/;
+			var rgName = /^[A-Z][a-z]{1,}$/;
 			this.invalidName = !rgName.test(this.user.first_name) || (this.user.first_name===null);
 			
 			this.invalidSurname = !rgName.test(this.user.last_name) || (this.user.last_name===null);
