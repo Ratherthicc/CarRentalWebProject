@@ -23,7 +23,7 @@ Vue.component("landingpage", {
         <input type="text" name="search" v-on:keyup="updateGrid" v-model="textbox">
         
         <div >
-        <input type="checkbox" name="openCheckbox"> <label>Show only open</label> <br>
+        <input type="checkbox" v-on:click="filterOpenObjects" name="openCheckbox"> <label>Show only open</label> <br>
         <input type="checkbox">	
         <input type="checkbox">
         <input type="submit" value="Filter">
@@ -57,21 +57,58 @@ Vue.component("landingpage", {
 		SignInButton: function (){
 			router.push(`/register`);
 		},
-		updateGrid: function(){
+		updateGrid: function(){//Updates grid when someone writes in textbox
+					
 			this.SearchedAgencies=this.RentalAgencies.slice();
-			
 			for(var variable of this.RentalAgencies){
 				
 				if((!variable.name.toLowerCase().includes(this.textbox.toLowerCase())) &&
-				 (!variable.location.city.toLowerCase().includes(this.textbox.toLowerCase()))
+				 (!variable.location.city.toLowerCase().includes(this.textbox.toLowerCase()))//checks only for name and city missing rating
 				 ){
 					const i=this.SearchedAgencies.indexOf(variable);
 					this.SearchedAgencies.splice(i,1);
 				}
 	
 			}
+			
 		},
-		
+		filterOpenObjects: function(){
+			
+			var checkbox = document.getElementsByName("openCheckbox")[0];
+			
+			if(checkbox.checked){
+				var agencies=this.SearchedAgencies.slice();
+				
+				for(var variable of agencies){
+					if(variable.state=='NOT_WORKING'){
+						
+						const i=this.SearchedAgencies.indexOf(variable);
+						this.SearchedAgencies.splice(i,1);
+						
+					}
+				}	
+			}
+			else{
+				
+				var agencies=this.RentalAgencies.slice();
+				
+				for(var variable of agencies){
+					
+					if(variable.state=='NOT_WORKING'){
+						if((variable.name.toLowerCase().includes(this.textbox.toLowerCase())) ||
+				 			(variable.location.city.toLowerCase().includes(this.textbox.toLowerCase())))//missing rating search or something like that
+				 			{
+				 				
+							this.SearchedAgencies.splice(agencies.length,1,variable);
+						}
+					}
+				}
+				
+				
+			}
+			
+			
+		},
 		sortName: function(){
 		  var table, rows, switching, i, x, y, shouldSwitch;
 		  table = document.getElementById("myTable");
@@ -207,7 +244,7 @@ Vue.component("landingpage", {
 	mounted () {
 		axios.get(`rest/rentalAgency/getAll`).then((response) => {this.RentalAgencies = response.data;
 																  this.RentalAgencies.sort((a, b) => b.state.localeCompare(a.state));
-																  this.SearchedAgencies= response.data;});
+																  this.SearchedAgencies= this.RentalAgencies.slice();});
 		
     }
 });
