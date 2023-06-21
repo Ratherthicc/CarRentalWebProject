@@ -3,8 +3,10 @@ Vue.component("landingpage", {
 		    return {
 				RentalAgencies: [],
 				textbox:"",
-				SearchedAgencies: []
-				
+				SearchedAgencies: [],
+				sortNameFlag: false,
+				sortLocationFlag: false,
+				sortRatingFlag: false
 		    }
 	},
 	template: ` 
@@ -19,13 +21,20 @@ Vue.component("landingpage", {
             <a class="nav_a" v-on:click="logInButton"><button class="nav_button">Log in</button></a>
         </header>
         <input type="text" name="search" v-on:keyup="updateGrid" v-model="textbox">
-        <p><button v-on:click="sortTable">Sort</button></p>
+        
+        <div >
+        <input type="checkbox" name="openCheckbox"> <label>Show only open</label> <br>
+        <input type="checkbox">	
+        <input type="checkbox">
+        <input type="submit" value="Filter">
+		</div>
+        
         <table id="myTable">
             <tr class="tableHeader">
                 <th>Logo</th>
-                <th>Name</th>
-                <th>Location</th>
-                <th>Rating</th>
+                <th v-on:click="sortName">Name</th>
+                <th v-on:click="sortLocation">Location</th>
+                <th v-on:click="sortRating">Rating</th>
             </tr>
             <tr v-for="r in SearchedAgencies" class="dataRow">
                 <td>
@@ -62,7 +71,8 @@ Vue.component("landingpage", {
 	
 			}
 		},
-		sortTable: function(){
+		
+		sortName: function(){
 		  var table, rows, switching, i, x, y, shouldSwitch;
 		  table = document.getElementById("myTable");
 		  switching = true;
@@ -75,21 +85,125 @@ Vue.component("landingpage", {
 
 		      x = rows[i].getElementsByTagName("TD")[1];
 		      y = rows[i + 1].getElementsByTagName("TD")[1];
-
-		      if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-		        
-		        shouldSwitch = true;
-		        break;
-		      	}  	
+			  if(this.sortNameFlag){
+			      if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+			        
+			        shouldSwitch = true;
+			        break;
+			      	}
+			     } 
+			   else{
+				   if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+			        
+			        shouldSwitch = true;
+			        break;
+			      	}
+			   }	
 		    }
 		    if (shouldSwitch) {
 				rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
 		      	switching = true;
 		    }
+		    
 		  }
+		  	if(this.sortNameFlag){
+				this.sortNameFlag=false;
+			}
+			else{
+				this.sortNameFlag=true;
+			}
+		    
+		
+},
+			sortLocation: function(){
+					  var table, rows, switching, i, x, y, shouldSwitch;
+					  table = document.getElementById("myTable");
+					  switching = true;
+					  while (switching) {
+					    switching = false;
+					    rows = table.rows;
+					    for (i = 1; i < (rows.length - 1); i++) {
+			
+					      shouldSwitch = false;
+			
+					      x = rows[i].getElementsByTagName("TD")[2];
+					      y = rows[i + 1].getElementsByTagName("TD")[2];
+						  if(this.sortLocationFlag){
+						      if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+						        
+						        shouldSwitch = true;
+						        break;
+						      	}
+						     } 
+						   else{
+							   if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+						        
+						        shouldSwitch = true;
+						        break;
+						      	}
+						   }	
+					    }
+					    if (shouldSwitch) {
+							rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+					      	switching = true;
+					    }
+					    
+					  }
+					  	if(this.sortLocationFlag){
+							this.sortLocationFlag=false;
+						}
+						else{
+							this.sortLocationFlag=true;
+						}
+		    
+		
+},
+			sortRating: function(){
+					  var table, rows, switching, i, x, y, shouldSwitch;
+					  table = document.getElementById("myTable");
+					  switching = true;
+					  while (switching) {
+					    switching = false;
+					    rows = table.rows;
+					    for (i = 1; i < (rows.length - 1); i++) {
+			
+					      shouldSwitch = false;
+			
+					      x = rows[i].getElementsByTagName("TD")[3];
+					      y = rows[i + 1].getElementsByTagName("TD")[3];
+						  if(this.sortRatingFlag){
+						      if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+						        
+						        shouldSwitch = true;
+						        break;
+						      	}
+						     } 
+						   else{
+							   if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+						        
+						        shouldSwitch = true;
+						        break;
+						      	}
+						   }	
+					    }
+					    if (shouldSwitch) {
+							rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+					      	switching = true;
+					    }
+					    
+					  }
+					  	if(this.sortRatingFlag){
+							this.sortRatingFlag=false;
+						}
+						else{
+							this.sortRatingFlag=true;
+						}
+		    
+		
 }
 		
 	},
+	
 	mounted () {
 		axios.get(`rest/rentalAgency/getAll`).then((response) => {this.RentalAgencies = response.data;
 																  this.RentalAgencies.sort((a, b) => b.state.localeCompare(a.state));
