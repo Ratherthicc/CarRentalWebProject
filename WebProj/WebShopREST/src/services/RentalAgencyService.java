@@ -17,7 +17,9 @@ import javax.ws.rs.core.MediaType;
 
 import dao.LocationDAO;
 import dao.RentalAgencyDAO;
+import dao.VehicleDAO;
 import model.RentalAgency;
+import model.Vehicle;
 
 @Path("/rentalAgency")
 public class RentalAgencyService {
@@ -40,6 +42,11 @@ public class RentalAgencyService {
 			
 			ctx.setAttribute("LocationDAO", new LocationDAO(contextPath));
 		}
+		if(ctx.getAttribute("VehicleDAO") == null) {
+			String contextPath = ctx.getRealPath("");
+			
+			ctx.setAttribute("VehicleDAO", new VehicleDAO(contextPath));
+		}
 	}
 	
 	@GET
@@ -48,11 +55,20 @@ public class RentalAgencyService {
 	public Collection<RentalAgency> getAll(){
 		RentalAgencyDAO rentalAgencyDAO = (RentalAgencyDAO) ctx.getAttribute("RentalAgencyDAO");
 		LocationDAO locationDAO = (LocationDAO) ctx.getAttribute("LocationDAO");
+		VehicleDAO vehicleDAO= (VehicleDAO) ctx.getAttribute("VehicleDAO");
 		
 		Collection<RentalAgency> rentalAgencies = rentalAgencyDAO.getAll();
 		for (RentalAgency rentalAgency : rentalAgencies) {
 			rentalAgency.setLocation(locationDAO.GetById(rentalAgency.getLocation().getId()));
+			
+			for(Vehicle vehi:vehicleDAO.getById(rentalAgency.getId())) {
+				rentalAgency.addVehicles(vehi);
+			}
+			
 		}
+		
+		
+		
 		return rentalAgencies;
 	}
 }

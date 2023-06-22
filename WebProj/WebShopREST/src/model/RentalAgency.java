@@ -2,6 +2,8 @@ package model;
 
 import java.net.URI;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class RentalAgency {
@@ -13,6 +15,7 @@ public class RentalAgency {
 	private URI logoURI;
 	private int rating;
 	private Location location;
+	private List<Vehicle> vehicles;
 	
 	public enum AgencyState{
 		WORKING,
@@ -34,6 +37,15 @@ public class RentalAgency {
 		this.logoURI = logoURI;
 		this.rating = rating;
 		this.location.setId(locationId);
+		this.vehicles=new ArrayList<Vehicle>();
+	}
+
+	public List<Vehicle> getVehicles() {
+		return vehicles;
+	}
+
+	public void addVehicles(Vehicle vehicle) {
+		this.vehicles.add(vehicle);
 	}
 
 	public int getId() {

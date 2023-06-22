@@ -4,6 +4,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URI;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -22,6 +25,7 @@ import model.Vehicle;
 import model.Vehicle.FuelType;
 import model.Vehicle.TransmissionType;
 import model.Vehicle.VehicleType;
+import serializers.LocalTimeSerializer;
 
 public class VehicleDAO {
 	private List<Vehicle> vehicles=new ArrayList<Vehicle>();
@@ -34,15 +38,26 @@ public class VehicleDAO {
 	 */
 	public VehicleDAO(String contextPath) {
 		this.csvFilePath = contextPath.replace("\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\WebShopREST\\", "\\WebProj\\WebShopREST\\WebContent\\data\\vehicles.json");
-		vehicles.add(new Vehicle(0,"hah","haha",23,VehicleType.CAR,2,TransmissionType.AUTOMATIC,FuelType.DIESEL,22,3,3,"opis",URI.create("http://example.com"),true));
-		vehicles.add(new Vehicle(0,"hah","haha",23,VehicleType.CAR,2,TransmissionType.AUTOMATIC,FuelType.DIESEL,22,3,3,"opis",URI.create("http://example.com"),true));
+		//vehicles.add(new Vehicle(0,"hah","haha",23,VehicleType.CAR,2,TransmissionType.AUTOMATIC,FuelType.DIESEL,22,3,3,"opis",URI.create("http://example.com"),true));
+		//vehicles.add(new Vehicle(0,"hah","haha",23,VehicleType.CAR,2,TransmissionType.AUTOMATIC,FuelType.DIESEL,22,3,3,"opis",URI.create("http://example.com"),true));
 		
-		saveAll();
+		
 		loadAll();
+		
 	}
 	public Collection<Vehicle> getAll() {
 		loadAll();
 		return vehicles;
+	}
+	
+	public Collection<Vehicle> getById(int id){
+		List<Vehicle> vehicle_list=new ArrayList<Vehicle>();
+		for(Vehicle item:vehicles) {
+			if(item.getRental_object_id()==id) {
+				vehicle_list.add(item);
+			}
+		}
+		return vehicle_list;
 	}
 	
 	
@@ -51,7 +66,9 @@ public class VehicleDAO {
     	{
 			
 			FileReader fileReader = new FileReader(this.csvFilePath);
-			Gson gson = new Gson();
+			Gson gson = new GsonBuilder().registerTypeAdapter(LocalTime.class, new LocalTimeSerializer())
+	                .create();
+			
 			Vehicle[] objects = gson.fromJson(fileReader, Vehicle[].class);
 			vehicles.clear();
 			if(objects ==  null) {
@@ -67,7 +84,7 @@ public class VehicleDAO {
     	} catch (Exception e)
     	{
     		System.out.println(e.getMessage());
-    		System.out.println("nesto");
+    		System.out.println("nesto123");
     		return null;
     	}
 		
@@ -103,8 +120,6 @@ public class VehicleDAO {
 		jsonObject.addProperty("price", objekat.getPrice());
 		jsonObject.addProperty("vehicle_type", objekat.getVehicle_type().toString());
 		jsonObject.addProperty("rental_object_id",objekat.getRental_object_id());
-		
-		
 		jsonObject.addProperty("transmission_type", objekat.getTransmission_type().toString());
 		jsonObject.addProperty("fuel_type", objekat.getFuel_type().toString());
 		jsonObject.addProperty("fuel_consumption", objekat.getFuel_consumption());

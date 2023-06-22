@@ -1,6 +1,7 @@
 package services;
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
@@ -14,6 +15,7 @@ import dao.LocationDAO;
 import dao.RentalAgencyDAO;
 import dao.UserDAO;
 import dao.VehicleDAO;
+import model.RentalAgency;
 import model.User;
 import model.Vehicle;
 
@@ -34,6 +36,11 @@ public class VehicleService {
 	    	
 			ctx.setAttribute("VehicleDAO", new VehicleDAO(contextPath));
 		}
+		if (ctx.getAttribute("RentalAgencyDAO") == null) {
+	    	String contextPath = ctx.getRealPath("");
+	    	
+			ctx.setAttribute("RentalAgencyDAO", new RentalAgencyDAO(contextPath));
+		}
 		
 	}
 	
@@ -42,7 +49,20 @@ public class VehicleService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Collection<Vehicle> getVehicles() {
 		VehicleDAO dao = (VehicleDAO) ctx.getAttribute("VehicleDAO");
-		return dao.getAll();
+		Collection<Vehicle> lista= dao.getAll();
+		RentalAgencyDAO dao2=(RentalAgencyDAO) ctx.getAttribute("RentalAgencyDAO");
+		Collection<RentalAgency> objects=dao2.getAll();
+		for(Vehicle veh:lista) {
+			for(RentalAgency ren:objects) {
+				if(veh.getRental_object_id()==ren.getId()) {
+					veh.setRental_object(ren);
+					
+					break;
+				}
+			}
+			
+		}
+		return lista;
 		
 		
 	}

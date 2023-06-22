@@ -58,7 +58,7 @@ Vue.component("landingpage", {
 			router.push(`/register`);
 		},
 		updateGrid: function(){//Updates grid when someone writes in textbox
-					
+			console.log(this.RentalAgencies);		
 			this.SearchedAgencies=this.RentalAgencies.slice();
 			for(var variable of this.RentalAgencies){
 				

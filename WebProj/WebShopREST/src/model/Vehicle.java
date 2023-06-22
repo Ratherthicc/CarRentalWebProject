@@ -7,10 +7,9 @@ public class Vehicle {
 	private String brand;
 	private String model;
 	private double price;
-	private VehicleType vehicle_type;
-	
-	private int rental_object_id; 
-	
+	private VehicleType vehicle_type;	
+	private int rental_object_id;
+	private RentalAgency rental_object;
 	private TransmissionType transmission_type;
 	private FuelType fuel_type;
 	private double fuel_consumption;
@@ -53,6 +52,8 @@ public class Vehicle {
 		this.price = price;
 		this.vehicle_type = vehicle_type;
 		this.rental_object_id=object_id;
+		this.rental_object=new RentalAgency();
+		this.rental_object.setId(object_id);
 		this.transmission_type = transmission_type;
 		this.fuel_type = fuel_type;
 		this.fuel_consumption = fuel_consumption;
@@ -63,6 +64,16 @@ public class Vehicle {
 		this.available = available;
 	}
 
+	public RentalAgency getRental_object() {
+		return rental_object;
+	}
+
+	public void setRental_object(RentalAgency rental_object) {
+		this.rental_object = rental_object;
+	}
+
+	
+	
 	public int getId() {
 		return id;
 	}
@@ -110,7 +121,19 @@ public class Vehicle {
 	}
 
 	public void setRental_object_id(int rental_object_id) {
-		this.rental_object_id = rental_object_id;
+		this.rental_object.setId(rental_object_id);
+		this.rental_object_id=rental_object_id;
+	}
+
+	
+
+	@Override
+	public String toString() {
+		return "Vehicle [id=" + id + ", brand=" + brand + ", model=" + model + ", price=" + price + ", vehicle_type="
+				+ vehicle_type + ", rental_object_id=" + rental_object_id + ", rental_object=" + rental_object.getName()
+				+ ", transmission_type=" + transmission_type + ", fuel_type=" + fuel_type + ", fuel_consumption="
+				+ fuel_consumption + ", doors=" + doors + ", people=" + people + ", description=" + description
+				+ ", picture=" + picture + ", available=" + available + "]";
 	}
 
 	public TransmissionType getTransmission_type() {
