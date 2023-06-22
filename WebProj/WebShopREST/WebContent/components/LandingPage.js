@@ -6,7 +6,10 @@ Vue.component("landingpage", {
 				SearchedAgencies: [],
 				sortNameFlag: false,
 				sortLocationFlag: false,
-				sortRatingFlag: false
+				sortRatingFlag: false,
+				vehicle_type:"",
+				vehicle_fuel:"",
+				min_rating:10
 		    }
 	},
 	template: ` 
@@ -20,14 +23,29 @@ Vue.component("landingpage", {
             </nav>
             <a class="nav_a" v-on:click="logInButton"><button class="nav_button">Log in</button></a>
         </header>
-        <input type="text" name="search" v-on:keyup="updateGrid" v-model="textbox">
         
-        <div >
-        <input type="checkbox" v-on:click="filterOpenObjects" name="openCheckbox"> <label>Show only open</label> <br>
-        <input type="checkbox">	
-        <input type="checkbox">
-        <input type="submit" value="Filter">
-		</div>
+        
+        <form v-on:submit="filter">
+        <input type="text" name="search" v-model="textbox">
+        <input type="checkbox"  name="openCheckbox"> <label>Show only open</label> <br>
+        <select v-model="vehicle_type">
+	        <option value="CAR">Car</option>
+	        <option value="VAN">Van</option>
+	        <option value="MOBILEHOME">Mobilehome</option>
+	        <option value="">NONE</option>
+   		</select>
+   		<select v-model="vehicle_fuel">
+	        <option value="DIESEL">Diesel</option>
+	        <option value="BENZENE">Benzene</option>
+	        <option value="HYBRID">Hybrid</option>
+	        <option value="ELECTRIC">Electric</option>
+	        <option value="">NONE</option>
+   		</select>	
+   		
+   		<label>Pick a vehicle stats</label> <br>
+   		<input type="text" v-model="min_rating"> <br>
+        <input type="submit" value="Search">
+		</form>
         
         <table id="myTable">
             <tr class="tableHeader">
@@ -57,8 +75,8 @@ Vue.component("landingpage", {
 		SignInButton: function (){
 			router.push(`/register`);
 		},
-		updateGrid: function(){//Updates grid when someone writes in textbox
-			console.log(this.RentalAgencies);		
+		updateGrid: function(){
+					
 			this.SearchedAgencies=this.RentalAgencies.slice();
 			for(var variable of this.RentalAgencies){
 				
@@ -72,10 +90,52 @@ Vue.component("landingpage", {
 			}
 			
 		},
+		filter: function(){
+			event.preventDefault();
+			this.updateGrid();
+			this.filterOpenObjects();
+			this.filterCarType();
+			this.filterVehicleFuel();
+			this.filterMinRating();
+			
+		},
+		filterMinRating: function(){
+			if(this.min_rating>=5)return;
+			var agencies=this.SearchedAgencies.slice();
+			for(var agency of agencies){
+				if(agency.rating <= this.min_rating){
+					const i=this.SearchedAgencies.indexOf(agency);
+					this.SearchedAgencies.splice(i,1);
+				}
+			}
+		},
+		filterVehicleFuel: function(){
+			if(this.vehicle_fuel=="")return;
+			
+			var agencies=this.SearchedAgencies.slice();
+			var flag=1;	
+				for(var agency of agencies){
+					flag=1;
+					for(var vehicle of agency.vehicles){
+						
+						if(vehicle.fuel_type==this.vehicle_fuel){
+							
+							flag=0;
+							break;
+						}
+					}
+					if(flag){
+						const i=this.SearchedAgencies.indexOf(agency);
+						this.SearchedAgencies.splice(i,1);
+					}
+				}
+		},
+		
+		
 		filterOpenObjects: function(){
 			
 			var checkbox = document.getElementsByName("openCheckbox")[0];
-			
+				
 			if(checkbox.checked){
 				var agencies=this.SearchedAgencies.slice();
 				
@@ -86,29 +146,29 @@ Vue.component("landingpage", {
 						this.SearchedAgencies.splice(i,1);
 						
 					}
-				}	
+				}
 			}
-			else{
-				
-				var agencies=this.RentalAgencies.slice();
-				
-				for(var variable of agencies){
-					
-					if(variable.state=='NOT_WORKING'){
-						if((variable.name.toLowerCase().includes(this.textbox.toLowerCase())) ||
-				 			(variable.location.city.toLowerCase().includes(this.textbox.toLowerCase())))//missing rating search or something like that
-				 			{
-				 				
-							this.SearchedAgencies.splice(agencies.length,1,variable);
+		},
+		
+		filterCarType:function(){
+			if(this.vehicle_type=="")return;
+			var agencies=this.SearchedAgencies.slice();
+			var flag=1;	
+				for(var agency of agencies){
+					flag=1;
+					for(var vehicle of agency.vehicles){
+						if(vehicle.vehicle_type==this.vehicle_type){
+							flag=0;
+							break;
 						}
 					}
+					if(flag){
+						const i=this.SearchedAgencies.indexOf(agency);
+						this.SearchedAgencies.splice(i,1);
+					}
 				}
-				
-				
-			}
-			
-			
 		},
+		
 		sortName: function(){
 		  var table, rows, switching, i, x, y, shouldSwitch;
 		  table = document.getElementById("myTable");
