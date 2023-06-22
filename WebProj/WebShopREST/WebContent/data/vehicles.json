@@ -1,0 +1,34 @@
+[
+  {
+    "id": 0,
+    "brand": "hah",
+    "model": "haha",
+    "price": 23.0,
+    "vehicle_type": "CAR",
+    "rental_object_id": 2,
+    "transmission_type": "AUTOMATIC",
+    "fuel_type": "DIESEL",
+    "fuel_consumption": 22.0,
+    "doors": 3,
+    "people": 3,
+    "description": "opis",
+    "picture": "http://example.com",
+    "available": true
+  },
+  {
+    "id": 0,
+    "brand": "hah",
+    "model": "haha",
+    "price": 23.0,
+    "vehicle_type": "CAR",
+    "rental_object_id": 2,
+    "transmission_type": "AUTOMATIC",
+    "fuel_type": "DIESEL",
+    "fuel_consumption": 22.0,
+    "doors": 3,
+    "people": 3,
+    "description": "opis",
+    "picture": "http://example.com",
+    "available": true
+  }
+]

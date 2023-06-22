@@ -9,7 +9,7 @@ public class Vehicle {
 	private double price;
 	private VehicleType vehicle_type;
 	
-	private RentalAgency object; 
+	private int rental_object_id; 
 	
 	private TransmissionType transmission_type;
 	private FuelType fuel_type;
@@ -52,8 +52,7 @@ public class Vehicle {
 		this.model = model;
 		this.price = price;
 		this.vehicle_type = vehicle_type;
-		this.object = new RentalAgency();
-		this.object.setId(object_id);
+		this.rental_object_id=object_id;
 		this.transmission_type = transmission_type;
 		this.fuel_type = fuel_type;
 		this.fuel_consumption = fuel_consumption;
@@ -104,12 +103,14 @@ public class Vehicle {
 		this.vehicle_type = vehicle_type;
 	}
 
-	public RentalAgency getObject() {
-		return object;
+	
+
+	public int getRental_object_id() {
+		return rental_object_id;
 	}
 
-	public void setObject(RentalAgency object) {
-		this.object = object;
+	public void setRental_object_id(int rental_object_id) {
+		this.rental_object_id = rental_object_id;
 	}
 
 	public TransmissionType getTransmission_type() {
