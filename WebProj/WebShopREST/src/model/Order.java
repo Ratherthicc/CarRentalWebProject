@@ -8,6 +8,7 @@ public class Order {
 	private String order_id;
 	private List<Vehicle> vehicles;
 	private RentalAgency agency;
+	private int agency_id;
 	private LocalDateTime date_time;
 	private double duration;
 	private double price;
@@ -29,18 +30,28 @@ public class Order {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Order(String order_id, List<Vehicle> vehicles, RentalAgency agency, LocalDateTime date_time, double duration,
+	public Order(String order_id,List<Vehicle> veh, int agency_id, LocalDateTime date_time, double duration,
 			double price, String firstname, String lastname, Status status) {
 		super();
 		this.order_id = order_id;
-		this.vehicles = vehicles;
-		this.agency = agency;
+		this.vehicles=veh;
+		this.agency=new RentalAgency();
+		this.agency.setId(agency_id);
+		this.setAgency_id(agency_id);
 		this.date_time = date_time;
 		this.duration = duration;
 		this.price = price;
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.status = status;
+	}
+
+	
+	@Override
+	public String toString() {
+		return "Order [order_id=" + order_id + ", vehicles=" + vehicles + ", agency=" + agency + ", agency_id="
+				+ agency_id + ", date_time=" + date_time + ", duration=" + duration + ", price=" + price
+				+ ", firstname=" + firstname + ", lastname=" + lastname + ", status=" + status + "]";
 	}
 
 	public String getOrder_id() {
@@ -113,6 +124,14 @@ public class Order {
 
 	public void setStatus(Status status) {
 		this.status = status;
+	}
+
+	public int getAgency_id() {
+		return agency_id;
+	}
+
+	public void setAgency_id(int agency_id) {
+		this.agency_id = agency_id;
 	}
 	
 	

@@ -61,7 +61,7 @@ public class RentalAgencyService {
 		for (RentalAgency rentalAgency : rentalAgencies) {
 			rentalAgency.setLocation(locationDAO.GetById(rentalAgency.getLocation().getId()));
 			
-			for(Vehicle vehi:vehicleDAO.getById(rentalAgency.getId())) {
+			for(Vehicle vehi:vehicleDAO.getByRentalObjectId(rentalAgency.getId())) {
 				rentalAgency.addVehicles(vehi);
 			}
 			

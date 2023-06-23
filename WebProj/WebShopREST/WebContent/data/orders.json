@@ -1,0 +1,22 @@
+[
+  {
+    "order_id": "sifra1",
+    "agency_id": 1,
+    "date_time": "2014-01-01T10:10:30",
+    "duration": 5.0,
+    "price": 55.0,
+    "firstname": "Jovan",
+    "lastname": "Katanic",
+    "status": "APPROVED"
+  },
+  {
+    "order_id": "sifra2",
+    "agency_id": 1,
+    "date_time": "2014-01-01T10:10:30",
+    "duration": 5.0,
+    "price": 55.0,
+    "firstname": "Jovan",
+    "lastname": "Katanic",
+    "status": "APPROVED"
+  }
+]

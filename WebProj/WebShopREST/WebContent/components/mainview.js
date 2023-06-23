@@ -49,6 +49,7 @@ Vue.component("mainview", {
         </tr>
 	    </table>
     </form>
+    
     `
 	, 
 	methods : {

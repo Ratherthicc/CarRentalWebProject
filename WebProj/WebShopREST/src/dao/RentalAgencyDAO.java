@@ -41,6 +41,15 @@ public class RentalAgencyDAO {
 		return rentalAgencies;
 	}
 	
+	public RentalAgency getById(int id) {
+		loadAll();
+		for(RentalAgency r:rentalAgencies) {
+			if(r.getId()==id)return r;
+		}
+		return null;
+	}
+	
+	
 	public List<RentalAgency> loadAll() {
 		String row;
 		try (BufferedReader csvReader = new BufferedReader(new FileReader(csvFilePath))){

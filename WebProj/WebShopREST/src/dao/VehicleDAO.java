@@ -50,7 +50,7 @@ public class VehicleDAO {
 		return vehicles;
 	}
 	
-	public Collection<Vehicle> getById(int id){
+	public Collection<Vehicle> getByRentalObjectId(int id){
 		List<Vehicle> vehicle_list=new ArrayList<Vehicle>();
 		for(Vehicle item:vehicles) {
 			if(item.getRental_object_id()==id) {
