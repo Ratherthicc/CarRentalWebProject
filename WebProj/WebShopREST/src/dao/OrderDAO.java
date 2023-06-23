@@ -39,12 +39,12 @@ public class OrderDAO {
 	 */
 	public OrderDAO(String contextPath) {
 		this.csvFilePath = contextPath.replace("\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\WebShopREST\\", "\\WebProj\\WebShopREST\\WebContent\\data\\orders.json");
-		List<Vehicle> lista=new ArrayList<>();
-		lista.add(new Vehicle(0,"hah","haha",23,VehicleType.CAR,2,TransmissionType.AUTOMATIC,FuelType.DIESEL,22,3,3,"opis",URI.create("http://example.com"),true));
-		orders.add(new Order("sifra1",lista,1,LocalDateTime.of(2014, Month.JANUARY, 1, 10, 10, 30),5,55,"Jovan","Katanic",Order.Status.APPROVED));
-		orders.add(new Order("sifra2",lista,1,LocalDateTime.of(2014, Month.JANUARY, 1, 10, 10, 30),5,55,"Jovan","Katanic",Order.Status.APPROVED));
-		saveAll();
-		//loadAll();
+		//List<Vehicle> lista=new ArrayList<>();
+		//lista.add(new Vehicle(0,"hah","haha",23,VehicleType.CAR,2,TransmissionType.AUTOMATIC,FuelType.DIESEL,22,3,3,"opis",URI.create("http://example.com"),true));
+		//orders.add(new Order("sifra1",lista,1,LocalDateTime.of(2014, Month.JANUARY, 1, 10, 10, 30),5,55,"Jovan","Katanic",Order.Status.APPROVED));
+		//.add(new Order("sifra2",lista,1,LocalDateTime.of(2014, Month.JANUARY, 1, 10, 10, 30),5,55,"Jovan","Katanic",Order.Status.APPROVED));
+		//saveAll();
+		loadAll();
 		
 	}
 	public Collection<Order> getAll() {
