@@ -1,6 +1,24 @@
 [
   {
     "order_id": "sifra1",
+    "vehicles": [
+      {
+        "id": 0,
+        "brand": "hah",
+        "model": "haha",
+        "price": 23.0,
+        "vehicle_type": "CAR",
+        "rental_object_id": 2,
+        "transmission_type": "AUTOMATIC",
+        "fuel_type": "DIESEL",
+        "fuel_consumption": 22.0,
+        "doors": 3,
+        "people": 3,
+        "description": "opis",
+        "picture": "http://example.com",
+        "available": true
+      }
+    ],
     "agency_id": 1,
     "date_time": "2014-01-01T10:10:30",
     "duration": 5.0,
@@ -11,6 +29,24 @@
   },
   {
     "order_id": "sifra2",
+    "vehicles": [
+      {
+        "id": 0,
+        "brand": "hah",
+        "model": "haha",
+        "price": 23.0,
+        "vehicle_type": "CAR",
+        "rental_object_id": 2,
+        "transmission_type": "AUTOMATIC",
+        "fuel_type": "DIESEL",
+        "fuel_consumption": 22.0,
+        "doors": 3,
+        "people": 3,
+        "description": "opis",
+        "picture": "http://example.com",
+        "available": true
+      }
+    ],
     "agency_id": 1,
     "date_time": "2014-01-01T10:10:30",
     "duration": 5.0,

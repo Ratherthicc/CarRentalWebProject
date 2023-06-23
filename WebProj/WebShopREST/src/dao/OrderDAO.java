@@ -131,7 +131,8 @@ public class OrderDAO {
 
             jsonArray.add(jsonVehicle);
         }
-		
+        jsonObject.add("vehicles", jsonArray);
+        
 		jsonObject.addProperty("agency_id", objekat.getAgency_id());
 		jsonObject.addProperty("date_time", objekat.getDate_time().toString());
 		jsonObject.addProperty("duration", objekat.getDuration());
