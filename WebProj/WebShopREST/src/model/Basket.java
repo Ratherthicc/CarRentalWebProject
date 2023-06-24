@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Basket {
 	private int id;
+	private String username;
 	private User user;
 	private double price;
 	private List<Vehicle> vehicles;
@@ -14,13 +15,20 @@ public class Basket {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Basket(int id, String username, double price) {
+	public Basket(int id, String username, double price,List<Vehicle> li) {
 		super();
 		this.id = id;
 		this.user = new User();
 		this.user.setUsername(username);
+		this.username=username;
 		this.price = price;
-		this.vehicles = new ArrayList<Vehicle>();
+		this.vehicles = new ArrayList<Vehicle>(li);
+	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	public int getId() {
 		return id;

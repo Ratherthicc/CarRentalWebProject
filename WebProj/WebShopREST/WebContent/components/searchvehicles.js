@@ -50,9 +50,10 @@ Vue.component("searchvehicles", {
 	                <td>{{v.doors}}</td>
 	                <td>{{v.people}}</td>
 	                <td>{{v.description}}</td>
+	                <td><input type="button" value="+" @click="addToBasket(v)"></td>
             	</tr>
 	        </table>
-	        
+	        <input type="button" value="View basket" @click="goBasketView(username)">
    		</form>
    		
     `
@@ -70,8 +71,7 @@ Vue.component("searchvehicles", {
 							if(!vehicle.available){
 								continue;
 							}
-						
-						
+
 						var date1end=new Date(this.to_date);
 						var date1start=new Date(this.from_date);
 						var jsonDateTime=JSON.stringify(order.date_time);
@@ -102,7 +102,16 @@ Vue.component("searchvehicles", {
 					}
 					
 				}
-			}
+			},
+			addToBasket:function(vehicle){
+				axios.post('rest/baskets/'+this.username+"/"+vehicle.id)
+				
+			},
+			goBasketView:function(username){
+				
+				router.push(`/basketview/${username}`);
+				
+				}
 			
 		},
 	mounted () {

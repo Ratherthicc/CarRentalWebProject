@@ -7,6 +7,7 @@ import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -66,4 +67,14 @@ public class VehicleService {
 		
 		
 	}
+	@GET
+	@Path("/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Vehicle getVehicle(@PathParam("id")int id) {
+		VehicleDAO dao = (VehicleDAO) ctx.getAttribute("VehicleDAO");
+		
+		
+		return dao.getVehicleById(id);
+	}
+	
 }

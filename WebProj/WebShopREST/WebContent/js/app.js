@@ -4,6 +4,7 @@ const MainView = { template: '<mainview></mainview>' }
 const LandingPage = {template: '<landingpage></landingpage>'}
 const EditView ={template: '<editview></editview>'}
 const SearchVehicles ={template: '<searchvehicles></searchvehicles>'}
+const BasketView = {template: '<basketview></basketview>'}
 const router = new VueRouter({
 	mode: 'hash',
 	  routes: [
@@ -12,7 +13,8 @@ const router = new VueRouter({
 		{ path: '/register', component: Register},
 		{ path: '/view/:username', component: MainView},
 		{ path: '/edit/:username', component: EditView},
-		{ path: '/searchvehicles/:username', component: SearchVehicles}
+		{ path: '/searchvehicles/:username', component: SearchVehicles},
+		{ path: '/basketview/:username', component: BasketView}
 	  ]
 });
 
