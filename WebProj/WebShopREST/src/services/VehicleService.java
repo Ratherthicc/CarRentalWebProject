@@ -1,5 +1,6 @@
 package services;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collector;
@@ -15,6 +16,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 import dao.LocationDAO;
+import dao.OrderDAO;
 import dao.RentalAgencyDAO;
 import dao.UserDAO;
 import dao.VehicleDAO;
@@ -43,6 +45,11 @@ public class VehicleService {
 	    	String contextPath = ctx.getRealPath("");
 	    	
 			ctx.setAttribute("RentalAgencyDAO", new RentalAgencyDAO(contextPath));
+		}
+		if (ctx.getAttribute("OrderDAO") == null) {
+	    	String contextPath = ctx.getRealPath("");
+	    	
+			ctx.setAttribute("OrderDAO", new OrderDAO(contextPath));
 		}
 		
 	}
@@ -78,4 +85,16 @@ public class VehicleService {
 		
 		
 	}
+	@GET
+	@Path("/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Vehicle getVehicle(@PathParam("id")int id) {
+		VehicleDAO dao = (VehicleDAO) ctx.getAttribute("VehicleDAO");
+		
+		
+		return dao.getVehicleById(id);
+	}
+	
+	
+	
 }

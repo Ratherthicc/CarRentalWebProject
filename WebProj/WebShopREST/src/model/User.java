@@ -11,7 +11,7 @@ public class User {
 	private Gender gender;
 	private String birth_date;
 	private UserType type;
-	private int points;
+	private double points;
 	private String rank;
 	
 	public User() {
@@ -19,7 +19,7 @@ public class User {
 	}
 	
 	public User(String username, String password, String first_name, String last_name, Gender gender, String birth_date,
-			UserType type, int points, String rank) {
+			UserType type, double points, String rank) {
 		this.username = username;
 		this.password = password;
 		this.first_name = first_name;
@@ -31,10 +31,10 @@ public class User {
 		this.rank = rank;
 	}
 
-	public int getPoints() {
+	public double getPoints() {
 		return points;
 	}
-	public void setPoints(int points) {
+	public void setPoints(double points) {
 		this.points = points;
 	}
 	public String getRank() {

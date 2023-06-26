@@ -59,6 +59,16 @@ public class VehicleDAO {
 		}
 		return vehicle_list;
 	}
+	public Vehicle getVehicleById(int id){
+		for(Vehicle item:vehicles) {
+			if(item.getId()==id) {
+				return item;
+			}
+		
+		}
+		return null;
+	}
+	
 	
 	
 	public List<Vehicle> loadAll() {

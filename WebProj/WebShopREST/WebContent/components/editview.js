@@ -75,7 +75,7 @@ Vue.component("editview", {
 				return;
 			}
 			else{
-				axios.put('rest/users/',this.user).then(response=>{
+				axios.put('rest/users/updateUser/',this.user).then(response=>{
 														router.push(`/view/${username}`);
 														self.invalidName = false;
 														self.invalidSurname = false;
