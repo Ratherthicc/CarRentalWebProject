@@ -5,6 +5,7 @@ const LandingPage = {template: '<landingpage></landingpage>'}
 const EditView ={template: '<editview></editview>'}
 const SearchVehicles ={template: '<searchvehicles></searchvehicles>'}
 const BasketView = {template: '<basketview></basketview>'}
+const ViewOrders = {template: '<vieworders></vieworders>'}
 const router = new VueRouter({
 	mode: 'hash',
 	  routes: [
@@ -14,7 +15,8 @@ const router = new VueRouter({
 		{ path: '/view/:username', component: MainView},
 		{ path: '/edit/:username', component: EditView},
 		{ path: '/searchvehicles/:username', component: SearchVehicles},
-		{ path: '/basketview/:username/:from_date/:to_date', component: BasketView}
+		{ path: '/basketview/:username/:from_date/:to_date', component: BasketView},
+		{ path: '/viewOrders', component: ViewOrders}
 	  ]
 });
 

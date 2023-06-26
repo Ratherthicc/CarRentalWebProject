@@ -36,6 +36,14 @@ public class UserDAO {
 		return users;
 	}
 	
+	public User updatePoints(String username,double points) {
+		User u=this.getUser(username);
+		if(u==null)return null;
+		u.setPoints(u.getPoints()+points);
+		saveAll();
+		return u;
+	}
+	
 	public User getUser(String username) {
 		for(User u:users) {
 			if(u.getUsername().equals(username)) {
@@ -111,7 +119,7 @@ public class UserDAO {
 				else 
 					type=UserType.Administrator;
 				
-				User user=new User(data[0],data[1],data[2],data[3],gender,data[5],type,Integer.parseInt(data[7]),data[8]);
+				User user=new User(data[0],data[1],data[2],data[3],gender,data[5],type,Double.parseDouble(data[7]),data[8]);
 				users.add(user);
 				
 			    

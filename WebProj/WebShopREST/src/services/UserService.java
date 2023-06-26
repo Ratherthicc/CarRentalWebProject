@@ -58,10 +58,10 @@ public class UserService {
 	@Path("/login/{username}/{password}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public User find(@PathParam("username") String us,@PathParam("password") String pas) {
-		UserDAO dao = (UserDAO) ctx.getAttribute("UserDAO");
+		UserDAO dao = (UserDAO)ctx.getAttribute("UserDAO");
+		
 		return dao.findUser(us,pas);
-		
-		
+
 	}
 	
 	@POST
@@ -75,11 +75,21 @@ public class UserService {
 	}
 	
 	@PUT
-	@Path("/")
+	@Path("/updateUser/")
 	@Produces(MediaType.APPLICATION_JSON)
 	public User nesto2(User u) {
 		UserDAO dao = (UserDAO) ctx.getAttribute("UserDAO");
 		return dao.updateUser(u);
+		
+		
+	}
+	
+	@PUT
+	@Path("/updatePoints/{username}/{points}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public User nesto2(@PathParam("points")double points,@PathParam("username")String username) {
+		UserDAO dao = (UserDAO) ctx.getAttribute("UserDAO");
+		return dao.updatePoints(username,points);
 		
 		
 	}

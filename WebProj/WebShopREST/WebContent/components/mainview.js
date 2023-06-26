@@ -9,7 +9,8 @@ Vue.component("mainview", {
 	template: ` 
 	<div>
 		<div>
-	        <input type="submit" value="Search vehicles" @click="findVehicles(username)">
+	        <input type="button" value="Make orders"  @click="findVehicles(username)">
+	        <input type="button" value="View orders" @click="viewOrders" >
 	   </div>
 	   
 		<form>
@@ -64,6 +65,9 @@ Vue.component("mainview", {
 		},
 		findVehicles:function(username){
 			router.push(`/searchVehicles/${username}`);
+		},
+		viewOrders:function(){
+			router.push(`/viewOrders`);
 		}
 		
 	},

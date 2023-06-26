@@ -6,6 +6,7 @@ Vue.component("basketview", {
 		      	from_date:null,
 		      	to_date:null,
 		      	total_price:0.0
+		      	
 		    }
 	},
 	template: ` 
@@ -70,6 +71,10 @@ Vue.component("basketview", {
 		addOrder:function(){
 			axios.post('rest/orders/'+this.username+'/'+this.from_date+'/'+this.to_date)
 			router.push(`/view/${this.username}`);
+			
+			var points=this.total_price*133/1000;
+			axios.put('rest/users/updatePoints/'+this.username+'/'+points)
+			
 		}
 	},
 	mounted () {

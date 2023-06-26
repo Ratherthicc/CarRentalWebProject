@@ -28,17 +28,17 @@
     "status": "PROCESSING"
   },
   {
-    "order_id": "Sij9Flth8YfVQX",
+    "order_id": "ChbJDEoDPKFLg4",
     "vehicles": [
       {
-        "id": 1,
+        "id": 0,
         "brand": "hah",
         "model": "haha",
         "price": 23.0,
         "vehicle_type": "CAR",
-        "rental_object_id": 1,
+        "rental_object_id": 4,
         "transmission_type": "AUTOMATIC",
-        "fuel_type": "HYBRID",
+        "fuel_type": "DIESEL",
         "fuel_consumption": 22.0,
         "doors": 3,
         "people": 3,
@@ -47,26 +47,26 @@
         "available": true
       }
     ],
-    "agency_id": 1,
-    "date_time": "2023-07-09T17:36",
-    "duration": 5.0,
+    "agency_id": 4,
+    "date_time": "2023-06-11T20:05",
+    "duration": 14.0,
     "price": 23.0,
     "firstname": "Jovan123",
     "lastname": "Katanic",
     "status": "PROCESSING"
   },
   {
-    "order_id": "z6sNpzoKTZz08O",
+    "order_id": "FJ3HdZQ1oka64l",
     "vehicles": [
       {
-        "id": 3,
+        "id": 0,
         "brand": "hah",
         "model": "haha",
         "price": 23.0,
-        "vehicle_type": "VAN",
-        "rental_object_id": 6,
+        "vehicle_type": "CAR",
+        "rental_object_id": 4,
         "transmission_type": "AUTOMATIC",
-        "fuel_type": "HYBRID",
+        "fuel_type": "DIESEL",
         "fuel_consumption": 22.0,
         "doors": 3,
         "people": 3,
@@ -75,26 +75,26 @@
         "available": true
       }
     ],
-    "agency_id": 6,
-    "date_time": "2023-06-26T17:09",
-    "duration": 13.0,
+    "agency_id": 4,
+    "date_time": "2023-06-11T20:05",
+    "duration": 14.0,
     "price": 23.0,
     "firstname": "Jovan123",
     "lastname": "Katanic",
     "status": "PROCESSING"
   },
   {
-    "order_id": "TcoP5HCmPtzJWl",
+    "order_id": "6GjiPpmMk5UT3p",
     "vehicles": [
       {
-        "id": 3,
+        "id": 0,
         "brand": "hah",
         "model": "haha",
         "price": 23.0,
-        "vehicle_type": "VAN",
-        "rental_object_id": 6,
+        "vehicle_type": "CAR",
+        "rental_object_id": 4,
         "transmission_type": "AUTOMATIC",
-        "fuel_type": "HYBRID",
+        "fuel_type": "DIESEL",
         "fuel_consumption": 22.0,
         "doors": 3,
         "people": 3,
@@ -103,9 +103,9 @@
         "available": true
       }
     ],
-    "agency_id": 6,
-    "date_time": "2023-06-26T17:09",
-    "duration": 13.0,
+    "agency_id": 4,
+    "date_time": "2023-06-11T20:05",
+    "duration": 14.0,
     "price": 23.0,
     "firstname": "Jovan123",
     "lastname": "Katanic",
