@@ -54,7 +54,7 @@ Vue.component("landingpage", {
                 <th v-on:click="sortLocation">Location</th>
                 <th v-on:click="sortRating">Rating</th>
             </tr>
-            <tr v-for="r in SearchedAgencies" class="dataRow">
+            <tr v-for="r in SearchedAgencies" class="dataRow" v-on:click="checkRentalAgency(r)">
                 <td>
                 	<div class="imageContainer">
             			<img v-bind:src="r.logoURI" class="rowDataImage"/>
@@ -297,7 +297,10 @@ Vue.component("landingpage", {
 						}
 		    
 		
-}
+},
+			checkRentalAgency: function(r){
+				router.push(`/agencyview/${r.id}`)
+			}
 		
 	},
 	

@@ -47,6 +47,9 @@ public class RentalAgencyService {
 			
 			ctx.setAttribute("VehicleDAO", new VehicleDAO(contextPath));
 		}
+		if(ctx.getAttribute("VehicleService") == null) {
+			ctx.setAttribute("VehicleService", new VehicleService());
+		}
 	}
 	
 	@GET
@@ -70,5 +73,21 @@ public class RentalAgencyService {
 		
 		
 		return rentalAgencies;
+	}
+	
+	@GET
+	@Path("/getById/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public RentalAgency GetById(@PathParam("id") int id) {
+		RentalAgencyDAO rentalAgencyDAO = (RentalAgencyDAO) ctx.getAttribute("RentalAgencyDAO");
+		VehicleDAO vehicleDAO = (VehicleDAO) ctx.getAttribute("VehicleDAO");
+		LocationDAO locationDAO = (LocationDAO) ctx.getAttribute("LocationDAO");
+		
+		RentalAgency rentalAgency =  rentalAgencyDAO.getById(id);
+		rentalAgency.setLocation(locationDAO.GetById(rentalAgency.getLocation().getId()));
+		for (Vehicle v : vehicleDAO.getByRentalObjectId(rentalAgency.getId())) {
+			rentalAgency.addVehicles(v);
+		}
+		return rentalAgency;
 	}
 }

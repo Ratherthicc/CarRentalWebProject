@@ -3,6 +3,8 @@ const Register = { template: '<register></register>' }
 const MainView = { template: '<mainview></mainview>' }
 const LandingPage = {template: '<landingpage></landingpage>'}
 const EditView ={template: '<editview></editview>'}
+const AgencyView ={template: '<agencyview></agencyview>'}
+
 const router = new VueRouter({
 	mode: 'hash',
 	  routes: [
@@ -10,7 +12,8 @@ const router = new VueRouter({
 		{ path: '/login', component: LogIn},
 		{ path: '/register', component: Register},
 		{ path: '/view/:username', component: MainView},
-		{ path: '/edit/:username', component: EditView}
+		{ path: '/edit/:username', component: EditView},
+		{ path: '/agencyview/:id', component: AgencyView}
 	  ]
 });
 
