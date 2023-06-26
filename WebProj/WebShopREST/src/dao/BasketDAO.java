@@ -53,9 +53,7 @@ public class BasketDAO {
 				
 			}
 		}
-		return null;
-		
-		
+		return null;	
 	}
 	
 	public Basket addToBasket(Vehicle vehicle,String username) {
@@ -65,13 +63,44 @@ public class BasketDAO {
 				b.getVehicles().add(vehicle);
 				saveAll();
 				return b;
+			}
+		}
+		return null;
+	}
+	
+	
+	public Basket removeFromBasket(Vehicle vehicle,String username) {
+		
+		if(vehicle==null)return null;
+		for(Basket b : baskets) {
+			if(b.getUsername().equals(username)) {
+				for(Vehicle v : b.getVehicles()) {
+					if(v.getId()==vehicle.getId()) {
+						b.getVehicles().remove(v);
+						saveAll();
+						return b;
+					}
+				}
+			}
+		}
+		return null;
+	}
+	
+	public void removeAllFromBasket(String username) {
+		for(Basket b : baskets) {
+			if(b.getUsername().equals(username)) {
+
+					
+			b.getVehicles().clear();
+					
+					
 				
+			
+			saveAll();
+			return;
 			}
 		}
 		
-		
-		
-		return null;
 	}
 	
 	

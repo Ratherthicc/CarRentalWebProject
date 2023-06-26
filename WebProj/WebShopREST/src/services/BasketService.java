@@ -5,6 +5,7 @@ import java.util.Collection;
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -69,6 +70,26 @@ public class BasketService {
 		VehicleDAO vehdao=(VehicleDAO) ctx.getAttribute("VehicleDAO");
 		
 		return dao.addToBasket(vehdao.getVehicleById(id), username);
-	} 
+	}
+	
+	@DELETE
+	@Path("/deleteOne/{username}/{veh_id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Basket removeVehicle(@PathParam("username")String username,@PathParam("veh_id")int id) {
+		
+		BasketDAO dao = (BasketDAO) ctx.getAttribute("BasketDAO");
+		VehicleDAO vehdao=(VehicleDAO) ctx.getAttribute("VehicleDAO");
+		return dao.removeFromBasket(vehdao.getVehicleById(id),username);
+	}
+	
+	@DELETE
+	@Path("/deleteAll/{username}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public void removeAllVehicles(@PathParam("username")String username) {
+		
+		BasketDAO dao = (BasketDAO) ctx.getAttribute("BasketDAO");
+		dao.removeAllFromBasket(username);
+		
+	}
 	
 }

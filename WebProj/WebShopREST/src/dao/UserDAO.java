@@ -36,6 +36,15 @@ public class UserDAO {
 		return users;
 	}
 	
+	public User getUser(String username) {
+		for(User u:users) {
+			if(u.getUsername().equals(username)) {
+				return u;
+			}
+		}
+		return null;
+	}
+	
 	public User addUser(User u) {
 		for(User user : users) {
 			if(user.getUsername().equals(u.getUsername()))return null;

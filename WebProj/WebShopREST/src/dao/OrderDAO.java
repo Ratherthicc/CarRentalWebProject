@@ -50,7 +50,57 @@ public class OrderDAO {
 	public Collection<Order> getAll() {
 		return orders;
 	}
+	public void addOrder(Order o) {
+		loadAll();
+		o.setOrder_id(makeId());
+		orders.add(o);
+		saveAll();
+	}
 	
+	
+	
+	public boolean checkId(String s) {
+		if(s.equals(""))return false;
+		for(Order o:orders) {
+			  if(o.getOrder_id().equals(s)) {
+				  return false;
+				  
+			  }
+		  }
+		return true;
+	}
+	
+	public String makeId() {
+		int n=14;
+		String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+		         + "0123456789"
+		         + "abcdefghijklmnopqrstuvxyz";
+		 
+		  // create StringBuffer size of AlphaNumericString
+		  StringBuilder sb = new StringBuilder(n);
+		  String s="";
+		  while(!checkId(s)) {
+			  
+		  
+			  for (int i = 0; i < n; i++) {
+			 
+			   // generate a random number between
+			   // 0 to AlphaNumericString variable length
+			   int index
+			    = (int)(AlphaNumericString.length()
+			      * Math.random());
+			 
+			   // add Character one by one in end of sb
+			   sb.append(AlphaNumericString
+			      .charAt(index));
+			  }
+			  
+			  s = sb.toString();
+		  }
+		  
+		  
+		  return s;
+	}
 	
 	
 	public List<Order> loadAll() {

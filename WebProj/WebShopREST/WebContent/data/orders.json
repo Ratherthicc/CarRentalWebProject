@@ -1,6 +1,6 @@
 [
   {
-    "order_id": "sifra1",
+    "order_id": "Ki79TbvrrFTVZS",
     "vehicles": [
       {
         "id": 0,
@@ -8,7 +8,7 @@
         "model": "haha",
         "price": 23.0,
         "vehicle_type": "CAR",
-        "rental_object_id": 2,
+        "rental_object_id": 4,
         "transmission_type": "AUTOMATIC",
         "fuel_type": "DIESEL",
         "fuel_consumption": 22.0,
@@ -19,40 +19,96 @@
         "available": true
       }
     ],
-    "agency_id": 1,
-    "date_time": "2014-01-01T10:10:30",
+    "agency_id": 4,
+    "date_time": "2023-07-09T17:36",
     "duration": 5.0,
-    "price": 55.0,
-    "firstname": "Jovan",
+    "price": 23.0,
+    "firstname": "Jovan123",
     "lastname": "Katanic",
-    "status": "APPROVED"
+    "status": "PROCESSING"
   },
   {
-    "order_id": "sifra2",
+    "order_id": "Sij9Flth8YfVQX",
     "vehicles": [
       {
         "id": 1,
-    	"brand": "hah",
-    	"model": "haha",
-    	"price": 23.0,
-    	"vehicle_type": "CAR",
-    	"rental_object_id": 1,
-    	"transmission_type": "AUTOMATIC",
-    	"fuel_type": "HYBRID",
-    	"fuel_consumption": 22.0,
-    	"doors": 3,
-    	"people": 3,
-    	"description": "opis",
-    	"picture": "http://example.com",
-    	"available": true
+        "brand": "hah",
+        "model": "haha",
+        "price": 23.0,
+        "vehicle_type": "CAR",
+        "rental_object_id": 1,
+        "transmission_type": "AUTOMATIC",
+        "fuel_type": "HYBRID",
+        "fuel_consumption": 22.0,
+        "doors": 3,
+        "people": 3,
+        "description": "opis",
+        "picture": "http://example.com",
+        "available": true
       }
     ],
     "agency_id": 1,
-    "date_time": "2014-01-01T10:10:30",
+    "date_time": "2023-07-09T17:36",
     "duration": 5.0,
-    "price": 55.0,
-    "firstname": "Jovan",
+    "price": 23.0,
+    "firstname": "Jovan123",
     "lastname": "Katanic",
-    "status": "APPROVED"
+    "status": "PROCESSING"
+  },
+  {
+    "order_id": "z6sNpzoKTZz08O",
+    "vehicles": [
+      {
+        "id": 3,
+        "brand": "hah",
+        "model": "haha",
+        "price": 23.0,
+        "vehicle_type": "VAN",
+        "rental_object_id": 6,
+        "transmission_type": "AUTOMATIC",
+        "fuel_type": "HYBRID",
+        "fuel_consumption": 22.0,
+        "doors": 3,
+        "people": 3,
+        "description": "opis",
+        "picture": "http://example.com",
+        "available": true
+      }
+    ],
+    "agency_id": 6,
+    "date_time": "2023-06-26T17:09",
+    "duration": 13.0,
+    "price": 23.0,
+    "firstname": "Jovan123",
+    "lastname": "Katanic",
+    "status": "PROCESSING"
+  },
+  {
+    "order_id": "TcoP5HCmPtzJWl",
+    "vehicles": [
+      {
+        "id": 3,
+        "brand": "hah",
+        "model": "haha",
+        "price": 23.0,
+        "vehicle_type": "VAN",
+        "rental_object_id": 6,
+        "transmission_type": "AUTOMATIC",
+        "fuel_type": "HYBRID",
+        "fuel_consumption": 22.0,
+        "doors": 3,
+        "people": 3,
+        "description": "opis",
+        "picture": "http://example.com",
+        "available": true
+      }
+    ],
+    "agency_id": 6,
+    "date_time": "2023-06-26T17:09",
+    "duration": 13.0,
+    "price": 23.0,
+    "firstname": "Jovan123",
+    "lastname": "Katanic",
+    "status": "PROCESSING"
   }
 ]
