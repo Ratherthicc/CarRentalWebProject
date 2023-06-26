@@ -3,6 +3,8 @@ package services;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
@@ -50,6 +52,15 @@ public class VehicleService {
 			ctx.setAttribute("OrderDAO", new OrderDAO(contextPath));
 		}
 		
+	}
+	@GET
+	@Path("/ByRentalObject/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<Vehicle> getByRentalObjectId(@PathParam("id") int rentalObjectId){
+		VehicleDAO dao = (VehicleDAO) ctx.getAttribute("VehicleDAO");
+		
+		return dao.getAll().stream()
+				.filter(v -> v.getRental_object_id() == rentalObjectId).collect(Collectors.toList());
 	}
 	
 	@GET
