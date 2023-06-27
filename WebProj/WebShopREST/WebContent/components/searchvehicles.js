@@ -64,10 +64,6 @@ Vue.component("searchvehicles", {
 				 
 				axios.delete('rest/baskets/deleteAll/'+this.username)
 				
-				
-				
-				
-				
 				var flag;
 				this.free_vehicles=[];
 				for(var vehicle of this.vehicles){

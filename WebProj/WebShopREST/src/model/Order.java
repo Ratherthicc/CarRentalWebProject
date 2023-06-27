@@ -15,6 +15,7 @@ public class Order {
 	private String firstname;
 	private String lastname;
 	private Status status;
+	private String username;
 	
 	public enum Status{
 		PROCESSING,
@@ -31,7 +32,7 @@ public class Order {
 	}
 
 	public Order(String order_id,List<Vehicle> veh, int agency_id, LocalDateTime date_time, double duration,
-			double price, String firstname, String lastname, Status status) {
+			double price, String firstname, String lastname, Status status,String username) {
 		super();
 		this.order_id = order_id;
 		this.vehicles=veh;
@@ -44,6 +45,7 @@ public class Order {
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.status = status;
+		this.username=username;
 	}
 
 	
@@ -132,6 +134,14 @@ public class Order {
 
 	public void setAgency_id(int agency_id) {
 		this.agency_id = agency_id;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	
 	

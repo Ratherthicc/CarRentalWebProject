@@ -99,6 +99,12 @@ table{
     box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.2);
     background-color: #f7f9f7;
 }
+#tableNotCentered {
+    position:static;
+
+}
+
+
 .dataRow{
     cursor: pointer;
     transition: all 0.2s ease-in;

@@ -72,6 +72,15 @@ public class BasketService {
 		return dao.addToBasket(vehdao.getVehicleById(id), username);
 	}
 	
+	@POST
+	@Path("/createBasket/{username}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Basket createBasket(@PathParam("username")String username) {
+		BasketDAO dao = (BasketDAO) ctx.getAttribute("BasketDAO");
+		
+		return dao.createBasket(username);
+	}
+	
 	@DELETE
 	@Path("/deleteOne/{username}/{veh_id}")
 	@Produces(MediaType.APPLICATION_JSON)

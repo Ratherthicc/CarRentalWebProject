@@ -67,7 +67,7 @@ Vue.component("mainview", {
 			router.push(`/searchVehicles/${username}`);
 		},
 		viewOrders:function(){
-			router.push(`/viewOrders`);
+			router.push(`/viewOrders/${this.username}`);
 		}
 		
 	},

@@ -9,7 +9,7 @@ Vue.component("landingpage", {
 				sortRatingFlag: false,
 				vehicle_type:"",
 				vehicle_fuel:"",
-				min_rating:10
+				min_rating:0
 		    }
 	},
 	template: ` 
@@ -100,10 +100,13 @@ Vue.component("landingpage", {
 			
 		},
 		filterMinRating: function(){
-			if(this.min_rating>=5)return;
+			if(this.min_rating>=5){
+				this.SearchedAgencies=[];
+				return;
+				}
 			var agencies=this.SearchedAgencies.slice();
 			for(var agency of agencies){
-				if(agency.rating <= this.min_rating){
+				if(agency.rating < this.min_rating){
 					const i=this.SearchedAgencies.indexOf(agency);
 					this.SearchedAgencies.splice(i,1);
 				}

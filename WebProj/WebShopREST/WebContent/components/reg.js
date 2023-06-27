@@ -120,6 +120,8 @@ Vue.component("register", {
 							}})
 								
 			}
+			
+			axios.post('rest/baskets/createBasket/'+this.user.username)
 				
 		}
 		

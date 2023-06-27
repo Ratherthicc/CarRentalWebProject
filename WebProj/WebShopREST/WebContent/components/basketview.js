@@ -70,11 +70,15 @@ Vue.component("basketview", {
 		},
 		addOrder:function(){
 			axios.post('rest/orders/'+this.username+'/'+this.from_date+'/'+this.to_date)
-			router.push(`/view/${this.username}`);
+			
 			
 			var points=this.total_price*133/1000;
 			axios.put('rest/users/updatePoints/'+this.username+'/'+points)
-			
+			.then(response=>{
+				axios.delete('rest/baskets/deleteAll/'+this.username)
+			})
+			this.vehicles=[];
+			router.push(`/view/${this.username}`);
 		}
 	},
 	mounted () {

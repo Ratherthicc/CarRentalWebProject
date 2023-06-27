@@ -18,7 +18,7 @@ const router = new VueRouter({
 		{ path: '/edit/:username', component: EditView},
 		{ path: '/searchvehicles/:username', component: SearchVehicles},
 		{ path: '/basketview/:username/:from_date/:to_date', component: BasketView},
-		{ path: '/viewOrders', component: ViewOrders},
+		{ path: '/viewOrders/:username', component: ViewOrders},
 		{ path: '/agencyview/:id', component: AgencyView}
 	  ]
 });
