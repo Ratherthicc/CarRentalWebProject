@@ -67,13 +67,13 @@ Vue.component("searchvehicles", {
 				var flag;
 				this.free_vehicles=[];
 				for(var vehicle of this.vehicles){
-					if(!vehicle.available){
-						continue;
-					}
+					/*if(!vehicle.available){
+						continue;//mozda i ne treba
+					}*/
 					flag=true;
 					for(var order of this.orders){
 						if(!flag)break;
-						
+						if(order.status=="CANCELED")continue;
 						for(var order_vehicle of order.vehicles){
 							if(!(order_vehicle.id==vehicle.id)){
 								continue;

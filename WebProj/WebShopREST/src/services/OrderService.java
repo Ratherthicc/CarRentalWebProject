@@ -14,6 +14,7 @@ import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -148,6 +149,12 @@ public class OrderService {
 		
 		
 	}
-	
+	@PUT
+	@Path("/updateStatus/{order_id}/{status}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Order updateStatus(@PathParam("order_id")String order_id,@PathParam("status")Order.Status status) {
+		OrderDAO dao = (OrderDAO) ctx.getAttribute("OrderDAO");
+		return dao.updateStatus(order_id,status);
+	}
 	
 }

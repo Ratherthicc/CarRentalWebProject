@@ -23,7 +23,8 @@ Vue.component("vieworders", {
 			<input type="number" v-model="min_price" @keyup="updateGrid">
 			<input type="number" v-model="max_price" @keyup="updateGrid"><br>
 			<input type="datetime-local" v-model="min_date" @change="updateGrid">
-			<input type="datetime-local" v-model="max_date" @change="updateGrid">
+			<input type="datetime-local" v-model="max_date" @change="updateGrid"><br>
+			<input type="button" value="refresh" @click="refreshGrid">
 			<table id="myTable">
 		      <tr>
 		        <th>Order Id</th>
@@ -44,6 +45,7 @@ Vue.component("vieworders", {
 		        <td>{{o.firstname}}</td>
 		        <td>{{o.lastname}}</td>
 		        <td>{{o.status}}</td>
+		        <td v-if="o.status === 'PROCESSING'"><input type="button" value="Cancel" @click="cancelOrder(o)"></td>
       		  </tr>
     		</table>
     		
@@ -79,22 +81,68 @@ Vue.component("vieworders", {
 		getVehicles: function(order){
 			this.vehicles=order.vehicles;
 			
-			
+		},
+		cancelOrder:function(order){
+			event.stopPropagation();
+			axios.put('rest/orders/updateStatus/'+order.order_id+'/'+'CANCELED')
+			.then(response=>{
+				order.status='CANCELED';
+				/*for(var o of this.orders){
+					if(o.order_id==order.order_id){
+						o.status='CANCELED';
+					}//mozda treba
+				}*/
+				var points=order.price*(-133)*4/1000;
+				axios.put('rest/users/updatePoints/'+this.username+'/'+points)
+			})
+		},
+		refreshGrid:function(){
+			this.min_price=0;
+			this.max_price=100000;
+			this.search_text="";
+			this.min_date=null;
+			this.max_date=null;
+			this.updateGrid();
 		},
 		updateGrid: function(){
 			this.orders_searched=this.orders.slice();
 			
+			var min_date_temp,max_date_temp,start_date;
+			
+			if(this.min_date==null){
+				min_date_temp=new Date(1800, 0, 1);
+			}
+			else{
+				min_date_temp=new Date(this.min_date);
+			}
+			if(this.max_date==null){
+				max_date_temp=new Date(2500,0,1);
+			}
+			else{
+				max_date_temp=new Date(this.max_date);
+			}
+			
 			for(var variable of this.orders){
+				var jsonDateTime=JSON.stringify(variable.date_time);
+				const dateTimeObj = JSON.parse(jsonDateTime);
+				start_date = new Date(
+						dateTimeObj.year,
+						dateTimeObj.monthValue - 1, //js months start from 0
+						dateTimeObj.dayOfMonth,
+						dateTimeObj.hour,
+						dateTimeObj.minute,
+						dateTimeObj.second
+						);
+				
 				
 				if(!(variable.agency.name.toLowerCase().includes(this.search_text.toLowerCase())
-				 && variable.price>=this.min_price && variable.price<=this.max_price)){
-					 
+				 && variable.price>=this.min_price && variable.price<=this.max_price 
+				 && start_date >= min_date_temp && start_date<=max_date_temp
+				 )){
 					const i=this.orders_searched.indexOf(variable);
 					this.orders_searched.splice(i,1);
 				}
-	
-			}
-			
+			}	
 		},
 		sortByAgencyName: function(){
 			var table, rows, switching, i, x, y, shouldSwitch;

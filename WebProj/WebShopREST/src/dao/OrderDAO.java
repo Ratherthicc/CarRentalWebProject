@@ -60,6 +60,20 @@ public class OrderDAO {
 		
 		
 	}
+	
+	public Order updateStatus(String order_id,Order.Status status) {
+		for(Order order:orders) {
+			if(order.getOrder_id().equals(order_id)) {
+				order.setStatus(status);
+				saveAll();
+				return order;
+			}
+		}
+		
+		return null;
+	}
+	
+	
 	public Collection<Order> getSortedDates(int flag){
 		
 		List<Order> myList = new ArrayList<>(orders);
