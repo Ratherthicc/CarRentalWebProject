@@ -7,13 +7,23 @@ Vue.component("vieworders", {
 		      	vehicles:[],
 		      	sortNameFlag:false,
 		      	sortPriceFlag:false,
-		      	sortDateFlag:0
+		      	sortDateFlag:0,
+		      	search_text:"",
+		      	min_price:0,
+		      	max_price:100000,
+		      	min_date:null,
+		      	max_date:null
 		      	
 		      	
 		    }
 	},
 	template: ` 
 		<div>
+			<input type="text" v-model="search_text" @keyup="updateGrid"><br>
+			<input type="number" v-model="min_price" @keyup="updateGrid">
+			<input type="number" v-model="max_price" @keyup="updateGrid"><br>
+			<input type="datetime-local" v-model="min_date" @change="updateGrid">
+			<input type="datetime-local" v-model="max_date" @change="updateGrid">
 			<table id="myTable">
 		      <tr>
 		        <th>Order Id</th>
@@ -69,6 +79,21 @@ Vue.component("vieworders", {
 		getVehicles: function(order){
 			this.vehicles=order.vehicles;
 			
+			
+		},
+		updateGrid: function(){
+			this.orders_searched=this.orders.slice();
+			
+			for(var variable of this.orders){
+				
+				if(!(variable.agency.name.toLowerCase().includes(this.search_text.toLowerCase())
+				 && variable.price>=this.min_price && variable.price<=this.max_price)){
+					 
+					const i=this.orders_searched.indexOf(variable);
+					this.orders_searched.splice(i,1);
+				}
+	
+			}
 			
 		},
 		sortByAgencyName: function(){
@@ -158,13 +183,25 @@ Vue.component("vieworders", {
 			
 		  axios.get('rest/orders/sortedDates/'+this.sortDateFlag)
 		  .then(response=>{
-			  this.orders_searched=response.data
+			  
+			  var orders=response.data;
 			  if(this.sortDateFlag==0){
 				  this.sortDateFlag=1;
 			  }
 			  else{
 				  this.sortDateFlag=0;
 			  }
+			  var array=[];
+			  
+			  
+			  for(var item of orders){
+				  const foundItem = this.orders_searched.find(item => item.order_id === item.order_id);
+				  if(foundItem){
+					  array.push(item);
+				  }
+			  }
+			  this.orders_searched=array;
+			  
 			  })
 		 }
 	},

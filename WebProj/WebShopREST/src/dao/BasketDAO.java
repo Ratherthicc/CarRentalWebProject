@@ -66,7 +66,7 @@ public class BasketDAO {
 	
 	
 	public Basket getByUsername(String username) {
-		loadAll();
+		
 		for(Basket b : baskets) {
 			if(b.getUsername().equals(username)) {
 				return b;

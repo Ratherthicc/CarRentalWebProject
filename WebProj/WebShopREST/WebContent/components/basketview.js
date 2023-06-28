@@ -69,14 +69,15 @@ Vue.component("basketview", {
 			axios.delete('rest/baskets/deleteOne/'+this.username+'/'+v.id)
 		},
 		addOrder:function(){
-			axios.post('rest/orders/'+this.username+'/'+this.from_date+'/'+this.to_date)
-			
-			
 			var points=this.total_price*133/1000;
-			axios.put('rest/users/updatePoints/'+this.username+'/'+points)
+			axios.post('rest/orders/'+this.username+'/'+this.from_date+'/'+this.to_date)
 			.then(response=>{
-				axios.delete('rest/baskets/deleteAll/'+this.username)
+				return axios.put('rest/users/updatePoints/'+this.username+'/'+points)
+						.then(response=>{
+							return axios.delete('rest/baskets/deleteAll/'+this.username)
+						})
 			})
+
 			this.vehicles=[];
 			router.push(`/view/${this.username}`);
 		}
