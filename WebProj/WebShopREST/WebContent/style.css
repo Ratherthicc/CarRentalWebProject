@@ -388,3 +388,88 @@ tr.tableHeader{
 	margin-top: 2px;
   	margin-left: 15px;
 }
+/*
+-----------------------------------
+
+ searchbox styles 
+
+-----------------------------------
+*/
+
+.searchBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  
+  background-color: #c5d6d0;
+  border: 3px solid rgba(33, 1, 36, 1);
+  width:23vw;
+}
+
+.searchBox label{
+	font-size:1.7vh;
+	font-family: "Poppins";
+}
+.underline-label{
+	text-decoration: underline;
+	display: flex;
+	justify-content: center;
+	margin-bottom: 0.5vh;
+	
+}
+.vehicle-stats-label{
+	display: flex;
+	justify-content: center;
+	margin-bottom: 0.5vh;
+}
+
+.basic-div{
+
+	display: flex;
+	justify-content: center;
+	margin-bottom: 0.5vh;
+	
+}
+.basic-div input[type="text"]{
+	width:15vw;
+	height:2vh;
+	border: 1.5px solid rgba(33, 1, 36, 1);
+}
+.basic-div input[type="number"]{
+	width:2vw;
+	height:3vh;
+	border: 1.5px solid rgba(33, 1, 36, 1);
+	text-align: center;
+	
+}
+
+.basic-div input[type="submit"]{
+  background-color:  rgba(33, 1, 36, 1); 
+  border: none;
+  color: white;
+  width:5vw;
+  height:2.5vh;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 50px;
+}
+.basic-div input[type="submit"]:hover{
+    background-color: rgba(33, 1, 36, 0.8);
+}
+
+.basic-div select{
+  font-size: 14px;
+  font-family: "Poppins";
+  border: 1.5px solid rgba(33, 1, 36, 1);
+  border-radius: 4px;
+  background-color: #f7f7f7;  
+}
+
+
+

@@ -24,29 +24,46 @@ Vue.component("landingpage", {
             <a class="nav_a" v-on:click="logInButton"><button class="nav_button">Log in</button></a>
         </header>
         
-        
-        <form v-on:submit="filter">
-        <input type="text" name="search" v-model="textbox">
-        <input type="checkbox"  name="openCheckbox"> <label>Show only open</label> <br>
-        <select v-model="vehicle_type">
-	        <option value="CAR">Car</option>
-	        <option value="VAN">Van</option>
-	        <option value="MOBILEHOME">Mobilehome</option>
-	        <option value="">NONE</option>
-   		</select>
-   		<select v-model="vehicle_fuel">
-	        <option value="DIESEL">Diesel</option>
-	        <option value="BENZENE">Benzene</option>
-	        <option value="HYBRID">Hybrid</option>
-	        <option value="ELECTRIC">Electric</option>
-	        <option value="">NONE</option>
-   		</select>	
-   		
-   		<label>Pick a vehicle stats</label> <br>
-   		<input type="text" v-model="min_rating"> <br>
-        <input type="submit" value="Search">
-		</form>
-        
+        <div class="searchBox">
+	        <form v-on:submit="filter" >
+		        <label class="underline-label"> Search: </label>
+		        <div class="basic-div">
+		        <input  type="text" name="search" v-model="textbox" style="text-align: center;" placeholder="Search by agency and location!">
+		        </div>
+		        <div class="basic-div">
+		        <input type="checkbox"  name="openCheckbox">&nbsp; &nbsp;<label>Show only open</label> 
+		        </div>
+		        <label class="underline-label">Pick vehicle stats:</label>
+		        <div class="basic-div">
+		        <label>Type:</label>&nbsp;
+		        <select v-model="vehicle_type">
+		        	<option value="">NONE</option>
+			        <option value="CAR">Car</option>
+			        <option value="VAN">Van</option>
+			        <option value="MOBILEHOME">Mobilehome</option>
+			        
+		   		</select>&nbsp;&nbsp;&nbsp;
+		   		<label>Fuel:</label>&nbsp;
+		   		
+		   		<select v-model="vehicle_fuel">
+		   			<option value="">NONE</option>
+			        <option value="DIESEL">Diesel</option>
+			        <option value="BENZENE">Benzene</option>
+			        <option value="HYBRID">Hybrid</option>
+			        <option value="ELECTRIC">Electric</option>
+			        
+		   		</select>
+		   		
+		   		</div>
+		   		<div class="basic-div">
+			   		<label>Minimum rating:</label>&nbsp;&nbsp;&nbsp;
+			   		<input type="number" v-model="min_rating">
+		   		</div>
+		   		<div class="basic-div">
+		        <input type="submit" value="Search">
+		        </div>
+			</form>
+        </div>
         <table id="myTable">
             <tr class="tableHeader">
                 <th>Logo</th>
