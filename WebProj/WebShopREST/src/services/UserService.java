@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -16,7 +17,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
+import dao.OrderDAO;
 import dao.UserDAO;
+import model.Order;
 import model.User;
 
 @Path("/users")
@@ -32,6 +35,10 @@ public class UserService {
 		if (ctx.getAttribute("UserDAO") == null) {
 	    	String contextPath = ctx.getRealPath("");
 			ctx.setAttribute("UserDAO", new UserDAO(contextPath));
+		}
+		if (ctx.getAttribute("OrderDAO") == null) {
+	    	String contextPath = ctx.getRealPath("");
+			ctx.setAttribute("OrderDAO", new OrderDAO(contextPath));
 		}
 	}
 	@GET
@@ -91,9 +98,22 @@ public class UserService {
 		UserDAO dao = (UserDAO) ctx.getAttribute("UserDAO");
 		return dao.updatePoints(username,points);
 		
-		
 	}
-	
+	@GET
+	@Path("/purchasersFrom/{rentalAgencyId}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<User> getPurchasersByRentalId(@PathParam("rentalAgencyId") int rentalAgencyId){
+		UserDAO userDAO = (UserDAO) ctx.getAttribute("UserDAO");
+		OrderDAO orderDAO = (OrderDAO) ctx.getAttribute("OrderDAO");
+		Collection<User> purchasers = new ArrayList<User>();
+		
+		for (Order order : orderDAO.getAll()) {
+			if(rentalAgencyId == order.getAgency_id()) {
+				purchasers.add(userDAO.findUser(order.getFirstname(), order.getLastname()));
+			}
+		}
+		return purchasers;
+	}
 	
 }
 	
