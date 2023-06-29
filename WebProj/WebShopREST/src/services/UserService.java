@@ -43,7 +43,15 @@ public class UserService {
 		
 		
 	}
-	
+	@GET
+	@Path("/getBuyers")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<User> getBuyers() {
+		UserDAO dao = (UserDAO) ctx.getAttribute("UserDAO");
+		return dao.getBuyers();
+		
+		
+	}
 	@GET
 	@Path("/{username}")
 	@Produces(MediaType.APPLICATION_JSON)

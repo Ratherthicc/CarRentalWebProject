@@ -11,7 +11,7 @@ Vue.component("register", {
 			        birth_date: null,
 			        type: "Buyer"  ,
 			        points:0,
-			        rank:"Bronze"
+			        rank:"BRONZE"
 			  		},
 			  confirmpas:"",
 			  invalidUsername: false,
@@ -113,6 +113,7 @@ Vue.component("register", {
 								self.invalidBirthDate = false;
 								self.invalidPassword = false;
 								self.invalidGender = false;
+								axios.post('rest/baskets/createBasket/'+this.user.username)
 								return;	
 							}
 							else{
@@ -121,7 +122,7 @@ Vue.component("register", {
 								
 			}
 			
-			axios.post('rest/baskets/createBasket/'+this.user.username)
+			
 				
 		}
 		

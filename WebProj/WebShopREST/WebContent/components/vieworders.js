@@ -188,7 +188,7 @@ Vue.component("vieworders", {
 		},
 		sortByAgencyName: function(){
 			var table, rows, switching, i, x, y, shouldSwitch;
-		  table = document.getElementById("myTable");
+		  table = document.getElementById("table-vieworders");
 		  switching = true;
 		  while (switching) {
 		    switching = false;
@@ -229,7 +229,7 @@ Vue.component("vieworders", {
 		},
 		sortByPrice:function(){
 			var table, rows, switching, i, x, y, shouldSwitch;
-		  table = document.getElementById("myTable");
+		  table = document.getElementById("table-vieworders");
 		  switching = true;
 		  while (switching) {
 		    switching = false;
@@ -241,14 +241,14 @@ Vue.component("vieworders", {
 		      x = rows[i].getElementsByTagName("TD")[4];
 		      y = rows[i + 1].getElementsByTagName("TD")[4];
 			  if(this.sortPriceFlag){
-			      if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+			      if (parseFloat(x.innerHTML)> parseFloat(y.innerHTML)) {
 			        
 			        shouldSwitch = true;
 			        break;
 			      	}
 			     } 
 			   else{
-				   if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+				   if (parseFloat(x.innerHTML) < parseFloat(y.innerHTML)) {
 			        
 			        shouldSwitch = true;
 			        break;

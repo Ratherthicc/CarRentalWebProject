@@ -291,14 +291,14 @@ Vue.component("landingpage", {
 					      x = rows[i].getElementsByTagName("TD")[3];
 					      y = rows[i + 1].getElementsByTagName("TD")[3];
 						  if(this.sortRatingFlag){
-						      if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+						      if (parseFloat(x.innerHTML) > parseFloat(y.innerHTML)) {
 						        
 						        shouldSwitch = true;
 						        break;
 						      	}
 						     } 
 						   else{
-							   if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+							   if (parseFloat(x.innerHTML) < parseFloat(y.innerHTML)) {
 						        
 						        shouldSwitch = true;
 						        break;

@@ -7,6 +7,8 @@ const SearchVehicles ={template: '<searchvehicles></searchvehicles>'}
 const BasketView = {template: '<basketview></basketview>'}
 const ViewOrders = {template: '<vieworders></vieworders>'}
 const AgencyView ={template: '<agencyview></agencyview>'}
+const ViewUsers ={template: '<viewusers></viewusers>'}
+const AddManager ={template: '<addmanager></addmanager>'}
 
 const router = new VueRouter({
 	mode: 'hash',
@@ -19,7 +21,9 @@ const router = new VueRouter({
 		{ path: '/searchvehicles/:username', component: SearchVehicles},
 		{ path: '/basketview/:username/:from_date/:to_date', component: BasketView},
 		{ path: '/viewOrders/:username', component: ViewOrders},
-		{ path: '/agencyview/:id', component: AgencyView}
+		{ path: '/agencyview/:id', component: AgencyView},
+		{ path: '/viewUsers/:username', component: ViewUsers},
+		{ path: '/addManager/:username', component: AddManager}
 	  ]
 });
 

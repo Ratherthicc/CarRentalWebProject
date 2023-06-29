@@ -11,6 +11,8 @@ Vue.component("mainview", {
 		<div>
 	        <input type="button" value="Make orders"  @click="findVehicles(username)">
 	        <input type="button" value="View orders" @click="viewOrders" >
+	        <input type="button" value="Administrator View Users" @click="viewUsers" >
+	        <input type="button" value="Administrator Add Menager" @click="addManager" >
 	   </div>
 	   
 		<form>
@@ -68,6 +70,12 @@ Vue.component("mainview", {
 		},
 		viewOrders:function(){
 			router.push(`/viewOrders/${this.username}`);
+		},
+		viewUsers: function(){
+			router.push(`/viewUsers/${this.username}`);
+		},
+		addManager:function(){
+			router.push(`/addManager/${this.username}`);
 		}
 		
 	},

@@ -35,6 +35,18 @@ public class UserDAO {
 	public Collection<User> getAll() {
 		return users;
 	}
+	public Collection<User> getBuyers(){
+		List<User> list=new ArrayList<>();
+		for(User u : users) {
+			if(u.getType()!=User.UserType.Administrator) {
+				list.add(u);
+			}
+		}
+		
+		
+		return list;
+	}
+	
 	
 	public User updatePoints(String username,double points) {
 		User u=this.getUser(username);
