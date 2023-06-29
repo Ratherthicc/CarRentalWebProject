@@ -125,6 +125,12 @@ public class OrderService {
 			LocalDateTime endDate=LocalDateTime.parse(to_date);
 			Duration duration = Duration.between(startDate, endDate);
 			double len= duration.toDays();
+			if(user.getRank().equals("GOLD")) {
+				price=price*0.95;
+			}
+			else if(user.getRank().equals("SILVER")) {
+				price=price*0.97;
+			}
 			Order order=new Order("0",listToAdd,agency_id,startDate,len,price,username,user.getLast_name(),Order.Status.PROCESSING,username);
 			dao.addOrder(order);
 		}

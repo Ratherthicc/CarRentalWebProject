@@ -10,6 +10,7 @@ Vue.component("editview", {
 	},
 	template: ` 
 		<form>
+		
     <table>
         <tr>
             <td><label>First name:</label></td>

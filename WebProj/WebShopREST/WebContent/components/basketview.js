@@ -5,7 +5,9 @@
 		      	vehicles:[],
 		      	from_date:null,
 		      	to_date:null,
-		      	total_price:0.0
+		      	total_price:0.0,
+		      	discount:0,
+		      	user:{}
 		      	
 		    }
 	},
@@ -19,7 +21,8 @@
 		<div class="confirm-div">	
 		     <input type="button" @click="addOrder" value="Confirm order" class="button-confirm">
 		     <div >	
-		      	<p>Total price of the order is: {{total_price}}</p>
+		      	<p>Total price of the order without discount is: {{total_price}}</p>
+		      	<p>Discount:{{discount}}%</p>
 		     </div>
 		</div> 
 		<div class="basic-div-basketview">
@@ -87,12 +90,13 @@
 			.then(response=>{
 				return axios.put('rest/users/updatePoints/'+this.username+'/'+points)
 						.then(response=>{
-							return axios.delete('rest/baskets/deleteAll/'+this.username)
+							axios.delete('rest/baskets/deleteAll/'+this.username)
+							this.vehicles=[];
+							router.push(`/view/${this.username}`);
 						})
 			})
 
-			this.vehicles=[];
-			router.push(`/view/${this.username}`);
+			
 		}
 	},
 	mounted () {
@@ -107,7 +111,19 @@
 				
 			this.total_price+=vehicle.price;
 			}
-			
+			axios.get('rest/users/'+this.username)
+			.then(response=>{
+				this.user=response.data;
+				if(this.user.rank=="GOLD"){
+					this.discount=5;
+				}
+				else if(this.user.rank=="SILVER"){
+					this.discount=3;
+				}
+				else{
+					this.discount=0;
+				}
+			})
 			})
 		
 			

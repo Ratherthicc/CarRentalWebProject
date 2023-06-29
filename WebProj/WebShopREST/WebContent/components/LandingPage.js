@@ -64,6 +64,7 @@ Vue.component("landingpage", {
 		        </div>
 			</form>
         </div>
+        
         <table id="myTable">
             <tr class="tableHeader">
                 <th>Logo</th>
@@ -82,6 +83,7 @@ Vue.component("landingpage", {
                 <td>{{r.rating}}</td>
             </tr>
         </table>
+        
     </div>
 	`
 	, 

@@ -73,9 +73,6 @@ Vue.component("mainview", {
 	},
 	mounted () {
 		this.username=this.$route.params.username;
-		
-		
-		
 		axios.get('rest/users/'+this.username)
 			.then(response => (this.user=response.data))
 		

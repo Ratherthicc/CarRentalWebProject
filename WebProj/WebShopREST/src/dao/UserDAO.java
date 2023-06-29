@@ -40,6 +40,15 @@ public class UserDAO {
 		User u=this.getUser(username);
 		if(u==null)return null;
 		u.setPoints(u.getPoints()+points);
+		if(u.getPoints()>=200) {
+			u.setRank("GOLD");
+		}
+		else if(u.getPoints()>=100){
+			u.setRank("SILVER");
+		}
+		else {
+			u.setRank("BRONZE");
+		}
 		saveAll();
 		return u;
 	}

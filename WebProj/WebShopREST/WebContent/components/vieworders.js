@@ -12,7 +12,8 @@ Vue.component("vieworders", {
 		      	min_price:0,
 		      	max_price:100000,
 		      	min_date:null,
-		      	max_date:null
+		      	max_date:null,
+		      	user:{}
 		      	
 		      	
 		    }
@@ -120,8 +121,21 @@ Vue.component("vieworders", {
 						o.status='CANCELED';
 					}//mozda treba
 				}*/
-				var points=order.price*(-133)*4/1000;
-				axios.put('rest/users/updatePoints/'+this.username+'/'+points)
+				axios.get('rest/users/'+this.username)
+				.then(response=>{
+					this.user=response.data;
+					if(this.user.rank=="GOLD"){
+						var points=(order.price/0.95)*(-133)*4/1000;
+					}
+					else if(this.user.rank=="SILVER"){
+						var points=(order.price/0.97)*(-133)*4/1000;
+					}
+					else{
+						var points=(order.price)*(-133)*4/1000;
+					}
+					axios.put('rest/users/updatePoints/'+this.username+'/'+points)
+				})
+				
 			})
 		},
 		refreshGrid:function(){
