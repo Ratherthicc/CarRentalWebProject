@@ -40,8 +40,19 @@ Vue.component("login", {
 			.then(function (response) { 
 						
 						if(response.data){
-							
-							router.push(`/view/${username}`);
+							let user = response.data;
+							if(user.type === 'Manager'){
+								router.push(`/managerprofile/${user.username}`);
+								return;
+							}
+							if(user.type === 'Administrator'){
+								router.push(`/view/${user.username}`);
+								return;
+							}
+							if(user.type === 'Buyer'){
+								router.push(`/view/${user.username}`);
+								return;
+							}
 						} 
 						else{
 							self.invalidCredentials = true;

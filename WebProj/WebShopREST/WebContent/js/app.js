@@ -22,7 +22,7 @@ const router = new VueRouter({
 		{ path: '/searchvehicles/:username', component: SearchVehicles},
 		{ path: '/basketview/:username/:from_date/:to_date', component: BasketView},
 		{ path: '/viewOrders', component: ViewOrders},
-		{ path: '/managerprofile', component: ManagerProfile}
+		{ path: '/managerprofile/:username', component: ManagerProfile}
 	  ]
 });
 

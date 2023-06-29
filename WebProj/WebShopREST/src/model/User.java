@@ -13,13 +13,14 @@ public class User {
 	private UserType type;
 	private double points;
 	private String rank;
+	private int rental_agency_id;
 	
 	public User() {
 		
 	}
 	
 	public User(String username, String password, String first_name, String last_name, Gender gender, String birth_date,
-			UserType type, double points, String rank) {
+			UserType type, double points, String rank,int rental_agency_id) {
 		this.username = username;
 		this.password = password;
 		this.first_name = first_name;
@@ -29,6 +30,13 @@ public class User {
 		this.type = type;
 		this.points = points;
 		this.rank = rank;
+		this.rental_agency_id = rental_agency_id;
+	}
+	public int getAgencyId() {
+		return this.rental_agency_id;
+	}
+	public void setAgencyId(int id) {
+		this.rental_agency_id = id;
 	}
 
 	public double getPoints() {

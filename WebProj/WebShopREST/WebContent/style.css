@@ -4,6 +4,7 @@
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+	font-family: "Poppins";
 }
 #main-page{
 	background-color: #dbf9f0;
@@ -305,7 +306,7 @@ tr.tableHeader{
 }
 .separator-line{
   border-bottom: 2px #210124 solid;
-  width: 98vw;
+  width: 97vw;
   margin-left: 25px;
 }
 .agency-name > span {
@@ -381,4 +382,24 @@ tr.tableHeader{
 	color:red;
 	margin-top: 2px;
   	margin-left: 15px;
+}
+
+.personal-info-div{
+  gap: 8px;
+  margin-top: 12px;
+  margin-left: 20px;
+  font-size: 15px;
+  border-radius: 12px;
+  box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.3);
+  background-color: #f7f9f7;
+  padding: 12px;
+  width: 450px;
+}
+.my-profile-label{
+  display: inline-block;
+  margin-top: 32px;
+  margin-left: 20px;
+}
+.personal-info-div label{
+  display: inline-block;
 }
