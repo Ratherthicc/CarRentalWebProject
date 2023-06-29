@@ -122,6 +122,7 @@ th,td{
 tr.tableHeader{
     background-color: rgba(33, 1, 36, 1);
     color: #f7f9f7;
+    user-select:none;
 }
 .login_form_div{
 	background-color: #dbf9f0;
@@ -395,7 +396,11 @@ tr.tableHeader{
 
 -----------------------------------
 */
-
+.rowTableImage {
+    max-width: 5vw;
+    max-height: 5vw;
+    object-fit: contain;
+}
 .searchBox {
   display: flex;
   justify-content: center;
@@ -404,10 +409,10 @@ tr.tableHeader{
   top: 20px;
   left: 50%;
   transform: translateX(-50%);
-  
   background-color: #c5d6d0;
-  border: 3px solid rgba(33, 1, 36, 1);
+  border: 2.2px solid rgba(33, 1, 36, 1);
   width:23vw;
+  border-radius: 50px;
 }
 
 .searchBox label{
@@ -471,5 +476,248 @@ tr.tableHeader{
   background-color: #f7f7f7;  
 }
 
+/*
+-----------------------------------
+
+ orderview styles 
+
+-----------------------------------
+*/
+.basic-div-orderview{
+
+	display: flex;
+	justify-content: center;
+	margin-bottom: 0.5vh;
+	
+}
+.basic-div-orderview input[type="text"]{
+	width:12vw;
+	height:2vh;
+	border: 1.5px solid rgba(33, 1, 36, 1);
+}
+
+.table-button{
+    padding: 9px 25px;
+    background-color: #c32023;
+    color: #f7f9f7;
+    border: none;
+    border-radius: 50px;
+    transition: all 0.3s ease 0s;
+    margin-left: 20px;
+    cursor: pointer;
+    margin-right: 20px;
+}
+.table-button:hover{
+    background-color: rgba(33, 1, 36, 0.8);
+}
+
+.vieworders-div-search{
+	margin-top: 50px;
+	margin-left:20vw;
+	
+	display: flex;
+	justify-content: center;
+  	flex-direction: column;
+  	align-items: center;
+  	
+	background-color: #c5d6d0;
+	border: 2.2px solid rgba(33, 1, 36, 1);
+	
+  	border-radius: 50px;
+  	padding:30px;
+  	
+}
+.vieworders-div-search label{
+	font-size:1.7vh;
+	font-family: "Poppins";
+}
+
+.vieworders-div-search input[type="number"]{
+	width:3vw;
+	height:2vh;
+	border: 1.5px solid rgba(33, 1, 36, 1);
+	text-align: center;
+	
+}
+.vieworders-div-search input[type="datetime-local"]{
+	width:8vw;
+	height:2vh;
+	border: 1.5px solid rgba(33, 1, 36, 1);
+	text-align: center;
+	
+}
+.vieworders-table-div2{
+	margin-top: 30px;
+	display: flex;
+	justify-content: center;
+  	padding:20px;
+  	background-color: red;
+  	
+}
+.vieworders-table-div{
+	margin-top: 30px;
+	display: flex;
+	justify-content: center;
+  	padding:20px;
+  	background-color: red;
+  	margin-right: 20vw;
+}
+
+.vieworders-div-search input[type="button"]{
+  background-color:  rgba(33, 1, 36, 1); 
+  border: none;
+  color: white;
+  width:5vw;
+  height:2.5vh;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 50px;
+  margin-top: 0.5vh;
+}
+.vieworders-div-search input[type="button"]:hover{
+    background-color: rgba(33, 1, 36, 0.8);
+}
+.container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+#table-vieworders{
+	
+    position:static;
+
+}
+/*
+-----------------------------------
+
+ searchvehicles styles 
+
+-----------------------------------
+*/
+.basic-div-table{
+
+	display: flex;
+	
+	justify-content: center;
+	margin-bottom: 0.5vh;
+	
+}
+.basic-div-searchvehicles{
+	justify-content:space-between;
+	margin-left: 35vw;
+ 	margin-right: 35vw;
+	margin-top: 50px;
+	display: flex;
+  	flex-direction: column;
+  	align-items: center;
+	background-color: #c5d6d0;
+	border: 2.2px solid rgba(33, 1, 36, 1);
+  	border-radius: 50px;
+  	padding: 30px;
+  	margin-bottom: 3vh;
+	
+}
+.basic-div-searchvehicles label{
+	font-size:1.7vh;
+	font-family: "Poppins";
+}
+.basic-div-searchvehicles input[type="button"]{
+  background-color:  rgba(33, 1, 36, 1); 
+  border: none;
+  color: white;
+  width:7vw;
+  height:2.5vh;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 50px;
+  margin-top: 0.5vh;
+}
+.basic-div-searchvehicles input[type="button"]:hover{
+    background-color: rgba(33, 1, 36, 0.8);
+}
+.basic-div-searchvehicles input[type="datetime-local"]{
+	width:10vw;
+	height:2vh;
+	border: 1.5px solid rgba(33, 1, 36, 1);
+	text-align: center;
+	
+}
+#go-basket-button{
+	background-color:  green; 
+}
+#go-basket-button:hover{
+	background-color: rgba(33, 1, 36, 0.8);
+}
+.circle-button-green {
+  width: 40px; /* Adjust the width and height as needed */
+  height: 40px;
+  border-radius: 50%;
+  background-color: green;
+  border: none;
+  box-sizing: border-box;
+  /* Additional styles for the button */
+}
+.circle-button-green:hover{
+    background-color: gray;
+}
 
 
+/*
+-----------------------------------
+
+ basketview styles 
+
+-----------------------------------
+*/
+.basic-div-basketview{
+	display: flex;
+	justify-content: center;
+	margin-bottom: 0.5vh;
+	
+}
+.confirm-div{
+	
+	display: flex;
+	justify-content: center;
+	margin-bottom: 0.5vh;
+	flex-direction: column;
+  	align-items: center;
+}
+.confirm-div p{
+	font-size:1.7vh;
+	font-family: "Poppins";
+}
+
+.button-confirm{
+  background-color:  green; 
+  border: none;
+  color: white;
+  width:7vw;
+  height:2.5vh;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 50px;
+  margin-top: 0.5vh;
+}
+.button-confirm:hover{
+    background-color: rgba(33, 1, 36, 0.8);
+}
+
+.circle-button-red {
+  width: 40px; /* Adjust the width and height as needed */
+  height: 40px;
+  border-radius: 50%;
+  background-color: red;
+  border: none;
+  box-sizing: border-box;
+  /* Additional styles for the button */
+}
+.circle-button-red:hover{
+    background-color: gray;
+}

@@ -18,60 +18,88 @@ Vue.component("vieworders", {
 		    }
 	},
 	template: ` 
-		<div>
-			<input type="text" v-model="search_text" @keyup="updateGrid"><br>
-			<input type="number" v-model="min_price" @keyup="updateGrid">
-			<input type="number" v-model="max_price" @keyup="updateGrid"><br>
-			<input type="datetime-local" v-model="min_date" @change="updateGrid">
-			<input type="datetime-local" v-model="max_date" @change="updateGrid"><br>
-			<input type="button" value="refresh" @click="refreshGrid">
-			<table id="myTable">
-		      <tr>
-		        <th>Order Id</th>
-		        <th @click="sortByAgencyName">Agency Name</th>
-		        <th @click="sortByDate">Start Date Time</th>
-		        <th>Duration(in days)</th>
-		        <th @click="sortByPrice">Price</th>
-		        <th>Firstname</th>
-		        <th>Lastname</th>
-		        <th>Status</th>
-		      </tr>
-		      <tr v-for="o in orders_searched" @click="getVehicles(o)">
-		        <td>{{o.order_id}}</td>
-		        <td>{{o.agency.name}}</td>
-		        <td>{{o.date_time.dayOfMonth +'-'+ o.date_time.month+'-'+o.date_time.year+' '+o.date_time.hour+':'+o.date_time.minute}}</td>
-		        <td>{{o.duration}}</td>
-		        <td>{{o.price}}</td>
-		        <td>{{o.firstname}}</td>
-		        <td>{{o.lastname}}</td>
-		        <td>{{o.status}}</td>
-		        <td v-if="o.status === 'PROCESSING'"><input type="button" value="Cancel" @click="cancelOrder(o)"></td>
-      		  </tr>
-    		</table>
-    		
-			<table id="tableNotCentered">
-		      <tr>
-		        <th>Image</th>
-		        <th>Brand</th>
-		        <th>Model</th>
-		        <th>Price</th>
-		        <th>Vehicle Type</th>
-		        <th>Description</th>
-		
-		      </tr>
-		      <tr v-for="v in vehicles">
-		          <td><div>
-		            <img v-bind:src="v.picture" />
-		         </div></td>
-		          <td>{{v.brand}}</td>
-		          <td>{{v.model}}</td>
-		          <td>{{v.price}}</td>
-		          <td>{{v.vehicle_type}}</td>
-		          <td>{{v.description}}</td>
-		
-		      </tr>
-		    </table>
+		<div class="landingPage">
+		<header>
+            <label class="header">Rent a car</label>
+            
+        </header>
+        <div class="container">
+			<div class="vieworders-div-search">
+				<label class="underline-label">Search:</label>
+				<div class="basic-div-orderview">
+					<input type="text" v-model="search_text" @keyup="updateGrid" placeholder="Search by agency name!" style="text-align: center;">
+				</div>
+				<label class="underline-label">Pick a price range: </label>
+				<div basic-div-orderview>
+					<label>Min: </label><input type="number" v-model="min_price" @keyup="updateGrid">
+					&nbsp;
+					<label>Max : </label><input type="number" v-model="max_price" @keyup="updateGrid">
+				</div>
+				<label class="underline-label">Picka a date range: </label>
+				<div basic-div-orderview>
+					<label>From: </label><input type="datetime-local" v-model="min_date" @change="updateGrid">
+				</div>	
+				<div basic-div-orderview>
+					<label>To: </label>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<input type="datetime-local" v-model="max_date" @change="updateGrid">
+				</div>	
+				
+				<input  type="button" value="refresh" @click="refreshGrid">
+				
+			</div>
+			<div class="vieworders-table-div">
+				<table id="table-vieworders">
+			      <tr class="tableHeader">
+			        <th>Order Id</th>
+			        <th @click="sortByAgencyName">Agency Name</th>
+			        <th @click="sortByDate">Start Date Time</th>
+			        <th>Duration(in days)</th>
+			        <th @click="sortByPrice">Price</th>
+			        <th>Firstname</th>
+			        <th>Lastname</th>
+			        <th>Status</th>
+			        <th>Cancel option</th>
+			      </tr>
+			      <tr v-for="o in orders_searched" @click="getVehicles(o)" class="dataRow">
+			        <td>{{o.order_id}}</td>
+			        <td>{{o.agency.name}}</td>
+			        <td>{{o.date_time.dayOfMonth +'-'+ o.date_time.month+'-'+o.date_time.year+' '+o.date_time.hour+':'+o.date_time.minute}}</td>
+			        <td>{{o.duration}}</td>
+			        <td>{{o.price}}</td>
+			        <td>{{o.firstname}}</td>
+			        <td>{{o.lastname}}</td>
+			        <td>{{o.status}}</td>
+			        <td v-if="o.status === 'PROCESSING'"><input type="button" value="Cancel" @click="cancelOrder(o)" class="table-button"></td>
+			        <td v-else>Unable to cancel!</td>
+	      		  </tr>
+	    		</table>
+    		</div>
+    	</div>
+    		<div class="vieworders-table-div2">
+				<table id="table-vieworders">
+			      <tr class="tableHeader">
+			        <th>Image</th>
+			        <th>Brand</th>
+			        <th>Model</th>
+			        <th>Price</th>
+			        <th>Vehicle Type</th>
+			        <th>Description</th>
 			
+			      </tr>
+			      <tr v-for="v in vehicles" class="dataRow">
+			          <td><div>
+			            <img v-bind:src="v.picture" class="rowTableImage"/>
+			         </div></td>
+			          <td>{{v.brand}}</td>
+			          <td>{{v.model}}</td>
+			          <td>{{v.price}}</td>
+			          <td>{{v.vehicle_type}}</td>
+			          <td>{{v.description}}</td>
+			
+			      </tr>
+			    </table>
+			</div>
 
 		</div>
     

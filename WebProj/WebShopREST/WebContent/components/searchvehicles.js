@@ -10,14 +10,33 @@ Vue.component("searchvehicles", {
 		    }
 	},
 	template: ` 
-		 <form @submit="searchVehicles">
-	        <label>Pick date range:</label><br>
-	        <input type="datetime-local" v-model="from_date"><label>from</label> <br>
-	        <input type="datetime-local" v-model="to_date"><label>to</label><br>
-	        <input type="submit" value="Search vehicles">
-	        
-	        <table>
-	        	<tr>
+	<div class="landingPage">
+		<header>
+            <label class="header">Rent a car</label>
+            
+        </header>
+		
+		
+		<div class="basic-div-searchvehicles">
+		    <label class="underline-label">Pick date range:</label>
+		    <div>
+		    	<label>From:</label>
+		    	&nbsp;
+		    	<input type="datetime-local" v-model="from_date">
+		    </div>
+		    <div>
+	        	<label>To:</label>
+	        	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	        	<input type="datetime-local" v-model="to_date">
+	        </div>
+	        <div>
+		        <input type="button" value="Search vehicles" @click="searchVehicles"> 
+		        <input type="button" value="View basket" @click="goBasketView(username)" id="go-basket-button">
+		    </div>    
+	    </div>
+	    <div class="basic-div-table">	  
+	        <table id="table-vieworders">
+	        	<tr class="tableHeader">
 	        		<th>Picture</th>
 	        		<th>Rental Object Name</th>
 	        		<th>Brand</th>
@@ -30,13 +49,13 @@ Vue.component("searchvehicles", {
 	        		<th>Doors</th>
 	        		<th>People</th>
 	        		<th>Description</th>
-	        		
-	        		
+	        		<th>Add to basket</th>
+	       	
 	        	</tr>
-	        	<tr v-for="v in free_vehicles">
+	        	<tr v-for="v in free_vehicles" class="dataRow">
 	        		<td>
 		        		<div>
-	            			<img v-bind:src="v.picture" />
+	            			<img v-bind:src="v.picture" class="rowTableImage"/>
 	       				</div>
 	       			</td>
 	                <td>{{v.rental_object.name}}</td>
@@ -50,11 +69,13 @@ Vue.component("searchvehicles", {
 	                <td>{{v.doors}}</td>
 	                <td>{{v.people}}</td>
 	                <td>{{v.description}}</td>
-	                <td><input type="button" value="+" @click="addToBasket(v)"></td>
+	                <td><input type="button" value="+" @click="addToBasket(v)" class="circle-button-green"></td>
+	                
             	</tr>
 	        </table>
-	        <input type="button" value="View basket" @click="goBasketView(username)">
-   		</form>
+	        </div>
+	        
+   		</div>
    		
     `
 	, 

@@ -1,4 +1,4 @@
-Vue.component("basketview", {
+ Vue.component("basketview", {
 	data: function () {
 		    return {
 		      	username:null,
@@ -10,45 +10,58 @@ Vue.component("basketview", {
 		    }
 	},
 	template: ` 
-	<div>
-		<table>
-        <tr>
-            <th>Picture</th>
-	        <th>Brand</th>
-	        <th>Model</th>
-	        <th>Price</th>
-	        <th>Vehicle Type</th>
-	        <th>Transmission</th>
-	        <th>Fuel Type</th>
-	        <th>Fuel Consumption</th>
-	        <th>Doors</th>
-	        <th>People</th>
-	        <th>Description</th>
-
-        </tr>
-        <tr v-for="v in vehicles">
-            <td>
-                <div>
-                    <img v-bind:src="v.picture" />
-                   </div>
-               </td>
-            <td>{{v.brand}}</td>
-            <td>{{v.model}}</td>
-            <td>{{v.price}}</td>
-            <td>{{v.vehicle_type}}</td>
-            <td>{{v.transmission_type}}</td>
-            <td>{{v.fuel_type}}</td>
-            <td>{{v.fuel_consumption}}</td>
-            <td>{{v.doors}}</td>
-            <td>{{v.people}}</td>
-            <td>{{v.description}}</td>
-            <td><input type="button" @click="removeItem(v)" value="-"></td>
-        </tr>
-
-
-      	</table>
-     <input type="button" @click="addOrder" value="Confirm order">	
-     {{total_price}}
+	<div class="landingPage">
+		<header>
+            <label class="header">Rent a car</label>
+            
+        </header>
+        
+		<div class="confirm-div">	
+		     <input type="button" @click="addOrder" value="Confirm order" class="button-confirm">
+		     <div >	
+		      	<p>Total price of the order is: {{total_price}}</p>
+		     </div>
+		</div> 
+		<div class="basic-div-basketview">
+			<table id="table-vieworders">
+		        <tr class="tableHeader">
+		            <th>Picture</th>
+			        <th>Brand</th>
+			        <th>Model</th>
+			        <th>Price</th>
+			        <th>Vehicle Type</th>
+			        <th>Transmission</th>
+			        <th>Fuel Type</th>
+			        <th>Fuel Consumption</th>
+			        <th>Doors</th>
+			        <th>People</th>
+			        <th>Description</th>
+			        <th>Remove item</th>
+		
+		        </tr>
+		        <tr v-for="v in vehicles" class="dataRow">
+		            <td>
+		                <div>
+		                    <img v-bind:src="v.picture" class="rowTableImage"/>
+		                </div>
+		               </td>
+		            <td>{{v.brand}}</td>
+		            <td>{{v.model}}</td>
+		            <td>{{v.price}}</td>
+		            <td>{{v.vehicle_type}}</td>
+		            <td>{{v.transmission_type}}</td>
+		            <td>{{v.fuel_type}}</td>
+		            <td>{{v.fuel_consumption}}</td>
+		            <td>{{v.doors}}</td>
+		            <td>{{v.people}}</td>
+		            <td>{{v.description}}</td>
+		            <td><input type="button" @click="removeItem(v)" value="-" class="circle-button-red"></td>
+		        </tr>
+	
+	
+	      	</table>
+	     </div> 
+	        
      </div>	
     
     `
