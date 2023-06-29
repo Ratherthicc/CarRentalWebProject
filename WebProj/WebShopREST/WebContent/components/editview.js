@@ -76,7 +76,20 @@ Vue.component("editview", {
 			}
 			else{
 				axios.put('rest/users/updateUser/',this.user).then(response=>{
-														router.push(`/view/${username}`);
+														//router.push(`/view/${username}`);
+														var self = this;
+														if(self.user.type === 'Manager'){
+															router.push(`/managerprofile/${self.user.username}`);
+															
+														}
+														if(self.user.type === 'Administrator'){
+															router.push(`/view/${self.user.username}`);
+															
+														}
+														if(self.user.type === 'Buyer'){
+															router.push(`/view/${self.user.username}`);
+															
+														}
 														self.invalidName = false;
 														self.invalidSurname = false;
 														self.invalidDateBirth = false;
