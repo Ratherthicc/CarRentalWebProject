@@ -18,7 +18,7 @@ Vue.component("managerprofile", {
                     <li class="nav_li"><a class="nav_a" v-on:click="EditUser">Edit</a></li>
                 </ul>
             </nav>
-            <a class="nav_a" v-on:click="logInButton"><button class="nav_button">{{this.user.first_name}}</button></a>
+            <a class="nav_a"><button class="nav_button">{{this.user.first_name}}</button></a>
         </header>
         
 	  <label class="my-profile-label">Personal information:</label>
