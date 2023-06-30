@@ -47,8 +47,8 @@ Vue.component("managerprofile", {
 	
 	  <div class="agency-additional-info">
 	    <span><label>Rating:</label><label class="add-info-values">{{this.rentalAgency.rating}}</label><label>/5</label></span>
-	    <span><label>Working hours:</label><label class="add-info-values">{{this.rentalAgency.openingTime.hour + 'h - ' + this.rentalAgency.closingTime.hour + 'h'}}</label></span>
-	    <span><label>Location:</label><label class="add-info-values">{{this.rentalAgency.location.street + ', ' + this.rentalAgency.location.streetNumber + ', ' + this.rentalAgency.location.city}}</label></span>
+	    <span><label>Working hours:</label><label class="add-info-values">{{this.rentalAgency.openingTime?.hour + 'h - ' + this.rentalAgency.closingTime?.hour + 'h'}}</label></span>
+	    <span><label>Location:</label><label class="add-info-values">{{this.rentalAgency.location?.street + ', ' + this.rentalAgency.location?.streetNumber + ', ' + this.rentalAgency.location?.city}}</label></span>
 	    
 	    <button class="nav_button" style="margin-left: 620px; position: relative;margin-top: 10px; margin-bottom: 0px; width: 200px; margin-right: 0px; height: 40px;">Add vehicle</button><br>
 	  </div>

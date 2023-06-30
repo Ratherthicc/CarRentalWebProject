@@ -50,7 +50,15 @@ public class UserService {
 		
 		
 	}
-	
+	@GET
+	@Path("/getBuyers")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<User> getBuyers() {
+		UserDAO dao = (UserDAO) ctx.getAttribute("UserDAO");
+		return dao.getBuyers();
+		
+		
+	}
 	@GET
 	@Path("/{username}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -109,7 +117,7 @@ public class UserService {
 		
 		for (Order order : orderDAO.getAll()) {
 			if(rentalAgencyId == order.getAgency_id()) {
-				purchasers.add(userDAO.findUser(order.getFirstname(), order.getLastname()));
+				purchasers.add(userDAO.findUserByUsername(order.getUsername()));
 			}
 		}
 		return purchasers;

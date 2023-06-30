@@ -45,8 +45,28 @@ public class BasketDAO {
 		loadAll();
 		return baskets;
 	}
+	public int MakeId() {
+		int max=-1;
+		for(Basket b:baskets) {
+			if(b.getId()>max) {
+				max=b.getId();
+			}
+		}
+		max++;
+		return max;
+	}
+	
+	
+	public Basket createBasket(String username) {
+		Basket basket=new Basket(MakeId(),username,0,new ArrayList<Vehicle>());
+		baskets.add(basket);
+		saveAll();
+		return basket;
+	}
+	
+	
 	public Basket getByUsername(String username) {
-		loadAll();
+		
 		for(Basket b : baskets) {
 			if(b.getUsername().equals(username)) {
 				return b;
@@ -61,6 +81,7 @@ public class BasketDAO {
 		for(Basket b : baskets) {
 			if(b.getUsername().equals(username)) {
 				b.getVehicles().add(vehicle);
+				b.setPrice(b.getPrice()+vehicle.getPrice());
 				saveAll();
 				return b;
 			}
@@ -77,6 +98,7 @@ public class BasketDAO {
 				for(Vehicle v : b.getVehicles()) {
 					if(v.getId()==vehicle.getId()) {
 						b.getVehicles().remove(v);
+						b.setPrice(b.getPrice()-vehicle.getPrice());
 						saveAll();
 						return b;
 					}
@@ -91,13 +113,13 @@ public class BasketDAO {
 			if(b.getUsername().equals(username)) {
 
 					
-			b.getVehicles().clear();
-					
+				b.getVehicles().clear();
+				b.setPrice(0);
 					
 				
 			
-			saveAll();
-			return;
+				saveAll();
+				return;
 			}
 		}
 		

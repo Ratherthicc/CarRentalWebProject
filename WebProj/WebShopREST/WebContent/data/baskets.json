@@ -2,7 +2,13 @@
   {
     "id": 0,
     "username": "Jovan123",
-    "price": 55.5,
+    "price": 0.0,
+    "vehicles": []
+  },
+  {
+    "id": 1,
+    "username": "Nesto123",
+    "price": 0.0,
     "vehicles": []
   }
 ]

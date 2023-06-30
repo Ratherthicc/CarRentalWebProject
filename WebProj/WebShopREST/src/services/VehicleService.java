@@ -89,7 +89,7 @@ public class VehicleService {
 	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Vehicle getVehicle(@PathParam("id")int id) {
-		VehicleDAO dao = (VehicleDAO) ctx.getAttribute("VehicleDAO");
+		VehicleDAO dao = (VehicleDAO)ctx.getAttribute("VehicleDAO");
 		
 		
 		return dao.getVehicleById(id);

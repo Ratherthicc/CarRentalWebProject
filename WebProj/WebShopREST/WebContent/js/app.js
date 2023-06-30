@@ -8,7 +8,8 @@ const ManagerProfile ={template: '<managerprofile></managerprofile>'}
 const SearchVehicles ={template: '<searchvehicles></searchvehicles>'}
 const BasketView = {template: '<basketview></basketview>'}
 const ViewOrders = {template: '<vieworders></vieworders>'}
-
+const ViewUsers ={template: '<viewusers></viewusers>'}
+const AddManager ={template: '<addmanager></addmanager>'}
 
 const router = new VueRouter({
 	mode: 'hash',
@@ -18,11 +19,13 @@ const router = new VueRouter({
 		{ path: '/register', component: Register},
 		{ path: '/view/:username', component: MainView},
 		{ path: '/edit/:username', component: EditView},
-		{ path: '/agencyview/:id', component: AgencyView},
+		{ path: '/managerprofile/:username', component: ManagerProfile},
 		{ path: '/searchvehicles/:username', component: SearchVehicles},
 		{ path: '/basketview/:username/:from_date/:to_date', component: BasketView},
-		{ path: '/viewOrders', component: ViewOrders},
-		{ path: '/managerprofile/:username', component: ManagerProfile}
+		{ path: '/viewOrders/:username', component: ViewOrders},
+		{ path: '/agencyview/:id', component: AgencyView},
+		{ path: '/viewUsers/:username', component: ViewUsers},
+		{ path: '/addManager/:username', component: AddManager}
 	  ]
 });
 

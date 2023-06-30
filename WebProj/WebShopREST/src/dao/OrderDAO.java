@@ -11,6 +11,7 @@ import java.time.Month;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 
 import com.google.gson.Gson;
@@ -50,6 +51,47 @@ public class OrderDAO {
 	public Collection<Order> getAll() {
 		return orders;
 	}
+	public Collection<Order> getUserOrders(String username){
+		List<Order> userOrders=new ArrayList<>();
+		for(Order order:orders) {
+			if(order.getUsername().equals(username)) userOrders.add(order);
+		}
+		return userOrders;
+		
+		
+	}
+	
+	public Order updateStatus(String order_id,Order.Status status) {
+		for(Order order:orders) {
+			if(order.getOrder_id().equals(order_id)) {
+				order.setStatus(status);
+				saveAll();
+				return order;
+			}
+		}
+		
+		return null;
+	}
+	
+	
+	public Collection<Order> getSortedDates(int flag){
+		
+		List<Order> myList = new ArrayList<>(orders);
+        
+        // Sort the list by LocalDateTime
+		if(flag==1) {
+			myList.sort(Comparator.comparing(Order::getDate_time));
+		}
+		else {
+			myList.sort(Comparator.comparing(Order::getDate_time).reversed());
+        }
+        // Iterate over the sorted list
+        
+       
+		return myList;
+	}
+	
+	
 	public void addOrder(Order o) {
 		loadAll();
 		o.setOrder_id(makeId());
@@ -190,6 +232,7 @@ public class OrderDAO {
 		jsonObject.addProperty("firstname", objekat.getFirstname());
 		jsonObject.addProperty("lastname", objekat.getLastname());
 		jsonObject.addProperty("status", objekat.getStatus().toString());
+		jsonObject.addProperty("username", objekat.getUsername());
 		return jsonObject;
 	}
 	

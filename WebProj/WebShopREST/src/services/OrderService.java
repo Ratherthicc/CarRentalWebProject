@@ -14,9 +14,11 @@ import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
@@ -71,6 +73,22 @@ public class OrderService {
 		
 	}
 	
+	@GET
+	@Path("/getUserOrders/{username}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<Order> getUserOrders(@PathParam("username")String username) {
+		OrderDAO dao = (OrderDAO) ctx.getAttribute("OrderDAO");
+		RentalAgencyDAO rentalDAO = (RentalAgencyDAO) ctx.getAttribute("RentalAgencyDAO");
+		
+		Collection<Order> orders=dao.getUserOrders(username);
+		for(Order order:orders) {
+			order.setAgency(rentalDAO.getById(order.getAgency_id()));
+		}
+		
+		
+		
+		return orders;
+	}
 	@POST
 	@Path("/{username}/{from_date}/{to_date}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -107,11 +125,42 @@ public class OrderService {
 			LocalDateTime endDate=LocalDateTime.parse(to_date);
 			Duration duration = Duration.between(startDate, endDate);
 			double len= duration.toDays();
-			Order order=new Order("0",listToAdd,agency_id,startDate,len,price,username,user.getLast_name(),Order.Status.PROCESSING);
+			if(user.getRank().equals("GOLD")) {
+				price=price*0.95;
+			}
+			else if(user.getRank().equals("SILVER")) {
+				price=price*0.97;
+			}
+			Order order=new Order("0",listToAdd,agency_id,startDate,len,price,username,user.getLast_name(),Order.Status.PROCESSING,username);
 			dao.addOrder(order);
+		}
+	}
+	
+	@GET
+	@Path("/sortedDates/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<Order> getSortedDates(@PathParam("id")int flag) {
+		
+		OrderDAO dao = (OrderDAO) ctx.getAttribute("OrderDAO");
+		RentalAgencyDAO rentalDAO = (RentalAgencyDAO) ctx.getAttribute("RentalAgencyDAO");
+
+		Collection<Order> orders=dao.getSortedDates(flag);
+		for(Order order:orders) {
+			order.setAgency(rentalDAO.getById(order.getAgency_id()));
 		}
 		
 		
+		
+		return orders;
+		
+		
+	}
+	@PUT
+	@Path("/updateStatus/{order_id}/{status}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Order updateStatus(@PathParam("order_id")String order_id,@PathParam("status")Order.Status status) {
+		OrderDAO dao = (OrderDAO) ctx.getAttribute("OrderDAO");
+		return dao.updateStatus(order_id,status);
 	}
 	
 }
