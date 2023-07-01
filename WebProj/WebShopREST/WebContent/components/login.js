@@ -46,7 +46,7 @@ Vue.component("login", {
 								return;
 							}
 							if(user.type === 'Administrator'){
-								router.push(`/view/${user.username}`);
+								router.push(`/administratorView/${user.username}`);
 								return;
 							}
 							if(user.type === 'Buyer'){

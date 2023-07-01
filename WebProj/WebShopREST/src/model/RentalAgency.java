@@ -17,6 +17,10 @@ public class RentalAgency {
 	private Location location;
 	private List<Vehicle> vehicles;
 	
+	public void setVehicles(List<Vehicle> vehicles) {
+		this.vehicles = vehicles;
+	}
+
 	public enum AgencyState{
 		WORKING,
 		NOT_WORKING

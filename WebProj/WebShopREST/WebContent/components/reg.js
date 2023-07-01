@@ -11,7 +11,8 @@ Vue.component("register", {
 			        birth_date: null,
 			        type: "Buyer"  ,
 			        points:0,
-			        rank:"BRONZE"
+			        rank:"BRONZE",
+			        agencyId:-1
 			  		},
 			  confirmpas:"",
 			  invalidUsername: false,
@@ -66,6 +67,7 @@ Vue.component("register", {
             
             <br><label class="register_message_label">Already got an account? <a href="/WebShopREST/#/login">Log in</a></a></label>
         </form>
+        {{user.rental_agency_id}}
         </div>
     `
 	, 

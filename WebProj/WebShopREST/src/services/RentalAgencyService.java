@@ -18,7 +18,12 @@ import javax.ws.rs.core.MediaType;
 import dao.LocationDAO;
 import dao.RentalAgencyDAO;
 import dao.VehicleDAO;
+import model.Basket;
+import model.Comment;
+import model.Location;
+import model.Order;
 import model.RentalAgency;
+import model.User;
 import model.Vehicle;
 
 @Path("/rentalAgency")
@@ -89,5 +94,13 @@ public class RentalAgencyService {
 			rentalAgency.addVehicles(v);
 		}
 		return rentalAgency;
+	}
+	
+	@POST
+	@Path("/addAgency")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public RentalAgency addAgency(RentalAgency agency) {
+		System.out.println(agency.getId());
+		return null;
 	}
 }

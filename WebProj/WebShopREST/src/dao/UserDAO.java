@@ -73,6 +73,15 @@ public class UserDAO {
 		}
 		return null;
 	}
+	public Collection<User> getManagers() {
+		List<User> lista=new ArrayList<>();
+		for(User u:users) {
+			if(u.getType()==User.UserType.Manager && u.getAgencyId()==-1) {
+				lista.add(u);
+			}
+		}
+		return lista;
+	}
 	
 	public User addUser(User u) {
 		for(User user : users) {

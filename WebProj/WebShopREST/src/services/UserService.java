@@ -60,6 +60,18 @@ public class UserService {
 		
 	}
 	@GET
+	@Path("/getManagers")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<User> getManagers() {
+		UserDAO dao = (UserDAO) ctx.getAttribute("UserDAO");
+		
+		
+		
+		return dao.getManagers();
+		
+		
+	}
+	@GET
 	@Path("/{username}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public User findu(@PathParam("username") String us) {

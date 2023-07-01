@@ -12,7 +12,8 @@
 			        birth_date: null,
 			        type: "Manager",
 			        points:0,
-			        rank:"BRONZE"//treba agency id
+			        rank:"BRONZE",
+			        agencyId:-1//treba agency id
 			  		}
 		    }
 	},
@@ -49,10 +50,6 @@
 	            <td><input type="date" v-model="user.birth_date"></td>
 	        </tr>
 	        <tr>
-	            <td>Rental_agency_id:</td>
-	            <td><input type="number"></td>
-	        </tr>
-	        <tr>
 	            <td></td>
 	            <td><input type="button" @click="addManager" value="Add"></td>
         	</tr>
@@ -61,8 +58,11 @@
     `
 	, 
 	methods : {
+		
 		addManager:function(){
-			axios.post('rest/users/',this.user);
+			this.username=this.$route.params.username;
+			axios.post('rest/users/',this.user)
+			.then(response=>(router.push('/administratorView/'+this.username)))
 		}
 		
 	},
