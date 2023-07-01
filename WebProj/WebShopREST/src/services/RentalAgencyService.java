@@ -99,8 +99,8 @@ public class RentalAgencyService {
 	@POST
 	@Path("/addAgency")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public RentalAgency addAgency(RentalAgency agency) {
-		System.out.println(agency.getId());
+	public RentalAgency addAgency(Order agency) {
+		System.out.println(agency.getOrder_id());
 		return null;
 	}
 }
