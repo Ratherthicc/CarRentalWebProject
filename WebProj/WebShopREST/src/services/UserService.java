@@ -119,6 +119,16 @@ public class UserService {
 		return dao.updatePoints(username,points);
 		
 	}
+	
+	@PUT
+	@Path("/updateAgencyId/{username}/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public User updateAgencyId(@PathParam("id")int id,@PathParam("username")String username) {
+		UserDAO dao = (UserDAO) ctx.getAttribute("UserDAO");
+		return dao.updateAgencyId(username,id);
+		
+	}
+	
 	@GET
 	@Path("/purchasersFrom/{rentalAgencyId}")
 	@Produces(MediaType.APPLICATION_JSON)

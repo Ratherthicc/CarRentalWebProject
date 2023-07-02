@@ -97,10 +97,12 @@ public class RentalAgencyService {
 	}
 	
 	@POST
-	@Path("/addAgency")
+	@Path("/addAgency/{open}/{close}")
+	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public RentalAgency addAgency(Order agency) {
-		System.out.println(agency.getOrder_id());
-		return null;
+	public int addAgency(@PathParam("open")String open,@PathParam("close")String close,RentalAgency agency) {
+		
+		RentalAgencyDAO dao = (RentalAgencyDAO) ctx.getAttribute("RentalAgencyDAO");
+		return dao.addAgency(agency,open,close);
 	}
 }

@@ -114,6 +114,17 @@ public class UserDAO {
 		
 		return null;
 	}
+	public User updateAgencyId(String username,int id) {
+		for(User user : users) {
+			if(user.getUsername().equals(username)) {
+				user.setAgencyId(id);
+				saveAll();
+				return user;
+			}
+		}
+		return null;
+		
+	}
 	
 	public User findUser(String us,String pas) {
 		for(User user : users) {

@@ -5,6 +5,8 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 
 public class RentalAgency {
 	private int id;

@@ -2,6 +2,7 @@
 	data: function () {
 		    return {
 		      	username:null,
+		      	
 		      	user:
 				  	{
 			        username: "",
@@ -60,12 +61,14 @@
 	methods : {
 		
 		addManager:function(){
-			this.username=this.$route.params.username;
+			
 			axios.post('rest/users/',this.user)
-			.then(response=>(router.push('/administratorView/'+this.username)))
+			.then(response=>(router.go(-1)))
 		}
 		
 	},
-	mounted () {	
+	mounted () {
+			this.username=this.$route.params.username;
+				
     }
 });

@@ -5,17 +5,19 @@ Vue.component("addagency", {
 		      	agency:{
 					  id:-1,
 					  name:"",
-					  openingTime:"",
-					  closingTime:"",
+					  openingTime:null,
+					  closingTime:null,
 					  state:"WORKING",
 					  logoURI:"",
 					  rating:0,
 					  location:null,
-					  vehicle:[]
+					  vehicles:[]
 				  },
 				  locations:[],
 				  managers:[],
-				  selectedManager:null
+				  selectedManager:null,
+				  openingTime:"",
+				  closingTime:""
 		    }
 	},
 	template: ` 
@@ -35,11 +37,11 @@ Vue.component("addagency", {
 	        </tr>
 	        <tr>
 	            <td>Opening time:</td>
-	            <td> <input type="time" v-model="agency.openingTime"></td>
+	            <td> <input type="time" v-model="openingTime"></td>
 	        </tr>
 	        <tr>
 	            <td>Closing time:</td>
-	            <td> <input type="time" v-model="agency.closingTime"></td>
+	            <td> <input type="time" v-model="closingTime"></td>
 	        </tr>
 	        <tr>
 	            <td>Logo:</td>
@@ -51,6 +53,7 @@ Vue.component("addagency", {
 	            	<select v-model="selectedManager">
 				        <option v-for="m in managers" :value="m">{{m.username}}</option>
 				    </select>
+				    <input type="button" value="add manager" @click="addManager">
 	            </td>
 	        </tr>
 	        <tr>
@@ -63,12 +66,21 @@ Vue.component("addagency", {
     	{{agency}}
     </div>
     
-    `
+    ` 
 	, 
 	methods : {
 		addObject:function(){
 			
-			axios.post('rest/rentalAgency/addAgency',this.agency)
+			
+			axios.post('rest/rentalAgency/addAgency/'+this.openingTime+'/'+this.closingTime,this.agency)
+			.then(response=>{
+				var id=response.data;
+				return axios.put('rest/users/updateAgencyId/'+this.selectedManager.username+'/'+id)
+				.then(response=>(router.push(`/administratorView/${this.username}`)))
+			})
+		},
+		addManager:function(){
+			router.push(`/addManager/${this.username}`);
 		}
 		
 	},
