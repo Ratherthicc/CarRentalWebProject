@@ -376,10 +376,7 @@ Vue.component("landingpage", {
 			this.map.setView(view);
 			
 			}
-			
-		
 	},
-	
 	mounted () {
 		this.initializeMap();
 		axios.get(`rest/rentalAgency/getAll`).then((response) => {this.RentalAgencies = response.data;

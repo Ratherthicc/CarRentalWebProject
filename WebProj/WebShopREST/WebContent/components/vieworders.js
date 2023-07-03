@@ -134,6 +134,9 @@ Vue.component("vieworders", {
 						var points=(order.price)*(-133)*4/1000;
 					}
 					axios.put('rest/users/updatePoints/'+this.username+'/'+points)
+					.then(response=>{
+						return axios.post('rest/canceledOrders/'+this.username)
+					})
 				})
 				
 			})

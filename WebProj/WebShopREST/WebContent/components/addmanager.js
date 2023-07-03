@@ -14,7 +14,8 @@
 			        type: "Manager",
 			        points:0,
 			        rank:"BRONZE",
-			        agencyId:-1//treba agency id
+			        agencyId:-1,//treba agency id
+			        blocked:0
 			  		}
 		    }
 	},

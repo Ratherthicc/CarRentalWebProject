@@ -42,6 +42,8 @@ Vue.component("viewusers", {
 	            <th>Birth_date</th>
 	            <th @click="sortPoints">Points</th>
 	            <th>Rank</th>
+	            <th>Blocked</th>
+	            
 	        </tr>
 	        <tr v-for="u in search_users">
 	            <td>{{u.username}}</td>
@@ -52,6 +54,8 @@ Vue.component("viewusers", {
 	            <td>{{u.birth_date}}</td>
 	            <td>{{u.points}}</td>
 	            <td>{{u.rank}}</td>
+	            <td v-if="u.blocked!==0">blocked</td>
+	            <td v-else>active</td>
 	        </tr>
    		</table>
 	</div>	

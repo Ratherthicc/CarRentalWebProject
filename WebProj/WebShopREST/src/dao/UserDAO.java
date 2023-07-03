@@ -160,7 +160,7 @@ public class UserDAO {
 				else 
 					type=UserType.Administrator;
 				
-				User user=new User(data[0],data[1],data[2],data[3],gender,data[5],type,Double.parseDouble(data[7]),data[8], Integer.parseInt(data[9]));
+				User user=new User(data[0],data[1],data[2],data[3],gender,data[5],type,Double.parseDouble(data[7]),data[8], Integer.parseInt(data[9]),Integer.parseInt(data[10]));
 				users.add(user);
 				
 			    
@@ -201,6 +201,8 @@ public class UserDAO {
 				line.append(user.getRank());
 				line.append(",");
 				line.append(user.getAgencyId());
+				line.append(",");
+				line.append(user.getBlocked());
 				line.append("\n");
 				
 			}
