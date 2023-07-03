@@ -50,7 +50,7 @@ Vue.component("managerprofile", {
 	    <span><label>Working hours:</label><label class="add-info-values">{{this.rentalAgency.openingTime?.hour + 'h - ' + this.rentalAgency.closingTime?.hour + 'h'}}</label></span>
 	    <span><label>Location:</label><label class="add-info-values">{{this.rentalAgency.location?.street + ', ' + this.rentalAgency.location?.streetNumber + ', ' + this.rentalAgency.location?.city}}</label></span>
 	    
-	    <button class="nav_button" style="margin-left: 620px; position: relative;margin-top: 10px; margin-bottom: 0px; width: 200px; margin-right: 0px; height: 40px;">Add vehicle</button><br>
+	    <button v-on:click="EditVehicle(-1)" class="nav_button" style="margin-left: 620px; position: relative;margin-top: 10px; margin-bottom: 0px; width: 200px; margin-right: 0px; height: 40px;">Add vehicle</button><br>
 	  </div>
 	
 	  <label class="my-profile-label">Available Vehicles:</label>
@@ -69,7 +69,7 @@ Vue.component("managerprofile", {
 	        <label class="status">{{'Status: ' + v.available}}</label>
 	        
 	  		<button class="nav_button" style="margin-left: 24px; position: relative;margin-top: 10px; margin-bottom: 0px; width: 115px; margin-right: 0px; height: 40px;">Remove</button>
-            <button class="nav_button" style="margin-left: 0px; position: relative;margin-top: 10px; margin-bottom: 0px; width: 115px; margin-right: 0px; height: 40px;">Edit</button><br>
+            <button v-on:click="EditVehicle(v.id)" class="nav_button" style="margin-left: 0px; position: relative;margin-top: 10px; margin-bottom: 0px; width: 115px; margin-right: 0px; height: 40px;">Edit</button><br>
 	      </span>
 	    </div>
 	  </div>
@@ -78,7 +78,7 @@ Vue.component("managerprofile", {
 	  <label class="my-profile-label">Purchasers of agency vehicles:</label>
 	  <div class="separator-line"></div>
 	  <div>
-		  <table id="myTable">
+		  <table>
 	            <tr class="tableHeader">
 	                <th>Name</th>
 	                <th>Surname</th>
@@ -106,6 +106,9 @@ Vue.component("managerprofile", {
 		},
 		viewOrders:function(){
 			router.push(`/viewOrders`);
+		},
+		EditVehicle:function(v){
+			router.push(`/vehicleView/` + v);
 		}
 		
 	},
