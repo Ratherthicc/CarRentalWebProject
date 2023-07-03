@@ -33,18 +33,20 @@ Vue.component("addagency", {
 	 
 		<div>
 			<table>
+				<tr>
+		            <td>Manager:</td>
+		            <td>
+		            	<select v-model="selectedManager">
+					        <option v-for="m in managers" :value="m">{{m.username}}</option>
+					    </select>
+					    <input type="button" value="add manager" @click="addManager">
+		            </td>
+		        </tr>
 		        <tr>
 		            <td>Name:</td>
 		            <td><input type="text" v-model="agency.name"></td>
 		        </tr>
-		        <tr>
-		            <td>Location:</td>
-		            <td>
-		            	<select v-model="agency.location">
-					        <option v-for="l in locations" :value="l">{{l.city}}, {{l.street}} {{l.streetNumber}}</option>
-					    </select>
-		            </td>
-		        </tr>
+		        
 		        <tr>
 		            <td>Opening time:</td>
 		            <td> <input type="time" v-model="openingTime"></td>
@@ -57,13 +59,11 @@ Vue.component("addagency", {
 		            <td>Logo:</td>
 		            <td><input type="url" v-model="agency.logoURI"></td>
 		        </tr>
+		        
 		        <tr>
-		            <td>Manager:</td>
+		            <td>Location:</td>
 		            <td>
-		            	<select v-model="selectedManager">
-					        <option v-for="m in managers" :value="m">{{m.username}}</option>
-					    </select>
-					    <input type="button" value="add manager" @click="addManager">
+		            	<label>{{agency.location.city}}, {{agency.location.street}} {{agency.location.streetNumber}}</label>
 		            </td>
 		        </tr>
 		        <tr>
@@ -77,7 +77,7 @@ Vue.component("addagency", {
 		            
 		        </tr>
 	    	</table>
-	    	{{agency.location}}
+	    	
 	    </div>
 	    
     
@@ -86,14 +86,21 @@ Vue.component("addagency", {
 	, 
 	methods : {
 		addObject:function(){
-			
-			
-			axios.post('rest/rentalAgency/addAgency/'+this.openingTime+'/'+this.closingTime,this.agency)
+			axios.post('rest/locations/',this.agency.location)
+			.then(response=>{
+				var loc=response.data;
+				this.agency.location.id=loc.id;
+			return axios.post('rest/rentalAgency/addAgency/'+this.openingTime+'/'+this.closingTime,this.agency)
 			.then(response=>{
 				var id=response.data;
 				return axios.put('rest/users/updateAgencyId/'+this.selectedManager.username+'/'+id)
 				.then(response=>(router.push(`/administratorView/${this.username}`)))
 			})
+				
+				
+			})
+			
+			
 		},
 		addManager:function(){
 			router.push(`/addManager/${this.username}`);
@@ -106,20 +113,21 @@ Vue.component("addagency", {
 	      		new ol.layer.Tile({
 	        	source: new ol.source.OSM(), // OpenStreetMap as the tile source
 	      }),
-	    ],
-	    view: new ol.View({
-	      center: ol.proj.fromLonLat([0, 0]), // Center the map at [0, 0] (longitude, latitude)
-	      zoom: 2, // Initial zoom level
-	    }),
-	  });
+		    ],
+		    view: new ol.View({
+		      center: ol.proj.fromLonLat([0, 0]), // Center the map at [0, 0] (longitude, latitude)
+		      zoom: 2, // Initial zoom level
+		    }),
+		  });
 		}
 		
 	},
 	mounted () {
 		this.initializeMap();
+		
 		var ovo=this;
 	  	this.map.on('click', function (evt) {
-		  ovo.agency.id=4;
+
 	
     
     	//console.log("evt.coordinate: " + evt.coordinate);
@@ -140,7 +148,36 @@ Vue.component("addagency", {
     
     	const url_nominatim = 'https://nominatim.openstreetmap.org/reverse?' + encoded_data;
     	//console.log("URL Request NOMINATIM-Reverse: " + url_nominatim);
+    	
+    	
+		//ADDS TARGET ICON
+		const layer = new ol.layer.Vector({
+		source: new ol.source.Vector({
+    	features: [
+    	new ol.Feature({
+        	geometry: new ol.geom.Point(ol.proj.fromLonLat([lon, lat])),
+    	})
+    	]
+		}),
+		style: new ol.style.Style({
+		    image: new ol.style.Icon({
+		    anchor: [0.5, 1],
+		    crossOrigin: 'anonymous',
+		    src: 'https://docs.maptiler.com/openlayers/default-marker/marker-icon.png',
+		    })
+		})
+		});
+		//REMOVES A LAYER
+		const layerId = 'myLayer'; 
+      	const layerToRemove = ovo.map.getLayers().getArray().find(layer => layer.get('id') === layerId);
 
+      	if (layerToRemove) {
+        
+        	ovo.map.removeLayer(layerToRemove);
+      	}
+      	
+		layer.set('id', 'myLayer');
+		ovo.map.addLayer(layer);
 	
 
     

@@ -9,7 +9,8 @@ Vue.component("landingpage", {
 				sortRatingFlag: false,
 				vehicle_type:"",
 				vehicle_fuel:"",
-				min_rating:0
+				min_rating:0,
+				map:null
 		    }
 	},
 	template: ` 
@@ -79,11 +80,11 @@ Vue.component("landingpage", {
        				</div>
                 </td>
                 <td>{{r.name}}</td>
-                <td>{{r.location.street + ', ' + r.location.streetNumber + ', ' + r.location.city}}</td>
+                <td @click="viewOnMap(r.location.geographicHeight,r.location.geographicWidth)">{{r.location.street + ', ' + r.location.streetNumber + ', ' + r.location.city}}</td>
                 <td>{{r.rating}}</td>
             </tr>
         </table>
-        
+        <div id="map" style="width: 20%; height: 20%;"></div>
     </div>
 	`
 	, 
@@ -107,6 +108,7 @@ Vue.component("landingpage", {
 				}
 	
 			}
+			
 			
 		},
 		filter: function(){
@@ -322,11 +324,64 @@ Vue.component("landingpage", {
 },
 			checkRentalAgency: function(r){
 				router.push(`/agencyview/${r.id}`)
+			},
+			initializeMap:function(){
+				this.map = new ol.Map({
+		    	target: 'map', // The ID of the map container element
+		    	layers: [
+		      		new ol.layer.Tile({
+		        	source: new ol.source.OSM(), // OpenStreetMap as the tile source
+		      }),
+			    ],
+			    view: new ol.View({
+			      center: ol.proj.fromLonLat([0, 0]), // Center the map at [0, 0] (longitude, latitude)
+			      zoom: 2, // Initial zoom level
+			    }),
+			  });
+		},
+		viewOnMap:function(lat,lon){
+			event.stopPropagation();
+			const layer = new ol.layer.Vector({
+			source: new ol.source.Vector({
+	    	features: [
+	    	new ol.Feature({
+	        	geometry: new ol.geom.Point(ol.proj.fromLonLat([lon, lat])),
+	    	})
+	    	]
+			}),
+			style: new ol.style.Style({
+			    image: new ol.style.Icon({
+			    anchor: [0.5, 1],
+			    crossOrigin: 'anonymous',
+			    src: 'https://docs.maptiler.com/openlayers/default-marker/marker-icon.png',
+			    })
+			})
+			});
+			//REMOVES A LAYER
+			const layerId = 'myLayer'; 
+	      	const layerToRemove = this.map.getLayers().getArray().find(layer => layer.get('id') === layerId);
+	
+	      	if (layerToRemove) {
+	        
+	        	this.map.removeLayer(layerToRemove);
+	      	}
+	      	
+			layer.set('id', 'myLayer');
+			this.map.addLayer(layer);
+			
+			var view = new ol.View({
+			  center: ol.proj.fromLonLat([lon, lat]), // Convert coordinates to the map's projection
+			  zoom: 10, // Adjust the zoom level as needed
+			});
+			this.map.setView(view);
+			
 			}
+			
 		
 	},
 	
 	mounted () {
+		this.initializeMap();
 		axios.get(`rest/rentalAgency/getAll`).then((response) => {this.RentalAgencies = response.data;
 																  this.RentalAgencies.sort((a, b) => b.state.localeCompare(a.state));
 																  this.SearchedAgencies= this.RentalAgencies.slice();});
