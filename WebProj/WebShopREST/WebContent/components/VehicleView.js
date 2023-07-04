@@ -20,7 +20,13 @@ Vue.component("vehicleview", {
 				  },
 		      	rentalAgency: {},
 		      	
-		      	validModel: true
+		      	validModel: true,
+		      	validBrand: true,
+		      	validPrice: true,
+		      	validConsumtion : true,
+		      	validDoorNumber: true,
+		      	validSeats: true,
+		      	validPicture: true
 		    }
 	},
 	template: ` 
@@ -35,12 +41,12 @@ Vue.component("vehicleview", {
         <label v-if="!validModel" class="invalid-vehicle-input">You have entered invalid model name!</label><br>
   
         <label class="vehicle-form-labels">Mark:</label><br>
-        <input class="vehicle_input" type="text"><br>
-        <label class="invalid-vehicle-input">You have entered invalid mark name!</label><br>
+        <input v-on:input="ValidateForm" v-model="Vehicle.brand" class="vehicle_input" type="text"><br>
+        <label v-if="!validBrand" class="invalid-vehicle-input">You have entered invalid mark name!</label><br>
   
         <label class="vehicle-form-labels">Price:</label><br>
-        <input class="vehicle_input" type="text"><br>
-        <label class="invalid-vehicle-input">You have entered invalid price!</label><br>
+        <input v-on:input="ValidateForm" v-model="Vehicle.price" class="vehicle_input" type="text"><br>
+        <label v-if="!validPrice" class="invalid-vehicle-input">You have entered invalid price!</label><br>
   
         <label class="vehicle-form-labels">Vehicle type:</label><br>
         <select class="vehicle-input">
@@ -64,20 +70,20 @@ Vue.component("vehicleview", {
         </select><br>
   
         <label class="vehicle-form-labels">Consumtion:</label><br>
-        <input class="vehicle_input" type="text"><br>
-        <label class="invalid-vehicle-input">You have entered invalid consumtion value!</label><br>
+        <input v-on:input="ValidateForm" v-model="Vehicle.fuel_consumption" class="vehicle_input" type="text"><br>
+        <label v-if="!validConsumtion" class="invalid-vehicle-input">You have entered invalid consumtion value!</label><br>
   
         <label class="vehicle-form-labels">Door number:</label><br>
-        <input class="vehicle_input" type="number"><br>
-        <label class="invalid-vehicle-input">You have entered invalid door number!</label><br>
+        <input v-on:input="ValidateForm" v-model="Vehicle.doors" class="vehicle_input" type="number"><br>
+        <label v-if="!validDoorNumber" class="invalid-vehicle-input">You have entered invalid door number!</label><br>
   
         <label class="vehicle-form-labels">Number of seats:</label><br>
-        <input class="vehicle_input" type="number"><br>
-        <label class="invalid-vehicle-input">You have entered invalid number of seats!</label><br>
+        <input v-on:input="ValidateForm" v-model="Vehicle.people" class="vehicle_input" type="number"><br>
+        <label v-if="!validSeats" class="invalid-vehicle-input">You have entered invalid number of seats!</label><br>
   
         <label class="vehicle-form-labels">Image:</label><br>
-        <input class="vehicle_input" type="text"><br>
-        <label class="invalid-vehicle-input">Entered image is invalid!</label><br>
+        <input v-on:input="ValidateForm" v-model="Vehicle.picture" class="vehicle_input" type="text"><br>
+        <label v-if="!validPicture" class="invalid-vehicle-input">Entered image is invalid!</label><br>
   
         <label class="vehicle-form-labels">Description(optional):</label><br>
         <input class="vehicle_input" type="text"><br>
@@ -100,6 +106,21 @@ Vue.component("vehicleview", {
 		},
 		ValidateForm: function(){
 				this.validModel = this.Vehicle.model != "" ? true : false;
+				this.validBrand = this.Vehicle.brand != "" ? true : false;
+				
+				const numberPattern = /^-?\d*\.?\d+$/;
+				this.validPrice = this.Vehicle.price > 0 && numberPattern.test(this.Vehicle.price);
+				this.validConsumtion = this.Vehicle.fuel_consumption > 0 && numberPattern.test(this.Vehicle.fuel_consumption);
+				this.validDoorNumber = this.Vehicle.doors > 0 && numberPattern.test(this.Vehicle.doors);
+				this.validSeats = this.Vehicle.people > 0 && numberPattern.test(this.Vehicle.people);
+				
+				try{
+					const url = new URL(this.Vehicle.picture);
+					this.validPicture = true;
+				}
+				catch(error){
+					this.validPicture = false;
+				}
 		}
 		
 	},
