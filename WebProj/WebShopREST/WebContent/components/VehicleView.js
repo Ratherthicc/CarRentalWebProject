@@ -26,14 +26,17 @@ Vue.component("vehicleview", {
 		      	validConsumtion : true,
 		      	validDoorNumber: true,
 		      	validSeats: true,
-		      	validPicture: true
+		      	validPicture: true,
+		      	
+		      	buttonMessage: "",
+		      	headerMessage: ""
 		    }
 	},
 	template: ` 
 	  <div class="vehicle-form-holder">
     <form class="vehicle-form">
 
-      <label class="vehicle-form-header">Add Vehicle</label>
+      <label class="vehicle-form-header">{{ headerMessage }}</label>
 
       <div class="vehicle-form-inputs">
         <label class="vehicle-form-labels">Model:</label><br>
@@ -89,18 +92,12 @@ Vue.component("vehicleview", {
         <input class="vehicle_input" type="text"><br>
       </div>
 
-      <input type="submit" class="nav_button" value="Add vehicle">
+      <input v-on:click="AddVehicle" type="submit" class="nav_button" v-bind:value="buttonMessage">
     </form>
   </div>
     `
 	, 
 	methods : {
-		EditUser:function(){
-			router.push(`/edit/${this.user.username}`);
-		},
-		findVehicles:function(username){
-			router.push(`/searchVehicles/${username}`);
-		},
 		viewOrders:function(){
 			router.push(`/viewOrders`);
 		},
@@ -121,6 +118,13 @@ Vue.component("vehicleview", {
 				catch(error){
 					this.validPicture = false;
 				}
+		},
+		AddVehicle: function(){
+			event.preventDefault();
+			var vehicle_id = this.$route.params.vehicle_id;
+			
+			if(vehicle_id == -1){
+				}
 		}
 		
 	},
@@ -128,6 +132,14 @@ Vue.component("vehicleview", {
 		var vehicle_id = this.$route.params.vehicle_id;
 		var agency_id = this.$route.params.rental_agency_id;
 		
+		if(vehicle_id == -1){
+			this.buttonMessage = "Add vehicle";
+			this.headerMessage = "Add vehicle";
+		}
+		else{
+			this.buttonMessage = "Edit vehicle";
+			this.headerMessage = "Edit vehicle";
+		}
 		
 		axios
 			 .then

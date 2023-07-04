@@ -49,6 +49,18 @@ public class VehicleDAO {
 		loadAll();
 		return vehicles;
 	}
+	public void Update(Vehicle vehicle) {
+		try {
+			for (Vehicle v : vehicles) {
+				if(v.getId() == vehicle.getId())
+					v = vehicle;
+			}
+			saveAll();
+		}
+		catch (Exception e) {
+			System.out.println("Greska pri azuriranju vozila(ID: " + vehicle.getId() + ")");
+		}
+	}
 	
 	public Collection<Vehicle> getByRentalObjectId(int id){
 		List<Vehicle> vehicle_list=new ArrayList<Vehicle>();
@@ -68,7 +80,10 @@ public class VehicleDAO {
 		}
 		return null;
 	}
-	
+	public void Add(Vehicle vehicle) {
+		vehicles.add(vehicle);
+		saveAll();
+	}
 	
 	
 	public List<Vehicle> loadAll() {
