@@ -35,6 +35,20 @@ public class UserDAO {
 	public Collection<User> getAll() {
 		return users;
 	}
+	
+	public User banUser(String username) {
+		for(User u : users) {
+			if(u.getUsername().equals(username)) {
+				u.setBlocked(1);
+				saveAll();
+				return u;
+			}
+		}
+		return null;
+		
+		
+	}
+	
 	public Collection<User> getBuyers(){
 		List<User> list=new ArrayList<>();
 		for(User u : users) {
@@ -73,6 +87,15 @@ public class UserDAO {
 		}
 		return null;
 	}
+	public Collection<User> getManagers() {
+		List<User> lista=new ArrayList<>();
+		for(User u:users) {
+			if(u.getType()==User.UserType.Manager && u.getAgencyId()==-1) {
+				lista.add(u);
+			}
+		}
+		return lista;
+	}
 	
 	public User addUser(User u) {
 		for(User user : users) {
@@ -104,6 +127,17 @@ public class UserDAO {
 		}
 		
 		return null;
+	}
+	public User updateAgencyId(String username,int id) {
+		for(User user : users) {
+			if(user.getUsername().equals(username)) {
+				user.setAgencyId(id);
+				saveAll();
+				return user;
+			}
+		}
+		return null;
+		
 	}
 	
 	public User findUser(String us,String pas) {
@@ -140,7 +174,7 @@ public class UserDAO {
 				else 
 					type=UserType.Administrator;
 				
-				User user=new User(data[0],data[1],data[2],data[3],gender,data[5],type,Double.parseDouble(data[7]),data[8], Integer.parseInt(data[9]));
+				User user=new User(data[0],data[1],data[2],data[3],gender,data[5],type,Double.parseDouble(data[7]),data[8], Integer.parseInt(data[9]),Integer.parseInt(data[10]));
 				users.add(user);
 				
 			    
@@ -181,6 +215,8 @@ public class UserDAO {
 				line.append(user.getRank());
 				line.append(",");
 				line.append(user.getAgencyId());
+				line.append(",");
+				line.append(user.getBlocked());
 				line.append("\n");
 				
 			}

@@ -18,7 +18,12 @@ import javax.ws.rs.core.MediaType;
 import dao.LocationDAO;
 import dao.RentalAgencyDAO;
 import dao.VehicleDAO;
+import model.Basket;
+import model.Comment;
+import model.Location;
+import model.Order;
 import model.RentalAgency;
+import model.User;
 import model.Vehicle;
 
 @Path("/rentalAgency")
@@ -89,5 +94,15 @@ public class RentalAgencyService {
 			rentalAgency.addVehicles(v);
 		}
 		return rentalAgency;
+	}
+	
+	@POST
+	@Path("/addAgency/{open}/{close}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public int addAgency(@PathParam("open")String open,@PathParam("close")String close,RentalAgency agency) {
+		
+		RentalAgencyDAO dao = (RentalAgencyDAO) ctx.getAttribute("RentalAgencyDAO");
+		return dao.addAgency(agency,open,close);
 	}
 }

@@ -14,13 +14,14 @@ public class User {
 	private double points;
 	private String rank;
 	private int rental_agency_id;
+	private int blocked;
 	
 	public User() {
 		
 	}
 	
 	public User(String username, String password, String first_name, String last_name, Gender gender, String birth_date,
-			UserType type, double points, String rank,int rental_agency_id) {
+			UserType type, double points, String rank,int rental_agency_id,int blocked) {
 		this.username = username;
 		this.password = password;
 		this.first_name = first_name;
@@ -31,7 +32,16 @@ public class User {
 		this.points = points;
 		this.rank = rank;
 		this.rental_agency_id = rental_agency_id;
+		this.blocked=blocked;
 	}
+	public int getBlocked() {
+		return blocked;
+	}
+
+	public void setBlocked(int blocked) {
+		this.blocked = blocked;
+	}
+
 	public int getAgencyId() {
 		return this.rental_agency_id;
 	}

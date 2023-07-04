@@ -39,19 +39,25 @@ Vue.component("login", {
 			axios.get('rest/users/login/'+this.username+'/'+this.password)
 			.then(function (response) { 
 						
+						
 						if(response.data){
 							let user = response.data;
-							if(user.type === 'Manager'){
-								router.push(`/managerprofile/${user.username}`);
-								return;
+							if(!user.blocked){
+								if(user.type === 'Manager'){
+									router.push(`/managerprofile/${user.username}`);
+									return;
+								}
+								if(user.type === 'Administrator'){
+									router.push(`/administratorView/${user.username}`);
+									return;
+								}
+								if(user.type === 'Buyer'){
+									router.push(`/view/${user.username}`);
+									return;
+								}
 							}
-							if(user.type === 'Administrator'){
-								router.push(`/view/${user.username}`);
-								return;
-							}
-							if(user.type === 'Buyer'){
-								router.push(`/view/${user.username}`);
-								return;
+							else{
+								alert("This user is blocked!");
 							}
 						} 
 						else{

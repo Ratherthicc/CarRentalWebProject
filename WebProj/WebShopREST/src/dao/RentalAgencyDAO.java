@@ -40,6 +40,30 @@ public class RentalAgencyDAO {
 		loadAll();
 		return rentalAgencies;
 	}
+	public int MakeID() {
+		int max=0;
+		for(RentalAgency r : rentalAgencies) {
+			if(r.getId()>max) {
+				max=r.getId();
+			}
+		}
+		max++;
+		return max;
+	}
+	
+	public int addAgency(RentalAgency agency,String open,String close) {
+		loadAll();
+		int a=MakeID();
+		agency.setId(a);
+		agency.setOpeningTime(LocalTime.parse(open));
+		agency.setClosingTime(LocalTime.parse(close));
+		rentalAgencies.add(agency);
+		
+		saveAll();
+		return a;
+		
+		
+	}
 	
 	public RentalAgency getById(int id) {
 		loadAll();
@@ -104,7 +128,7 @@ public class RentalAgencyDAO {
 				
 			}
 			writer.write(line.toString());
-            
+			writer.close();
 			//writer.close();
             System.out.println("Written to csv");
         } catch (IOException e) {

@@ -1,4 +1,10 @@
-Jovan123,pass123,Jovan,Katanic,Male,2001-01-01,Buyer,39.99099999999999,BRONZE,-1
-Nesto123,Jesam123,Neki,Nesto,Female,2023-06-02,Buyer,0.0,BRONZE,-1
-Katanic123,Nekasifra123,Aa,Aa,Male,2023-05-29,Buyer,0.0,BRONZE,-1
-Marko,asdasdasd,Marko,Radeticc,Male,2002-10-01,Manager,0.0,BRONZE,2
+Jovan123,pass123,Jovan,Katanic,Male,2001-01-01,Buyer,9.400999999999993,BRONZE,-1,0
+Nesto123,Jesam123,Neki,Nesto,Female,2023-06-02,Buyer,0.0,BRONZE,-1,0
+Katanic123,pass123,Aa,Aa,Male,2023-05-29,Buyer,0.0,BRONZE,-1,1
+Marko,asdasdasd,Marko,Radeticc,Male,2002-10-01,Manager,0.0,BRONZE,2,0
+Nejj123,pass123,Aaa,Aaaa,Male,2023-06-26,Administrator,0.0,BRONZE,-1,0
+Manager123,pass123,Manager,Men,Male,2023-06-26,Manager,0.0,BRONZE,11,0
+Manager321,pass123,Manager,Men,Male,2023-06-26,Manager,0.0,BRONZE,13,0
+NekiMen,pass123,Aaaa,Aaaaa,Male,2023-06-26,Manager,0.0,BRONZE,12,0
+Gaaa,pass123,Gaa,Ga,Male,2023-06-27,Manager,0.0,BRONZE,-1,0
+Menagg,pass123,Joo,Joo,Male,2023-06-27,Manager,0.0,BRONZE,-1,0

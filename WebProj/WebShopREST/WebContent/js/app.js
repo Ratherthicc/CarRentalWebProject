@@ -11,6 +11,8 @@ const ViewOrders = {template: '<vieworders></vieworders>'}
 const ViewUsers ={template: '<viewusers></viewusers>'}
 const AddManager ={template: '<addmanager></addmanager>'}
 const VehicleView ={template: '<vehicleview></vehicleview>'}
+const AdministratorView ={template: '<administratorview></administratorview>'}
+const AddAgency ={template: '<addagency></addagency>'}
 
 const router = new VueRouter({
 	mode: 'hash',
@@ -27,7 +29,9 @@ const router = new VueRouter({
 		{ path: '/agencyview/:id', component: AgencyView},
 		{ path: '/viewUsers/:username', component: ViewUsers},
 		{ path: '/addManager/:username', component: AddManager},
-		{ path: '/vehicleView/:rental_agency_id/:vehicle_id', component: VehicleView}
+		{ path: '/vehicleView/:rental_agency_id/:vehicle_id', component: VehicleView},
+		{ path: '/administratorView/:username', component: AdministratorView},
+		{ path: '/addAgency/:username', component: AddAgency}
 	  ]
 });
 

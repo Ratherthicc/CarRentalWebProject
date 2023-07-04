@@ -2,6 +2,7 @@
 	data: function () {
 		    return {
 		      	username:null,
+		      	
 		      	user:
 				  	{
 			        username: "",
@@ -12,7 +13,9 @@
 			        birth_date: null,
 			        type: "Manager",
 			        points:0,
-			        rank:"BRONZE"//treba agency id
+			        rank:"BRONZE",
+			        agencyId:-1,//treba agency id
+			        blocked:0
 			  		}
 		    }
 	},
@@ -49,10 +52,6 @@
 	            <td><input type="date" v-model="user.birth_date"></td>
 	        </tr>
 	        <tr>
-	            <td>Rental_agency_id:</td>
-	            <td><input type="number"></td>
-	        </tr>
-	        <tr>
 	            <td></td>
 	            <td><input type="button" @click="addManager" value="Add"></td>
         	</tr>
@@ -61,11 +60,16 @@
     `
 	, 
 	methods : {
+		
 		addManager:function(){
-			axios.post('rest/users/',this.user);
+			
+			axios.post('rest/users/',this.user)
+			.then(response=>(router.go(-1)))
 		}
 		
 	},
-	mounted () {	
+	mounted () {
+			this.username=this.$route.params.username;
+				
     }
 });

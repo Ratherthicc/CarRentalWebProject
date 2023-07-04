@@ -115,7 +115,7 @@
     "price": 46.0,
     "firstname": "Jovan123",
     "lastname": "Katanic",
-    "status": "PROCESSING",
+    "status": "CANCELED",
     "username": "Jovan123"
   },
   {
@@ -144,7 +144,7 @@
     "price": 23.0,
     "firstname": "Jovan123",
     "lastname": "Katanic",
-    "status": "PROCESSING",
+    "status": "CANCELED",
     "username": "Jovan123"
   },
   {
@@ -199,6 +199,64 @@
     "agency_id": 6,
     "date_time": "2023-06-01T15:51",
     "duration": 51.0,
+    "price": 23.0,
+    "firstname": "Jovan123",
+    "lastname": "Katanic",
+    "status": "PROCESSING",
+    "username": "Jovan123"
+  },
+  {
+    "order_id": "EQg3YIyeWurCep",
+    "vehicles": [
+      {
+        "id": 1,
+        "brand": "hah",
+        "model": "haha",
+        "price": 23.0,
+        "vehicle_type": "CAR",
+        "rental_object_id": 1,
+        "transmission_type": "AUTOMATIC",
+        "fuel_type": "HYBRID",
+        "fuel_consumption": 22.0,
+        "doors": 3,
+        "people": 3,
+        "description": "opis",
+        "picture": "http://example.com",
+        "available": true
+      }
+    ],
+    "agency_id": 1,
+    "date_time": "2023-07-04T22:39",
+    "duration": 25.0,
+    "price": 23.0,
+    "firstname": "Jovan123",
+    "lastname": "Katanic",
+    "status": "PROCESSING",
+    "username": "Jovan123"
+  },
+  {
+    "order_id": "Zp0Zo5g2P9ZtG1",
+    "vehicles": [
+      {
+        "id": 0,
+        "brand": "hah",
+        "model": "haha",
+        "price": 23.0,
+        "vehicle_type": "CAR",
+        "rental_object_id": 4,
+        "transmission_type": "AUTOMATIC",
+        "fuel_type": "DIESEL",
+        "fuel_consumption": 22.0,
+        "doors": 3,
+        "people": 3,
+        "description": "opis",
+        "picture": "http://example.com",
+        "available": true
+      }
+    ],
+    "agency_id": 4,
+    "date_time": "2023-07-04T22:39",
+    "duration": 25.0,
     "price": 23.0,
     "firstname": "Jovan123",
     "lastname": "Katanic",

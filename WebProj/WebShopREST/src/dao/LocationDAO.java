@@ -35,6 +35,23 @@ public class LocationDAO {
 		loadAll();
 		return locations;
 	}
+	public int MakeId() {
+		int max=0;
+		for(Location l : locations) {
+			if(max<l.getId()) {
+				max=l.getId();
+			}
+		}
+		return max+1;
+	}
+	
+	public Location addLocation(Location loc) {
+		loc.setId(MakeId());
+		locations.add(loc);
+		saveAll();
+		return loc;
+	}
+	
 	public Location GetById(int id) {
 		loadAll();
 		for (Location location : locations) {

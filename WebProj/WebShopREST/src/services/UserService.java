@@ -60,6 +60,18 @@ public class UserService {
 		
 	}
 	@GET
+	@Path("/getManagers")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<User> getManagers() {
+		UserDAO dao = (UserDAO) ctx.getAttribute("UserDAO");
+		
+		
+		
+		return dao.getManagers();
+		
+		
+	}
+	@GET
 	@Path("/{username}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public User findu(@PathParam("username") String us) {
@@ -107,6 +119,24 @@ public class UserService {
 		return dao.updatePoints(username,points);
 		
 	}
+	
+	@PUT
+	@Path("/updateAgencyId/{username}/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public User updateAgencyId(@PathParam("id")int id,@PathParam("username")String username) {
+		UserDAO dao = (UserDAO) ctx.getAttribute("UserDAO");
+		return dao.updateAgencyId(username,id);
+		
+	}
+	@PUT
+	@Path("/banUser/{username}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public User banUser(@PathParam("username")String username) {
+		UserDAO dao = (UserDAO) ctx.getAttribute("UserDAO");
+		return dao.banUser(username);
+		
+	}
+	
 	@GET
 	@Path("/purchasersFrom/{rentalAgencyId}")
 	@Produces(MediaType.APPLICATION_JSON)
