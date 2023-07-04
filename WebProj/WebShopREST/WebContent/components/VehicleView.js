@@ -1,11 +1,26 @@
 Vue.component("vehicleview", {
 	data: function () {
 		    return {
-		      	user: {},
-		      	purchasers: [],
-		      	rentalAgency: {}
+		      	Vehicle: {
+					  "id": null,
+					  "brand": null,
+					  "model": null,
+					  "price": null,
+					  "vehicle_type": null,
+					  "rental_object_id": null,
+					  "rental_object": null,
+					  "transmission_type": null,
+					  "fuel_type": null,
+					  "fuel_consumption": null,
+					  "doors": null,
+					  "people": null,
+					  "description": null,
+					  "picture": null,
+					  "available": null
+				  },
+		      	rentalAgency: {},
 		      	
-			  		
+		      	validModel: true
 		    }
 	},
 	template: ` 
@@ -16,8 +31,8 @@ Vue.component("vehicleview", {
 
       <div class="vehicle-form-inputs">
         <label class="vehicle-form-labels">Model:</label><br>
-        <input class="vehicle_input" type="text"><br>
-        <label class="invalid-vehicle-input">You have entered invalid model name!</label><br>
+        <input v-on:input="ValidateForm" v-model="Vehicle.model" class="vehicle_input" type="text"><br>
+        <label v-if="!validModel" class="invalid-vehicle-input">You have entered invalid model name!</label><br>
   
         <label class="vehicle-form-labels">Mark:</label><br>
         <input class="vehicle_input" type="text"><br>
@@ -82,23 +97,26 @@ Vue.component("vehicleview", {
 		},
 		viewOrders:function(){
 			router.push(`/viewOrders`);
+		},
+		ValidateForm: function(){
+				this.validModel = this.Vehicle.model != "" ? true : false;
 		}
 		
 	},
 	mounted () {
-		var username = this.$route.params.username;
+		var vehicle_id = this.$route.params.vehicle_id;
+		var agency_id = this.$route.params.rental_agency_id;
 		
-		axios.get('rest/users/' + username)
+		
+		axios
+			 .then
+		axios.get('rest/rentalAgency/getById/' + agency_id)
 			  .then(response => {
-			    this.user = response.data;
-			    return axios.get('rest/users/purchasersFrom/' + this.user.agencyId);
+			    this.rentalAgency = response.data;
+			    return axios.get('rest/vehicles/' + this.vehicle_id);
 			  })
 			  .then(response => {
-			    this.purchasers = response.data;
-			    return axios.get('rest/rentalAgency/getById/' + this.user.agencyId);
+			    this.Vehicle = response.data;
 			  })
-			  .then(response => {
-				this.rentalAgency = response.data;
-			  })	
     }
 });

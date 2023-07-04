@@ -27,7 +27,7 @@ const router = new VueRouter({
 		{ path: '/agencyview/:id', component: AgencyView},
 		{ path: '/viewUsers/:username', component: ViewUsers},
 		{ path: '/addManager/:username', component: AddManager},
-		{ path: '/vehicleView/:id', component: VehicleView}
+		{ path: '/vehicleView/:rental_agency_id/:vehicle_id', component: VehicleView}
 	  ]
 });
 
