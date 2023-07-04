@@ -128,6 +128,14 @@ public class UserService {
 		return dao.updateAgencyId(username,id);
 		
 	}
+	@PUT
+	@Path("/banUser/{username}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public User banUser(@PathParam("username")String username) {
+		UserDAO dao = (UserDAO) ctx.getAttribute("UserDAO");
+		return dao.banUser(username);
+		
+	}
 	
 	@GET
 	@Path("/purchasersFrom/{rentalAgencyId}")

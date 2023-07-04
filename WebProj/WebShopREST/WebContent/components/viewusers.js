@@ -10,7 +10,8 @@ Vue.component("viewusers", {
 		      	sortFirstNameFlag:false,
 		      	sortLastNameFlag:false,
 		      	sortUsernameFlag:false,
-		      	sortPointsFlag:false
+		      	sortPointsFlag:false,
+		      	bannable_users:[]
 		      	
 			  		
 		    }
@@ -56,13 +57,26 @@ Vue.component("viewusers", {
 	            <td>{{u.rank}}</td>
 	            <td v-if="u.blocked!==0">blocked</td>
 	            <td v-else>active</td>
+	            <td v-if="checkUser(u.username) && u.blocked==0"><input type="button" @click="banUser(u)" value="ban"></td>
+	            <td v-else>...</td>
 	        </tr>
    		</table>
+   		{{bannable_users}}
 	</div>	
     
     `
 	, 
 	methods : {
+		checkUser:function(username){
+			
+			
+			return this.bannable_users.includes(username);
+			
+		},
+		banUser:function(u){
+			u.blocked=1;
+			return axios.put('rest/users/banUser/'+u.username)
+		},
 		updateGrid: function(){
 			this.search_users=this.users.slice();
 			for(var variable of this.users){
@@ -283,10 +297,13 @@ sortPoints: function(){
 	},
 	mounted () {
 		this.username=this.$route.params.username;
+		
 		axios.get('rest/users/getBuyers/')
 			.then(response => {
 				this.users=response.data;
 				this.search_users=response.data;
+				return axios.get('rest/canceledOrders/checkUser/')
+				.then(response=>(this.bannable_users=response.data))
 				})
 			
     }
