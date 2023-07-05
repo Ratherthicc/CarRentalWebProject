@@ -121,7 +121,7 @@ public class Vehicle {
 	}
 
 	public void setRental_object_id(int rental_object_id) {
-		this.rental_object.setId(rental_object_id);
+		// this.rental_object.setId(rental_object_id);
 		this.rental_object_id=rental_object_id;
 	}
 

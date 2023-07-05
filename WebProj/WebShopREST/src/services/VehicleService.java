@@ -101,6 +101,7 @@ public class VehicleService {
 	@POST
 	@Path("/saveVehicle")
 	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
 	public void saveVehicle(Vehicle vehicle) {
 		VehicleDAO dao = (VehicleDAO)ctx.getAttribute("VehicleDAO");
 		dao.Add(vehicle);

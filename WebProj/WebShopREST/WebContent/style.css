@@ -752,6 +752,7 @@ height: 100px;
 }
 
 .vehicle-form-holder{
+	margin-bottom: 32px;
   height: 100vh;
   background-color: #dbf9f0;
   display: flex;
@@ -760,6 +761,7 @@ height: 100px;
   overflow: auto;
 }
 .vehicle-form{
+  margin-top: 32px;
   background-color: #F7F9F7;
   border-radius:3%;
   border: solid black 3px;

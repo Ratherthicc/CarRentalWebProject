@@ -50,7 +50,7 @@ Vue.component("managerprofile", {
 	    <span><label>Working hours:</label><label class="add-info-values">{{this.rentalAgency.openingTime?.hour + 'h - ' + this.rentalAgency.closingTime?.hour + 'h'}}</label></span>
 	    <span><label>Location:</label><label class="add-info-values">{{this.rentalAgency.location?.street + ', ' + this.rentalAgency.location?.streetNumber + ', ' + this.rentalAgency.location?.city}}</label></span>
 	    
-	    <button v-on:click="EditVehicle(rentalAgency.id,-1)" class="nav_button" style="margin-left: 620px; position: relative;margin-top: 10px; margin-bottom: 0px; width: 200px; margin-right: 0px; height: 40px;">Add vehicle</button><br>
+	    <button v-on:click="EditVehicle(rentalAgency.id,-1)" class="nav_button" style="display:block;margin-right:0px;margin-left:0px; left:70%;position: relative; margin-top: 10px; margin-bottom: 0px; width: 200px; height: 40px;">Add vehicle</button><br>
 	  </div>
 	
 	  <label class="my-profile-label">Available Vehicles:</label>

@@ -52,10 +52,24 @@ public class VehicleDAO {
 	public void Update(Vehicle vehicle) {
 		try {
 			for (Vehicle v : vehicles) {
-				if(v.getId() == vehicle.getId())
-					v = vehicle;
+				if(v.getId() == vehicle.getId()) {
+					v.setBrand(vehicle.getBrand());
+					v.setModel(vehicle.getModel());
+					v.setPicture(vehicle.getPicture());
+					v.setPrice(vehicle.getPrice());
+					v.setFuel_type(vehicle.getFuel_type());
+					v.setTransmission_type(vehicle.getTransmission_type());
+					v.setVehicle_type(vehicle.getVehicle_type());
+					v.setFuel_consumption(vehicle.getFuel_consumption());
+					v.setDoors(vehicle.getDoors());
+					v.setPeople(vehicle.getPeople());
+					v.setDescription(vehicle.getDescription());
+					
+					
+					saveAll();
+					return;
+				}
 			}
-			saveAll();
 		}
 		catch (Exception e) {
 			System.out.println("Greska pri azuriranju vozila(ID: " + vehicle.getId() + ")");

@@ -52,14 +52,14 @@ Vue.component("vehicleview", {
         <label v-if="!validPrice" class="invalid-vehicle-input">You have entered invalid price!</label><br>
   
         <label class="vehicle-form-labels">Vehicle type:</label><br>
-        <select class="vehicle-input">
+        <select v-model="Vehicle.vehicle_type" class="vehicle-input">
           <option value="CAR">Car</option>
           <option value="VAN">Van</option>
           <option value="MOBILEHOME">Mobilehome</option>
         </select><br>
   
         <label class="vehicle-form-labels">Fuel type:</label><br>
-        <select class="vehicle-input">
+        <select v-model="Vehicle.fuel_type" class="vehicle-input">
           <option value="BENZENE">Benzene</option>
           <option value="DIESEL">Diesel</option>
           <option value="HYBRID">Hybrid</option>
@@ -67,7 +67,7 @@ Vue.component("vehicleview", {
         </select><br>
   
         <label class="vehicle-form-labels">Type:</label><br>
-        <select class="vehicle-input">
+        <select v-model="Vehicle.transmission_type" class="vehicle-input">
           <option value="AUTOMATIC">Automatic</option>
           <option value="MANUEL">Manuel</option>
         </select><br>
@@ -89,7 +89,7 @@ Vue.component("vehicleview", {
         <label v-if="!validPicture" class="invalid-vehicle-input">Entered image is invalid!</label><br>
   
         <label class="vehicle-form-labels">Description(optional):</label><br>
-        <input class="vehicle_input" type="text"><br>
+        <input v-model="Vehicle.description" class="vehicle_input" type="text"><br>
       </div>
 
       <input v-on:click="AddVehicle" type="submit" class="nav_button" v-bind:value="buttonMessage">
@@ -102,14 +102,45 @@ Vue.component("vehicleview", {
 			router.push(`/viewOrders`);
 		},
 		ValidateForm: function(){
-				this.validModel = this.Vehicle.model != "" ? true : false;
-				this.validBrand = this.Vehicle.brand != "" ? true : false;
+				try{
+					this.validModel = this.Vehicle.model != "";
+				}
+				catch(error){
+					this.validModel = false;
+				}
+				try{
+					this.validBrand = this.Vehicle.brand != "";
+				}
+				catch(error){
+					this.validBrand = false;
+				}
 				
 				const numberPattern = /^-?\d*\.?\d+$/;
-				this.validPrice = this.Vehicle.price > 0 && numberPattern.test(this.Vehicle.price);
-				this.validConsumtion = this.Vehicle.fuel_consumption > 0 && numberPattern.test(this.Vehicle.fuel_consumption);
-				this.validDoorNumber = this.Vehicle.doors > 0 && numberPattern.test(this.Vehicle.doors);
-				this.validSeats = this.Vehicle.people > 0 && numberPattern.test(this.Vehicle.people);
+				
+				try{
+					this.validPrice = this.Vehicle.price > 0 && numberPattern.test(this.Vehicle.price);
+				}
+				catch(error){
+					this.validPrice = false;
+				}
+				try{
+					this.validConsumtion = this.Vehicle.fuel_consumption > 0 && numberPattern.test(this.Vehicle.fuel_consumption);
+				}
+				catch(error){
+					this.validConsumtion = false;
+				}
+				try{
+					this.validDoorNumber = this.Vehicle.doors > 0 && numberPattern.test(this.Vehicle.doors);
+				}
+				catch(error){
+					this.validDoorNumber = false;
+				}
+				try{
+					this.validSeats = this.Vehicle.people > 0 && numberPattern.test(this.Vehicle.people);
+				}
+				catch(error){
+					this.validSeats = false;
+				}
 				
 				try{
 					const url = new URL(this.Vehicle.picture);
@@ -126,15 +157,43 @@ Vue.component("vehicleview", {
 			
 			this.Vehicle.rental_object_id = agency_id;
 			
-			if(vehicle_id == -1){
-				axios.post(`rest/vehicles/saveVehicle`, this.Vehicle);
-				}
-			else{
-				this.Vehicle.id = vehicle_id;
-				axios.put(`rest/vehicles/updateVehicle`, this.Vehicle);
-			}
+			const booleanList = [
+								 this.validModel,
+								 this.validBrand,
+								 this.validPrice,
+								 this.validConsumtion,
+								 this.validDoorNumber,
+								 this.validSeats,
+								 this.validPicture
+								];
+
+			const containsTrue = booleanList.some(item => item === true);
+
+			
+			if (containsTrue) {
+		        if (vehicle_id == -1) {
+		          axios.post(`rest/vehicles/saveVehicle`, this.Vehicle)
+		            .then(response => {
+		              alert("Successfully added a vehicle!");
+		            })
+		            .catch(error => {
+		              console.error("Error adding a vehicle:", error);
+		            });
+		        } else {
+		          this.Vehicle.id = vehicle_id;
+		          axios.put(`rest/vehicles/updateVehicle`, this.Vehicle)
+		            .then(response => {
+		              alert("Successfully updated vehicle!");
+		            })
+		            .catch(error => {
+		              console.error("Error updating vehicle:", error);
+		            });
+		        }
+		      } 
+		      else {
+		        alert("You need to enter all valid credentials!");
+		        }	
 		}
-		
 	},
 	mounted () {
 		var vehicle_id = this.$route.params.vehicle_id;
@@ -143,21 +202,24 @@ Vue.component("vehicleview", {
 		if(vehicle_id == -1){
 			this.buttonMessage = "Add vehicle";
 			this.headerMessage = "Add vehicle";
+			axios.get('rest/rentalAgency/getById/' + agency_id)
+			  .then(response => {
+			    this.rentalAgency = response.data;
+			  })
 		}
 		else{
 			this.buttonMessage = "Edit vehicle";
 			this.headerMessage = "Edit vehicle";
-		}
-		
-		axios
-			 .then
-		axios.get('rest/rentalAgency/getById/' + agency_id)
+			axios.get('rest/rentalAgency/getById/' + agency_id)
 			  .then(response => {
 			    this.rentalAgency = response.data;
-			    return axios.get('rest/vehicles/' + this.vehicle_id);
+			    return axios.get('rest/vehicles/' + vehicle_id);
 			  })
 			  .then(response => {
 			    this.Vehicle = response.data;
 			  })
+		}
+		
+		
     }
 });
