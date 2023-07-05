@@ -9,7 +9,7 @@ Vue.component("managerprofile", {
 		    }
 	},
 	template: ` 
-	<div>
+	<div style="overflow: auto;">
 	
 	  <header>
             <label class="header">Rent a car</label>
@@ -77,8 +77,8 @@ Vue.component("managerprofile", {
 	
 	  <label class="my-profile-label">Purchasers of agency vehicles:</label>
 	  <div class="separator-line"></div>
-	  <div>
-		  <table>
+	  <div style="padding: 32px;">
+		  <table style="position: relative; margin-top: 24px;left: 0%; right: 50%">
 	            <tr class="tableHeader">
 	                <th>Name</th>
 	                <th>Surname</th>
@@ -93,6 +93,8 @@ Vue.component("managerprofile", {
 	            </tr>
 	        </table>
 	  </div>
+	  <label class="my-profile-label">Recently rented vehicles:</label>
+	  <div class="separator-line"></div>
     </div>
     
     `

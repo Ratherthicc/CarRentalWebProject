@@ -122,9 +122,17 @@ Vue.component("vehicleview", {
 		AddVehicle: function(){
 			event.preventDefault();
 			var vehicle_id = this.$route.params.vehicle_id;
+			var agency_id = this.$route.params.rental_agency_id;
+			
+			this.Vehicle.rental_object_id = agency_id;
 			
 			if(vehicle_id == -1){
+				axios.post(`rest/vehicles/saveVehicle`, this.Vehicle);
 				}
+			else{
+				this.Vehicle.id = vehicle_id;
+				axios.put(`rest/vehicles/updateVehicle`, this.Vehicle);
+			}
 		}
 		
 	},

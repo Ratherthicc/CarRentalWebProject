@@ -81,6 +81,8 @@ public class VehicleDAO {
 		return null;
 	}
 	public void Add(Vehicle vehicle) {
+		loadAll();
+		vehicle.setId(vehicles.size());
 		vehicles.add(vehicle);
 		saveAll();
 	}
