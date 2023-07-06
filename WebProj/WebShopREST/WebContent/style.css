@@ -341,7 +341,7 @@ tr.tableHeader{
   border-radius: 12px;
   box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.3);
   background-color: #f7f9f7;
-  margin: 25px;
+  margin: 25px 6px;
   width: 400px;
   height: 320px;
 }
@@ -383,7 +383,9 @@ tr.tableHeader{
 {
   display: flex;
   justify-content: flex-start;
-  max-width: 1000;
+  max-width: 100vw;
+  flex-wrap: wrap;
+  padding-left: 19px;
 }
 .red-color{
 	color:red;

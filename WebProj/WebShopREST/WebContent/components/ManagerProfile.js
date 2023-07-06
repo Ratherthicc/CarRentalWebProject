@@ -66,9 +66,9 @@ Vue.component("managerprofile", {
 	        <label class="fuel-type">{{'Fuel Type: ' + v.fuel_type}}</label><br>
 	        <label class="seats">{{'Number of Seats: ' +  v.people}}</label><br>
 	        <label class="doors">{{'Number of Doors: ' + v.doors}}</label><br>
-	        <label class="status">{{'Status: ' + v.available}}</label>
+	        <label class="status">{{ 'Status: ' + (v.available ? 'Free' : 'Taken') }}</label>
 	        
-	  		<button class="nav_button" style="margin-left: 24px; position: relative;margin-top: 10px; margin-bottom: 0px; width: 115px; margin-right: 0px; height: 40px;">Remove</button>
+	  		<button class="nav_button" style="margin-left: 20px; position: relative;margin-top: 10px; margin-bottom: 0px; width: 115px; margin-right: 0px; height: 40px;">Remove</button>
             <button v-on:click="EditVehicle(rentalAgency.id,v.id)" class="nav_button" style="margin-left: 0px; position: relative;margin-top: 10px; margin-bottom: 0px; width: 115px; margin-right: 0px; height: 40px;">Edit</button><br>
 	      </span>
 	    </div>
@@ -101,7 +101,7 @@ Vue.component("managerprofile", {
 	            <tr class="tableHeader">
 	                <th>Id</th>
 	                <th>Username</th>
-	                <th>Purchase date</th>
+	                <th>Retrieval date</th>
 	                <th>Price</th>
 	                <th>Status</th>
 	                <th>Actions</th>
@@ -114,15 +114,15 @@ Vue.component("managerprofile", {
 	                <td>{{r.status}}</td>
 	                <td v-if="r.status === 'PROCESSING'">
 	                	<span>
-		                	<input type="button" style="background-color: #004D40;margin-right: 0px; margin-left:0px;" value="Approve" @click="cancelOrder(o)" class="table-button">
-		                	<input type="button" style="margin-right: 0px;margin-left: 0px;" value="Deny" @click="cancelOrder(o)" class="table-button">
+		                	<input type="button" style="background-color: #004D40;margin-right: 0px; margin-left:0px;" value="Approve" @click="approveOrder(r)" class="table-button">
+		                	<input type="button" style="margin-right: 0px;margin-left: 0px;" value="Deny" @click="denyOrder(r)" class="table-button">
 	                	</span
 	                </td>
 			        <td v-else-if="r.status === 'APPROVED'">
-			        	<input type="button" style="background-color: #388E3C; width: 190px;" value="Retrieve" @click="cancelOrder(o)" class="table-button">
+			        	<input type="button" style="background-color: #388E3C; width: 190px;" value="Retrieve" @click="retrieveOrder(r)" class="table-button">
 			        </td>
 			        <td v-else-if="r.status === 'RETRIEVED'">
-			        	<input type="button" style="background-color: #1A237E; width: 190px;" value="Return" @click="cancelOrder(o)" class="table-button">
+			        	<input type="button" style="background-color: #1A237E; width: 190px;" value="Return" @click="returnOrder(r)" class="table-button">
 			        </td>
 			        <td v-else>
 			        	<label>No action</label>
@@ -146,6 +146,43 @@ Vue.component("managerprofile", {
 		},
 		EditVehicle:function(r,v){
 			router.push(`/vehicleView/`+ r + `/` + v);
+		},
+		approveOrder: function(o){
+			axios.put('rest/orders/updateStatus/' + o.order_id + '/APPROVED')
+				 .then(response => (o.status = 'APPROVED'));
+		},
+		denyOrder: function(o){
+			axios.put('rest/orders/updateStatus/' + o.order_id + '/REJECTED')
+				 .then(response => (o.status = 'REJECTED'));
+		},
+		retrieveOrder: function(o){
+			const currentDate = new Date();
+			
+			var jsonDateTime=JSON.stringify(o.date_time);
+			const dateTimeObj = JSON.parse(jsonDateTime);
+			const date2start = new Date(
+								  dateTimeObj.year,
+								  dateTimeObj.monthValue - 1, //js months start from 0
+								  dateTimeObj.dayOfMonth,
+								  dateTimeObj.hour,
+								  dateTimeObj.minute,
+								  dateTimeObj.second
+								);
+			var orderDate=new Date(date2start);
+			
+			if(currentDate >= orderDate){
+				axios.put('rest/orders/updateStatus/' + o.order_id + '/RETRIEVED')
+				 	 .then(response => (o.status = 'RETRIEVED'));
+				return;
+			}
+			else{
+				alert('You can\'t retrieve an order before it\'s Buyer\'s selected time is not present! ');
+				return;
+			}
+		},
+		returnOrder: function(o){
+			axios.put('rest/orders/updateStatus/' + o.order_id + '/RETURNED')
+				 .then(response => (o.status = 'RETURNED'));
 		}
 		
 	},
