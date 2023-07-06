@@ -3,8 +3,8 @@ Vue.component("managerprofile", {
 		    return {
 		      	user: {},
 		      	purchasers: [],
-		      	rentalAgency: {}
-		      	
+		      	rentalAgency: {},
+		      	orders: []
 			  		
 		    }
 	},
@@ -88,13 +88,48 @@ Vue.component("managerprofile", {
 	            <tr v-for="r in this.purchasers" class="dataRow">
 	                <td>{{r.first_name}}</td>
 	                <td>{{r.last_name}}</td>
-	                <td>{{r.points}}</td>
+	                <td>{{r.points.toFixed(3)}}</td>
 	                <td>{{r.rank}}</td>
 	            </tr>
 	        </table>
 	  </div>
-	  <label class="my-profile-label">Recently rented vehicles:</label>
+	  
+	  <label class="my-profile-label">Orders:</label>
 	  <div class="separator-line"></div>
+	  <div style="padding: 32px;">
+		  <table style="position: relative; margin-top: 24px;left: 0%; right: 50%">
+	            <tr class="tableHeader">
+	                <th>Id</th>
+	                <th>Username</th>
+	                <th>Purchase date</th>
+	                <th>Price</th>
+	                <th>Status</th>
+	                <th>Actions</th>
+	            </tr>
+	            <tr v-for="r in this.orders" class="dataRow">
+	                <td>{{r.order_id}}</td>
+	                <td>{{r.username}}</td>
+	                <td>{{r.date_time?.dayOfMonth + '/' + r.date_time?.monthValue + '/' + r.date_time?.year + ' - ' + r.date_time?.hour + ':' + r.date_time?.minute}}</td>
+	                <td>{{r.price}}</td>
+	                <td>{{r.status}}</td>
+	                <td v-if="r.status === 'PROCESSING'">
+	                	<span>
+		                	<input type="button" style="background-color: #004D40;margin-right: 0px; margin-left:0px;" value="Approve" @click="cancelOrder(o)" class="table-button">
+		                	<input type="button" style="margin-right: 0px;margin-left: 0px;" value="Deny" @click="cancelOrder(o)" class="table-button">
+	                	</span
+	                </td>
+			        <td v-else-if="r.status === 'APPROVED'">
+			        	<input type="button" style="background-color: #388E3C; width: 190px;" value="Retrieve" @click="cancelOrder(o)" class="table-button">
+			        </td>
+			        <td v-else-if="r.status === 'RETRIEVED'">
+			        	<input type="button" style="background-color: #1A237E; width: 190px;" value="Return" @click="cancelOrder(o)" class="table-button">
+			        </td>
+			        <td v-else>
+			        	<label>No action</label>
+			        </td>
+	            </tr>
+	        </table>
+	  </div>
     </div>
     
     `
@@ -128,6 +163,11 @@ Vue.component("managerprofile", {
 			  })
 			  .then(response => {
 				this.rentalAgency = response.data;
+				return axios.get('rest/orders/');
+			  })
+			  .then(response => {
+				  this.orders = response.data;
+				  this.orders = this.orders.filter(o => o.agency_id === this.rentalAgency.id)
 			  })	
     }
 });
