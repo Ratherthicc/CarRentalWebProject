@@ -1,6 +1,8 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
@@ -14,9 +16,11 @@ import javax.ws.rs.core.MediaType;
 
 import dao.BasketDAO;
 import dao.CanceledOrdersDAO;
+import dao.UserDAO;
 import dao.VehicleDAO;
 import model.Basket;
 import model.CanceledOrders;
+import model.User;
 
 @Path("/canceledOrders")
 public class CanceledOrdersService {
@@ -31,7 +35,10 @@ public class CanceledOrdersService {
 	    	String contextPath = ctx.getRealPath("");
 			ctx.setAttribute("CanceledOrdersDAO", new CanceledOrdersDAO(contextPath));
 		}
-		
+		if (ctx.getAttribute("UserDAO") == null) {
+	    	String contextPath = ctx.getRealPath("");
+			ctx.setAttribute("UserDAO", new UserDAO(contextPath));
+		}
 	}
 	
 	@GET
@@ -54,11 +61,18 @@ public class CanceledOrdersService {
 	}
 	
 	@GET
-	@Path("/checkUser/{username}")
+	@Path("/checkUser")
 	@Produces(MediaType.APPLICATION_JSON)
-	public boolean checkUser(@PathParam("username")String username) {
+	public List<String> checkUser() {
 		CanceledOrdersDAO dao = (CanceledOrdersDAO) ctx.getAttribute("CanceledOrdersDAO");
-		return dao.checkUser(username);
+		UserDAO userDAO=(UserDAO) ctx.getAttribute("UserDAO");
+		List<String> usernames=new ArrayList<>();
+		for(User u : userDAO.getBuyers()) {
+			if(!dao.checkUser(u.getUsername())) {
+				usernames.add(u.getUsername());
+			}
+		}
+		return usernames;
 		
 		
 		

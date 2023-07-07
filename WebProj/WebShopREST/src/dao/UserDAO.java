@@ -35,6 +35,20 @@ public class UserDAO {
 	public Collection<User> getAll() {
 		return users;
 	}
+	
+	public User banUser(String username) {
+		for(User u : users) {
+			if(u.getUsername().equals(username)) {
+				u.setBlocked(1);
+				saveAll();
+				return u;
+			}
+		}
+		return null;
+		
+		
+	}
+	
 	public Collection<User> getBuyers(){
 		List<User> list=new ArrayList<>();
 		for(User u : users) {
