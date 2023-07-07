@@ -9,12 +9,12 @@ public class Comment {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Comment(String buyer, int agency, String text, int rating) {
+	public Comment(String username, int agencyId, String text, int rating) {
 		super();
 		this.buyer = new User();
-		this.buyer.setFirst_name(buyer);
+		this.buyer.setUsername(username);
 		this.agency = new RentalAgency();
-		this.agency.setId(agency);
+		this.agency.setId(agencyId);
 		this.text = text;
 		this.rating = rating;
 	}

@@ -1,11 +1,18 @@
 package dao;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
 import model.Comment;
+import model.Location;
+import model.User;
 
 
 
@@ -25,9 +32,67 @@ public class CommentDAO {
 		loadAll();
 	}
 	public Collection<Comment> getAll() {
+		loadAll();
 		return comments;
 	}
+	public void addComment(Comment comment) {
+		loadAll();
+		comments.add(comment);
+		saveAll();
+	}
+	public List<Comment> getAllByAgencyId(int agencyId) {
+		List<Comment> retComments=new ArrayList<Comment>();
+		for (Comment comment : comments) {
+			if(comment.getAgency().getId() == agencyId) {
+				retComments.add(comment);
+			}
+		}
+		return retComments;
+	}
 	
-	public List<Comment> loadAll() {return null;}
-	public void saveAll() {}
+	public List<Comment> loadAll() {
+		String row;
+		try (BufferedReader csvReader = new BufferedReader(new FileReader(csvFilePath))){
+			comments.clear();
+			while ((row = csvReader.readLine()) != null) {    
+				String[] data=row.split(",");
+				
+				Comment comment=new Comment(
+											data[0], // username
+											Integer.parseInt(data[1]), // agencyId
+											data[2], // text
+											Integer.parseInt(data[3]) // rating
+										   );
+				comments.add(comment);
+			}
+			csvReader.close();
+		}
+		catch (Exception e) {
+			return null;
+		}
+	
+		return comments;
+	}
+	public void saveAll() {
+		try (BufferedWriter writer = new BufferedWriter(new FileWriter(csvFilePath))) {
+			
+			StringBuilder line = new StringBuilder();
+			for(Comment comment : comments) {
+				
+				line.append(comment.getBuyer().getUsername());
+				line.append(",");
+				line.append(comment.getAgency().getId());
+				line.append(",");
+				line.append(comment.getText());
+				line.append(",");
+				line.append(comment.getRating());
+				line.append("\n");
+				
+			}
+			writer.write(line.toString());
+			writer.close();
+        } catch (IOException e) {
+            System.err.println("Error writing to CSV file: " + e.getMessage());
+        }
+	}
 }
