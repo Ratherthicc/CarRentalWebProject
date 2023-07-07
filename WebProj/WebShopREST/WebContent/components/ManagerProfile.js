@@ -4,7 +4,8 @@ Vue.component("managerprofile", {
 		      	user: {},
 		      	purchasers: [],
 		      	rentalAgency: {},
-		      	orders: []
+		      	orders: [],
+		      	comments: []
 			  		
 		    }
 	},
@@ -129,6 +130,38 @@ Vue.component("managerprofile", {
 			        </td>
 	            </tr>
 	        </table>
+	        
+	        <label class="my-profile-label">Comments:</label>
+	  		<div class="separator-line"></div>
+	  		
+	        <div v-for="c in comments" class="comments">
+	      <div class="comment">
+	        <div class="username-bubble">
+	          <label>{{c?.buyer?.username + ':'}}</label>
+	        </div>
+	        <div class="comment-source">
+	          <p>
+	            {{c?.text}}
+	          </p>
+	        </div>
+	
+	        <div>
+	          <div class="stars">
+	            <p>User's rating:</p>
+	            <label v-if="c?.rating >= 1">&#11088</label>
+	            <label v-if="c?.rating >= 2">&#11088</label>
+	            <label v-if="c?.rating >= 3">&#11088</label>
+	            <label v-if="c?.rating >= 4">&#11088</label>
+	            <label v-if="c?.rating >= 5">&#11088</label>
+	          </div>
+	          <span class="comment-buttons">
+	            <button class="accept-comment-button">Accept</button>
+	            <button class="reject-comment-button">Reject</button>
+	          </span>
+	        </div>
+	        
+	      </div>
+	    </div>
 	  </div>
     </div>
     
@@ -204,7 +237,11 @@ Vue.component("managerprofile", {
 			  })
 			  .then(response => {
 				  this.orders = response.data;
-				  this.orders = this.orders.filter(o => o.agency_id === this.rentalAgency.id)
+				  this.orders = this.orders.filter(o => o.agency_id === this.rentalAgency.id);
+				  return axios.get('rest/comments/getByAgencyId/' + this.rentalAgency.id);
+			  })
+			  .then(response => {
+				  this.comments = response.data;
 			  })	
     }
 });

@@ -142,5 +142,21 @@
     "description": "asdasddas",
     "picture": "https://images.unsplash.com/photo-1555652736-e92021d28a10?ixlib\u003drb-4.0.3\u0026ixid\u003dM3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\u0026auto\u003dformat\u0026fit\u003dcrop\u0026w\u003d1170\u0026q\u003d80",
     "available": false
+  },
+  {
+    "id": 9,
+    "brand": "xxasde",
+    "model": "Bmw",
+    "price": 123123.0,
+    "vehicle_type": "CAR",
+    "rental_object_id": 2,
+    "transmission_type": "MANUEL",
+    "fuel_type": "BENZENE",
+    "fuel_consumption": 666.0,
+    "doors": 4,
+    "people": 4,
+    "description": "nekiopsis",
+    "picture": "https://images.unsplash.com/flagged/photo-1553505192-acca7d4509be?ixlib\u003drb-4.0.3\u0026ixid\u003dM3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\u0026auto\u003dformat\u0026fit\u003dcrop\u0026w\u003d1190\u0026q\u003d80",
+    "available": false
   }
 ]

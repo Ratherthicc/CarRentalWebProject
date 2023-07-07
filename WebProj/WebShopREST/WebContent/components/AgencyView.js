@@ -15,7 +15,7 @@ Vue.component("agencyview", {
 		    }
 	},
 	template: ` 
-	<div>
+	<div style="overflow:auto; height: 100vh;">
 	<header>
             <label class="header">Rent a car</label>
             <nav>
@@ -64,7 +64,7 @@ Vue.component("agencyview", {
 	        <label class="fuel-type">{{'Fuel Type: ' + v.fuel_type}}</label><br>
 	        <label class="seats">{{'Number of Seats: ' +  v.people}}</label><br>
 	        <label class="doors">{{'Number of Doors: ' + v.doors}}</label><br>
-	        <label class="status">{{'Status: ' + v.available}}</label>
+	        <label class="status">{{ 'Status: ' + (v.available ? 'Free' : 'Taken') }}</label>
 	      </span>
 	    </div>
 	  </div>
