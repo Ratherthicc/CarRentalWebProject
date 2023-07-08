@@ -48,11 +48,7 @@ Vue.component("mainview", {
 	},
 	template: ` 
 	<div style="overflow: auto;height: 100vh;">
-		<div>
-	        <input type="button" value="Make orders"  @click="findVehicles(username)">
-	        <input type="button" value="View orders" @click="viewOrders" >
-	        
-	   </div>
+		
 	   
 	   
 	   
@@ -69,6 +65,8 @@ Vue.component("mainview", {
 	  <label class="my-profile-label">Personal information:</label>
 	  <div class="separator-line"></div>
 	
+	  <div style="display:flex; width:100vw;gap:50px;">
+	  
 	  <div class="personal-info-div">
 	    <label style="margin-bottom: 8px; color: orange; font-weight: 800; font-size: 24px; display: inline-block; text-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);">Buyer</label>
 	
@@ -85,6 +83,14 @@ Vue.component("mainview", {
 	
 	    <label>Gender:</label>
 	    <label class="add-info-values">{{this.user.gender}}</label><br>
+	  </div>
+	  
+	  <div style="padding-top:12px;">
+	        <input class="nav_button" style="height:40px; margin-right:5px;" type="button" value="Make orders"  @click="findVehicles(username)">
+	        <input class="nav_button" style="height:40px; margin-left:5px;" type="button" value="View orders" @click="viewOrders" >
+	        
+	   </div>
+	  
 	  </div>
 	  
 	  <label class="my-profile-label">Check out our agencies:</label>
