@@ -120,7 +120,7 @@ Vue.component("agencyview", {
 				})
 			.then(response => {
 				this.comments = response.data;
-				this.comments = this.comments.filter(comment => comment.is_rated);
+				this.comments = this.comments.filter(comment => comment.is_rated === "APPROVED");
 				});
     }
 });

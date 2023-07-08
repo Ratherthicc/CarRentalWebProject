@@ -5,12 +5,19 @@ public class Comment {
 	private RentalAgency agency;
 	private String text;
 	private int rating;
-	private boolean is_rated;
+	private CommentStatus is_rated;
+	
+	public enum CommentStatus{
+		APPROVED,
+		REJECTED,
+		ON_HOLD
+	};
+	
 	public Comment() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Comment(String username, int agencyId, String text, int rating, boolean is_rated) {
+	public Comment(String username, int agencyId, String text, int rating, CommentStatus is_rated) {
 		super();
 		this.buyer = new User();
 		this.buyer.setUsername(username);
@@ -20,10 +27,19 @@ public class Comment {
 		this.rating = rating;
 		this.is_rated = is_rated;
 	}
-	public boolean isIs_rated() {
+	
+	public boolean equals(Comment c) {
+		//bez poredjenja po statusu!
+		return (c.getAgency().getId() == this.agency.getId()
+				&& c.getBuyer().getUsername().equals(this.getBuyer().getUsername())
+				&& c.getText().equals(this.getText())
+				&& c.getRating() == this.getRating());
+	}
+	
+	public CommentStatus getIs_rated() {
 		return is_rated;
 	}
-	public void setIs_rated(boolean is_rated) {
+	public void setIs_rated(CommentStatus is_rated) {
 		this.is_rated = is_rated;
 	}
 	public User getBuyer() {

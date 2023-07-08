@@ -147,7 +147,7 @@
     "id": 9,
     "brand": "xxasde",
     "model": "Bmw",
-    "price": 123123.0,
+    "price": 333.0,
     "vehicle_type": "CAR",
     "rental_object_id": 2,
     "transmission_type": "MANUEL",

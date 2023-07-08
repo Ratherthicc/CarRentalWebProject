@@ -11,6 +11,7 @@ import java.util.Collection;
 import java.util.List;
 
 import model.Comment;
+import model.Comment.CommentStatus;
 import model.Location;
 import model.User;
 
@@ -35,12 +36,23 @@ public class CommentDAO {
 		loadAll();
 		return comments;
 	}
+	public void update(Comment comment) {
+		loadAll();
+		for (int i = 0; i < comments.size(); i++) {
+            if (comments.get(i).equals(comment)) {
+            	comments.set(i, comment);
+            	saveAll();
+                break;
+            }
+        }
+	}
 	public void addComment(Comment comment) {
 		loadAll();
 		comments.add(comment);
 		saveAll();
 	}
 	public List<Comment> getAllByAgencyId(int agencyId) {
+		loadAll();
 		List<Comment> retComments=new ArrayList<Comment>();
 		for (Comment comment : comments) {
 			if(comment.getAgency().getId() == agencyId) {
@@ -62,7 +74,9 @@ public class CommentDAO {
 											Integer.parseInt(data[1]), // agencyId
 											data[2], // text
 											Integer.parseInt(data[3]), // rating
-											Boolean.parseBoolean(data[4]) // is_rated
+											data[4].equals("APPROVED") ? // is_rated
+												CommentStatus.APPROVED : 
+												(data[4].equals("REJECTED") ? CommentStatus.REJECTED :CommentStatus.ON_HOLD)
 										   );
 				comments.add(comment);
 			}
@@ -88,7 +102,7 @@ public class CommentDAO {
 				line.append(",");
 				line.append(comment.getRating());
 				line.append(",");
-				line.append(comment.isIs_rated());
+				line.append(comment.getIs_rated().toString());
 				line.append("\n");
 				
 			}

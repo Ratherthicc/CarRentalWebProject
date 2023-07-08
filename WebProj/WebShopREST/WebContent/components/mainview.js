@@ -42,7 +42,7 @@ Vue.component("mainview", {
 			        },
 			        "text": "",
 			        "rating": null,
-			        "is_rated": false
+			        "is_rated": "ON_HOLD"
 			  	}
 		    }
 	},
@@ -171,8 +171,13 @@ Vue.component("mainview", {
 			let radioBtns = document.querySelectorAll("input[name='mark']");
 			
 			let findSelected = () => {
-				let selected = document.querySelector("input[name='mark']:checked").value;
-				this.comment.rating = selected;
+				try{
+					let selected = document.querySelector("input[name='mark']:checked").value;
+					this.comment.rating = selected;
+				}
+				catch(e){
+					this.comment.rating = -1;
+				}
 			}
 			
 			radioBtns.forEach(radioBtn => radioBtn.addEventListener("change", findSelected));

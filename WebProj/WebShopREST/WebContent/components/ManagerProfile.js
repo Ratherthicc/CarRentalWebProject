@@ -155,8 +155,8 @@ Vue.component("managerprofile", {
 	            <label v-if="c?.rating >= 5">&#11088</label>
 	          </div>
 	          <span class="comment-buttons">
-	            <button class="accept-comment-button">Accept</button>
-	            <button class="reject-comment-button">Reject</button>
+	            <button v-if="c.is_rated === 'ON_HOLD'" @click="acceptComment(c)" class="accept-comment-button">Accept</button>
+	            <button v-if="c.is_rated === 'ON_HOLD'" @click="rejectComment(c)" class="reject-comment-button">Reject</button>
 	          </span>
 	        </div>
 	        
@@ -168,6 +168,14 @@ Vue.component("managerprofile", {
     `
 	, 
 	methods : {
+		acceptComment: function(c) {
+			c.is_rated = "APPROVED";
+			axios.put('rest/comments/updateComment', c)
+		},
+		rejectComment: function(c) {
+			c.is_rated = "REJECTED";
+			axios.put('rest/comments/updateComment', c)
+		},
 		EditUser:function(){
 			router.push(`/edit/${this.user.username}`);
 		},
