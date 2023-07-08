@@ -61,7 +61,8 @@ public class CommentDAO {
 											data[0], // username
 											Integer.parseInt(data[1]), // agencyId
 											data[2], // text
-											Integer.parseInt(data[3]) // rating
+											Integer.parseInt(data[3]), // rating
+											Boolean.parseBoolean(data[4]) // is_rated
 										   );
 				comments.add(comment);
 			}
@@ -86,6 +87,8 @@ public class CommentDAO {
 				line.append(comment.getText());
 				line.append(",");
 				line.append(comment.getRating());
+				line.append(",");
+				line.append(comment.isIs_rated());
 				line.append("\n");
 				
 			}

@@ -5,11 +5,12 @@ public class Comment {
 	private RentalAgency agency;
 	private String text;
 	private int rating;
+	private boolean is_rated;
 	public Comment() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Comment(String username, int agencyId, String text, int rating) {
+	public Comment(String username, int agencyId, String text, int rating, boolean is_rated) {
 		super();
 		this.buyer = new User();
 		this.buyer.setUsername(username);
@@ -17,6 +18,13 @@ public class Comment {
 		this.agency.setId(agencyId);
 		this.text = text;
 		this.rating = rating;
+		this.is_rated = is_rated;
+	}
+	public boolean isIs_rated() {
+		return is_rated;
+	}
+	public void setIs_rated(boolean is_rated) {
+		this.is_rated = is_rated;
 	}
 	public User getBuyer() {
 		return buyer;
