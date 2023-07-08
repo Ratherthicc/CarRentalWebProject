@@ -25,6 +25,8 @@ Vue.component("landingpage", {
             <a class="nav_a" v-on:click="logInButton"><button class="nav_button">Log in</button></a>
         </header>
         
+        <div style="display:flex; gap:56px;margin-left:30%;margin-right:30%;">
+        
         <div class="searchBox">
 	        <form v-on:submit="filter" >
 		        <label class="underline-label"> Search: </label>
@@ -61,12 +63,16 @@ Vue.component("landingpage", {
 			   		<input type="number" v-model="min_rating">
 		   		</div>
 		   		<div class="basic-div">
-		        <input type="submit" value="Search">
+		        <input class="nav_button" type="submit" value="Search">
 		        </div>
 			</form>
         </div>
         
-        <table id="myTable">
+        <div id="map" style="width: 25vw; height: 25vh;border: 3px solid black;"></div>
+        
+        </div>
+        
+        <table style="position:relative;top:6%;" id="myTable">
             <tr class="tableHeader">
                 <th>Logo</th>
                 <th v-on:click="sortName">Name</th>
@@ -84,7 +90,7 @@ Vue.component("landingpage", {
                 <td>{{r.rating}}</td>
             </tr>
         </table>
-        <div id="map" style="width: 20%; height: 20%;"></div>
+        
     </div>
 	`
 	, 
