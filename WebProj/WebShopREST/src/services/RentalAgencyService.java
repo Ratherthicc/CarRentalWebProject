@@ -70,11 +70,15 @@ public class RentalAgencyService {
 	public Collection<RentalAgency> getRateableAgencies(@PathParam("username") String username){
 		RentalAgencyDAO rentalAgencyDAO = (RentalAgencyDAO) ctx.getAttribute("RentalAgencyDAO");
 		OrderDAO orderDAO = (OrderDAO) ctx.getAttribute("OrderDAO");
+		LocationDAO locationDAO = (LocationDAO) ctx.getAttribute("LocationDAO");
 		Collection<RentalAgency> retAgencies = new ArrayList<RentalAgency>();
 		
 		for (Order o : orderDAO.getAll()) {
 			if(o.getUsername().equals(username) && o.getStatus().toString().equals(Status.RETURNED.toString())) {
-				retAgencies.add(rentalAgencyDAO.getById(o.getAgency_id()));
+				RentalAgency r = rentalAgencyDAO.getById(o.getAgency_id());
+				r.setLocation(locationDAO.GetById(r.getLocation().getId()));
+				
+				retAgencies.add(r);
 			}
 		}
 		return retAgencies;

@@ -11,8 +11,39 @@ Vue.component("mainview", {
 				vehicle_type:"",
 				vehicle_fuel:"",
 				min_rating:0,
-				map:null
-			  		
+				map:null,
+				
+				selected_rental_id: null,
+				commentFormFlag: false,
+				comment: {
+			    	"buyer": {
+				      "username": "",
+				      "password": null,
+				      "first_name": null,
+				      "last_name": null,
+				      "gender": null,
+				      "birth_date": null,
+				      "type": null,
+				      "points": 0.0,
+				      "rank": null,
+				      "blocked": 0,
+				      "agencyId": 0
+			    	},
+			        "agency": {
+			            "id": null,
+			            "name": null,
+			            "openingTime": null,
+			            "closingTime": null,
+			            "state": null,
+			            "logoURI": null,
+			            "rating": 0,
+			            "location": null,
+			            "vehicles": null
+			        },
+			        "text": "",
+			        "rating": null,
+			        "is_rated": false
+			  	}
 		    }
 	},
 	template: ` 
@@ -58,67 +89,56 @@ Vue.component("mainview", {
 	  
 	  <label class="my-profile-label">Check out our agencies:</label>
 	  <div class="separator-line"></div>
-	  
-	  <div class="searchBox" style="left: 0%; margin-left: 250px;">
-	        <form v-on:submit="filter" >
-		        <label class="underline-label"> Search: </label>
-		        <div class="basic-div">
-		        <input  type="text" name="search" v-model="textbox" style="text-align: center;" placeholder="Search by agency and location!">
-		        </div>
-		        <div class="basic-div">
-		        <input type="checkbox"  name="openCheckbox">&nbsp; &nbsp;<label>Show only open</label> 
-		        </div>
-		        <label class="underline-label">Pick vehicle stats:</label>
-		        <div class="basic-div">
-		        <label>Type:</label>&nbsp;
-		        <select v-model="vehicle_type">
-		        	<option value="">NONE</option>
-			        <option value="CAR">Car</option>
-			        <option value="VAN">Van</option>
-			        <option value="MOBILEHOME">Mobilehome</option>
-			        
-		   		</select>&nbsp;&nbsp;&nbsp;
-		   		<label>Fuel:</label>&nbsp;
-		   		
-		   		<select v-model="vehicle_fuel">
-		   			<option value="">NONE</option>
-			        <option value="DIESEL">Diesel</option>
-			        <option value="BENZENE">Benzene</option>
-			        <option value="HYBRID">Hybrid</option>
-			        <option value="ELECTRIC">Electric</option>
-			        
-		   		</select>
-		   		
-		   		</div>
-		   		<div class="basic-div">
-			   		<label>Minimum rating:</label>&nbsp;&nbsp;&nbsp;
-			   		<input type="number" v-model="min_rating">
-		   		</div>
-		   		<div class="basic-div">
-		        <input type="submit" value="Search">
-		        </div>
-			</form>
-        </div>
 	  	  
-	  <div style="padding: 32px;">
-	  <table id="myTable" style="position: relative; margin-top: 24px;left: 0%; width: 65%;">
+	  <div style="padding: 32px; display:flex;gap: 18px;width:100%;">
+	  
+	  <table id="myTable" style="z-index: 2;position: relative; margin-top: 12px;left: 0%; width: 65%;">
             <tr class="tableHeader">
                 <th>Logo</th>
-                <th v-on:click="sortName">Name</th>
-                <th v-on:click="sortLocation">Location</th>
-                <th v-on:click="sortRating">Rating</th>
+                <th >Name</th>
+                <th >Location</th>
+                <th >Rating</th>
+                <th>Discuss</th>
             </tr>
-            <tr v-for="r in SearchedAgencies" class="dataRow" v-on:click="checkRentalAgency(r)">
+            <tr v-for="r in SearchedAgencies" class="dataRow">
                 <td>
                 	<div class="imageContainer">
             			<img v-bind:src="r.logoURI" class="rowDataImage"/>
        				</div>
                 </td>
                 <td>{{r.name}}</td>
-                <td @click="viewOnMap(r.location.geographicHeight,r.location.geographicWidth)">{{r.location.street + ', ' + r.location.streetNumber + ', ' + r.location.city}}</td>
+                <td>{{r.location.street + ', ' + r.location.streetNumber + ', ' + r.location.city}}</td>
                 <td>{{r.rating}}</td>
+                <td>
+                	<input type="button" style="cursor:pointer;background-color: #F86F15;height: 55%; width: 65%;" value="Comment" @click="showCommentWindow(r)" class="table-button">
+                </td>
             </tr>
         </table>
+        
+        <div v-if="commentFormFlag" class="comment-form">
+      <label class="comment-form-label">Rate Agency:</label><br>
+      <div class="comment-form-inputs">
+        <label>Your comment:</label><br>
+        <textarea type="text" placeholder="Type text here..." v-model="comment.text" class="comment-input"></textarea><br>
+        <label>Your rating:</label>
+        <div id="ratingDiv" class="rating-div">
+          <label>1</label>
+          <label>2</label>
+          <label>3</label>
+          <label>4</label>
+          <label>5</label>
+        </div>
+        <div id="ratingDiv" class="rating-div">
+          <input type="radio" name="mark" value="1">
+          <input type="radio" name="mark" value="2">
+          <input type="radio" name="mark" value="3">
+          <input type="radio" name="mark" value="4">
+          <input type="radio" name="mark" value="5">
+        </div>
+      </div>
+      <input class="nav_button" type="submit" value="Post comment" @click="makeComment">
+    </div>
+
 	 </div>
     </div>
     
@@ -134,237 +154,46 @@ Vue.component("mainview", {
 		viewOrders:function(){
 			router.push(`/viewOrders/${this.username}`);
 		},
-		updateGrid: function(){
-					
-			this.SearchedAgencies=this.RentalAgencies.slice();
-			for(var variable of this.RentalAgencies){
-				
-				if((!variable.name.toLowerCase().includes(this.textbox.toLowerCase())) &&
-				 (!variable.location.city.toLowerCase().includes(this.textbox.toLowerCase()))//checks only for name and city missing rating
-				 ){
-					const i=this.SearchedAgencies.indexOf(variable);
-					this.SearchedAgencies.splice(i,1);
-				}
-	
-			}
-			
-			
-		},
-		filter: function(){
-			event.preventDefault();
-			this.updateGrid();
-			this.filterOpenObjects();
-			this.filterCarType();
-			this.filterVehicleFuel();
-			this.filterMinRating();
-			
-		},
-		filterMinRating: function(){
-			if(this.min_rating>=5){
-				this.SearchedAgencies=[];
-				return;
-				}
-			var agencies=this.SearchedAgencies.slice();
-			for(var agency of agencies){
-				if(agency.rating < this.min_rating){
-					const i=this.SearchedAgencies.indexOf(agency);
-					this.SearchedAgencies.splice(i,1);
-				}
-			}
-		},
-		filterVehicleFuel: function(){
-			if(this.vehicle_fuel=="")return;
-			
-			var agencies=this.SearchedAgencies.slice();
-			var flag=1;	
-				for(var agency of agencies){
-					flag=1;
-					for(var vehicle of agency.vehicles){
-						
-						if(vehicle.fuel_type==this.vehicle_fuel){
-							
-							flag=0;
-							break;
-						}
-					}
-					if(flag){
-						const i=this.SearchedAgencies.indexOf(agency);
-						this.SearchedAgencies.splice(i,1);
-					}
-				}
-		},
-		
-		
-		filterOpenObjects: function(){
-			
-			var checkbox = document.getElementsByName("openCheckbox")[0];
-				
-			if(checkbox.checked){
-				var agencies=this.SearchedAgencies.slice();
-				
-				for(var variable of agencies){
-					if(variable.state=='NOT_WORKING'){
-						
-						const i=this.SearchedAgencies.indexOf(variable);
-						this.SearchedAgencies.splice(i,1);
-						
-					}
-				}
-			}
-		},
-		
-		filterCarType:function(){
-			if(this.vehicle_type=="")return;
-			var agencies=this.SearchedAgencies.slice();
-			var flag=1;	
-				for(var agency of agencies){
-					flag=1;
-					for(var vehicle of agency.vehicles){
-						if(vehicle.vehicle_type==this.vehicle_type){
-							flag=0;
-							break;
-						}
-					}
-					if(flag){
-						const i=this.SearchedAgencies.indexOf(agency);
-						this.SearchedAgencies.splice(i,1);
-					}
-				}
-		},
-		
-		sortName: function(){
-		  var table, rows, switching, i, x, y, shouldSwitch;
-		  table = document.getElementById("myTable");
-		  switching = true;
-		  while (switching) {
-		    switching = false;
-		    rows = table.rows;
-		    for (i = 1; i < (rows.length - 1); i++) {
-
-		      shouldSwitch = false;
-
-		      x = rows[i].getElementsByTagName("TD")[1];
-		      y = rows[i + 1].getElementsByTagName("TD")[1];
-			  if(this.sortNameFlag){
-			      if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-			        
-			        shouldSwitch = true;
-			        break;
-			      	}
-			     } 
-			   else{
-				   if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-			        
-			        shouldSwitch = true;
-			        break;
-			      	}
-			   }	
-		    }
-		    if (shouldSwitch) {
-				rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-		      	switching = true;
-		    }
-		    
-		  }
-		  	if(this.sortNameFlag){
-				this.sortNameFlag=false;
+		showCommentWindow: function(r){
+			if(this.commentFormFlag){
+				this.selected_rental_id = null;
+				this.commentFormFlag = false;
 			}
 			else{
-				this.sortNameFlag=true;
+				this.selected_rental_id = r.id;
+				this.commentFormFlag = true;
+			}			
+		},
+		makeComment: function(){
+			this.comment.buyer.username = this.username;
+			this.comment.agency.id = this.selected_rental_id;
+			
+			let radioBtns = document.querySelectorAll("input[name='mark']");
+			
+			let findSelected = () => {
+				let selected = document.querySelector("input[name='mark']:checked").value;
+				this.comment.rating = selected;
 			}
-		    
-		
-},
-			sortLocation: function(){
-					  var table, rows, switching, i, x, y, shouldSwitch;
-					  table = document.getElementById("myTable");
-					  switching = true;
-					  while (switching) {
-					    switching = false;
-					    rows = table.rows;
-					    for (i = 1; i < (rows.length - 1); i++) {
 			
-					      shouldSwitch = false;
+			radioBtns.forEach(radioBtn => radioBtn.addEventListener("change", findSelected));
 			
-					      x = rows[i].getElementsByTagName("TD")[2];
-					      y = rows[i + 1].getElementsByTagName("TD")[2];
-						  if(this.sortLocationFlag){
-						      if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-						        
-						        shouldSwitch = true;
-						        break;
-						      	}
-						     } 
-						   else{
-							   if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-						        
-						        shouldSwitch = true;
-						        break;
-						      	}
-						   }	
-					    }
-					    if (shouldSwitch) {
-							rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-					      	switching = true;
-					    }
-					    
-					  }
-					  	if(this.sortLocationFlag){
-							this.sortLocationFlag=false;
-						}
-						else{
-							this.sortLocationFlag=true;
-						}
-		    
-		
-},
-			sortRating: function(){
-					  var table, rows, switching, i, x, y, shouldSwitch;
-					  table = document.getElementById("myTable");
-					  switching = true;
-					  while (switching) {
-					    switching = false;
-					    rows = table.rows;
-					    for (i = 1; i < (rows.length - 1); i++) {
+			findSelected();
 			
-					      shouldSwitch = false;
-			
-					      x = rows[i].getElementsByTagName("TD")[3];
-					      y = rows[i + 1].getElementsByTagName("TD")[3];
-						  if(this.sortRatingFlag){
-						      if (parseFloat(x.innerHTML) > parseFloat(y.innerHTML)) {
-						        
-						        shouldSwitch = true;
-						        break;
-						      	}
-						     } 
-						   else{
-							   if (parseFloat(x.innerHTML) < parseFloat(y.innerHTML)) {
-						        
-						        shouldSwitch = true;
-						        break;
-						      	}
-						   }	
-					    }
-					    if (shouldSwitch) {
-							rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-					      	switching = true;
-					    }
-					    
-					  }
-					  	if(this.sortRatingFlag){
-							this.sortRatingFlag=false;
-						}
-						else{
-							this.sortRatingFlag=true;
-						}
-		    
-		
-},
-			checkRentalAgency: function(r){
-				router.push(`/agencyview/${r.id}`)
+			if(this.comment.text === "" 
+			   || (this.comment.rating !== "1"
+			   && this.comment.rating !== "2"
+			   && this.comment.rating !== "3"
+			   && this.comment.rating !== "4"
+			   && this.comment.rating !== "5")){
+				alert("Fill each field to post comment!");
 			}
-		
+			else{
+				axios.post(`rest/comments/addComment`, this.comment);
+				alert("Successfully posted a comment!");
+				this.selected_rental_id = null;
+				this.commentFormFlag = false;
+			}
+		}
 		
 	},
 	mounted () {
@@ -372,7 +201,7 @@ Vue.component("mainview", {
 		axios.get('rest/users/'+this.username)
 			.then(response => {
 				this.user=response.data;
-				return axios.get(`rest/rentalAgency/getAll`);
+				return axios.get(`rest/rentalAgency/getRateableAgencies/` + this.username);
 				})
 		.then((response) => {let RentalAgencies = response.data;
 				             RentalAgencies.sort((a, b) => b.state.localeCompare(a.state));
