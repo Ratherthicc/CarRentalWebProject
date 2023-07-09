@@ -182,6 +182,10 @@ Vue.component("managerprofile", {
 		acceptComment: function(c) {
 			c.is_rated = "APPROVED";
 			axios.put('rest/comments/updateComment', c)
+			.then(response=>{
+				axios.put('rest/rentalAgency/updateRating/'+this.rentalAgency.id)
+				
+			})
 		},
 		rejectComment: function(c) {
 			c.is_rated = "REJECTED";

@@ -11,18 +11,21 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
+import dao.CommentDAO;
 import dao.LocationDAO;
 import dao.OrderDAO;
 import dao.RentalAgencyDAO;
 import dao.VehicleDAO;
 import model.Basket;
 import model.Comment;
+import model.Comment.CommentStatus;
 import model.Location;
 import model.Order;
 import model.Order.Status;
@@ -62,6 +65,10 @@ public class RentalAgencyService {
 		if (ctx.getAttribute("OrderDAO") == null) {
 	    	String contextPath = ctx.getRealPath("");
 			ctx.setAttribute("OrderDAO", new OrderDAO(contextPath));
+		}
+		if (ctx.getAttribute("CommentDAO") == null) {
+	    	String contextPath = ctx.getRealPath("");
+			ctx.setAttribute("CommentDAO", new CommentDAO(contextPath));
 		}
 	}
 	
@@ -134,5 +141,28 @@ public class RentalAgencyService {
 		return dao.addAgency(agency,open,close);
 	}
 	
+	@PUT
+	@Path("/updateRating/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void updateRating(@PathParam("id")int id) {
+		
+		RentalAgencyDAO dao = (RentalAgencyDAO) ctx.getAttribute("RentalAgencyDAO");
+		CommentDAO commentDAO=(CommentDAO) ctx.getAttribute("CommentDAO");
+		double rating=0;
+		int i=0;
+		for(Comment com : commentDAO.getAll()) {
+			if(com.getAgency().getId()==id && com.getIs_rated()==CommentStatus.APPROVED) {
+				rating+=com.getRating();
+				i++;
+			}
+		}
+		if(i==0)rating=0;
+		else {
+			rating=rating/i;
+		}
+		dao.updateRating(id,rating);
+		
+	}
 	
 }

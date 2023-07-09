@@ -52,7 +52,16 @@ public class RentalAgencyDAO {
 		max++;
 		return max;
 	}
-	
+	public void updateRating(int id,double rating) {
+		for(RentalAgency ren : rentalAgencies) {
+			if(ren.getId()==id) {
+				ren.setRating(rating);
+				saveAll();
+				return;
+			}
+		}
+		
+	}
 	
 	public int addAgency(RentalAgency agency,String open,String close) {
 		loadAll();
@@ -93,7 +102,7 @@ public class RentalAgencyDAO {
 													       LocalTime.parse(data[3]),
 													       state,
 													       new URI(data[5]),
-													       Integer.parseInt(data[6]),
+													       Double.parseDouble(data[6]),
 													       Integer.parseInt(data[7]));
 				rentalAgencies.add(rentalAgency);
 			}

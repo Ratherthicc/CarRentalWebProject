@@ -15,7 +15,7 @@ public class RentalAgency {
 	private LocalTime closingTime;
 	private AgencyState state;
 	private URI logoURI;
-	private int rating;
+	private double rating;
 	private Location location;
 	private List<Vehicle> vehicles;
 	
@@ -32,7 +32,7 @@ public class RentalAgency {
 	}
 
 	public RentalAgency(int id, String name, LocalTime openingTime, LocalTime closingTime, AgencyState state,
-			URI logoURI, int rating, int locationId) {
+			URI logoURI, double rating, int locationId) {
 		super();
 		location = new Location();
 		this.id = id;
@@ -104,11 +104,11 @@ public class RentalAgency {
 		this.logoURI = logoURI;
 	}
 
-	public int getRating() {
+	public double getRating() {
 		return rating;
 	}
 
-	public void setRating(int rating) {
+	public void setRating(double rating) {
 		this.rating = rating;
 	}
 
