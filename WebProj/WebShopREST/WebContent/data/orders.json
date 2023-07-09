@@ -1,52 +1,7 @@
 [
   {
-    "order_id": "hNLk3H9TO29DaM",
+    "order_id": "KblOnjkWISob3C",
     "vehicles": [
-      {
-        "id": 0,
-        "brand": "hah",
-        "model": "haha",
-        "price": 23.0,
-        "vehicle_type": "CAR",
-        "rental_object_id": 4,
-        "transmission_type": "AUTOMATIC",
-        "fuel_type": "DIESEL",
-        "fuel_consumption": 22.0,
-        "doors": 3,
-        "people": 3,
-        "description": "opis",
-        "picture": "http://example.com",
-        "available": true
-      }
-    ],
-    "agency_id": 4,
-    "date_time": "2023-06-01T00:55",
-    "duration": 30.0,
-    "price": 23.0,
-    "firstname": "Jovan123",
-    "lastname": "Katanic",
-    "status": "CANCELED",
-    "username": "Jovan123"
-  },
-  {
-    "order_id": "oRa9KUkj0TbEXD",
-    "vehicles": [
-      {
-        "id": 2,
-        "brand": "hah",
-        "model": "haha",
-        "price": 23.0,
-        "vehicle_type": "CAR",
-        "rental_object_id": 2,
-        "transmission_type": "AUTOMATIC",
-        "fuel_type": "HYBRID",
-        "fuel_consumption": 22.0,
-        "doors": 3,
-        "people": 3,
-        "description": "opis",
-        "picture": "https://images.unsplash.com/photo-1559416523-140ddc3d238c?ixlib\u003drb-4.0.3\u0026ixid\u003dM3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\u0026auto\u003dformat\u0026fit\u003dcrop\u0026w\u003d1151\u0026q\u003d80",
-        "available": true
-      },
       {
         "id": 4,
         "brand": "hah",
@@ -62,20 +17,52 @@
         "description": "opis",
         "picture": "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?ixlib\u003drb-4.0.3\u0026ixid\u003dM3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\u0026auto\u003dformat\u0026fit\u003dcrop\u0026w\u003d1170\u0026q\u003d80",
         "available": true
+      },
+      {
+        "id": 6,
+        "brand": "asdasd",
+        "model": "asd",
+        "price": 123.0,
+        "vehicle_type": "CAR",
+        "rental_object_id": 2,
+        "transmission_type": "MANUEL",
+        "fuel_type": "BENZENE",
+        "fuel_consumption": 123.0,
+        "doors": 123,
+        "people": 123,
+        "description": "asdasddas",
+        "picture": "https://images.unsplash.com/photo-1555652736-e92021d28a10?ixlib\u003drb-4.0.3\u0026ixid\u003dM3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\u0026auto\u003dformat\u0026fit\u003dcrop\u0026w\u003d1170\u0026q\u003d80",
+        "available": false
       }
     ],
     "agency_id": 2,
-    "date_time": "2023-06-01T15:33",
-    "duration": 44.0,
-    "price": 46.0,
-    "firstname": "Jovan123",
+    "date_time": "2023-07-16T17:02",
+    "duration": 14.0,
+    "price": 146.0,
+    "firstname": "Jovan",
     "lastname": "Katanic",
-    "status": "CANCELED",
+    "status": "APPROVED",
     "username": "Jovan123"
   },
   {
-    "order_id": "S3sDh8qm3WlWc2",
+    "order_id": "cCkJ8mq5n6D8Kk",
     "vehicles": [
+      {
+        "id": 5,
+        "brand": "asdasd",
+        "model": "asd",
+        "price": 123.0,
+        "vehicle_type": "CAR",
+        "rental_object_id": 2,
+        "transmission_type": "MANUEL",
+        "fuel_type": "BENZENE",
+        "fuel_consumption": 123.0,
+        "doors": 123,
+        "people": 123,
+        "description": "asdasddas",
+        "picture": "https://images.unsplash.com/photo-1555652736-e92021d28a10?ixlib\u003drb-4.0.3\u0026ixid\u003dM3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\u0026auto\u003dformat\u0026fit\u003dcrop\u0026w\u003d1170\u0026q\u003d80",
+        "available": false
+      },
       {
         "id": 2,
         "brand": "hah",
@@ -91,93 +78,19 @@
         "description": "opis",
         "picture": "https://images.unsplash.com/photo-1559416523-140ddc3d238c?ixlib\u003drb-4.0.3\u0026ixid\u003dM3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\u0026auto\u003dformat\u0026fit\u003dcrop\u0026w\u003d1151\u0026q\u003d80",
         "available": true
-      },
-      {
-        "id": 4,
-        "brand": "hah",
-        "model": "haha",
-        "price": 23.0,
-        "vehicle_type": "VAN",
-        "rental_object_id": 2,
-        "transmission_type": "AUTOMATIC",
-        "fuel_type": "DIESEL",
-        "fuel_consumption": 22.0,
-        "doors": 3,
-        "people": 3,
-        "description": "opis",
-        "picture": "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?ixlib\u003drb-4.0.3\u0026ixid\u003dM3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\u0026auto\u003dformat\u0026fit\u003dcrop\u0026w\u003d1170\u0026q\u003d80",
-        "available": true
       }
     ],
     "agency_id": 2,
-    "date_time": "2023-06-01T15:51",
-    "duration": 51.0,
-    "price": 46.0,
-    "firstname": "Jovan123",
+    "date_time": "2023-07-16T17:02",
+    "duration": 14.0,
+    "price": 146.0,
+    "firstname": "Jovan",
     "lastname": "Katanic",
-    "status": "CANCELED",
+    "status": "REJECTED",
     "username": "Jovan123"
   },
   {
-    "order_id": "8KxGBsjjvUdqL9",
-    "vehicles": [
-      {
-        "id": 0,
-        "brand": "hah",
-        "model": "haha",
-        "price": 23.0,
-        "vehicle_type": "CAR",
-        "rental_object_id": 4,
-        "transmission_type": "AUTOMATIC",
-        "fuel_type": "DIESEL",
-        "fuel_consumption": 22.0,
-        "doors": 3,
-        "people": 3,
-        "description": "opis",
-        "picture": "http://example.com",
-        "available": true
-      }
-    ],
-    "agency_id": 4,
-    "date_time": "2023-06-01T15:51",
-    "duration": 51.0,
-    "price": 23.0,
-    "firstname": "Jovan123",
-    "lastname": "Katanic",
-    "status": "CANCELED",
-    "username": "Jovan123"
-  },
-  {
-    "order_id": "qtAIGI41NrVOBT",
-    "vehicles": [
-      {
-        "id": 1,
-        "brand": "hah",
-        "model": "haha",
-        "price": 23.0,
-        "vehicle_type": "CAR",
-        "rental_object_id": 1,
-        "transmission_type": "AUTOMATIC",
-        "fuel_type": "HYBRID",
-        "fuel_consumption": 22.0,
-        "doors": 3,
-        "people": 3,
-        "description": "opis",
-        "picture": "http://example.com",
-        "available": true
-      }
-    ],
-    "agency_id": 1,
-    "date_time": "2023-06-01T15:51",
-    "duration": 51.0,
-    "price": 23.0,
-    "firstname": "Jovan123",
-    "lastname": "Katanic",
-    "status": "CANCELED",
-    "username": "Jovan123"
-  },
-  {
-    "order_id": "fP1v15NWsC8MCt",
+    "order_id": "DYSBT7aONOtP7D",
     "vehicles": [
       {
         "id": 3,
@@ -197,16 +110,16 @@
       }
     ],
     "agency_id": 6,
-    "date_time": "2023-06-01T15:51",
-    "duration": 51.0,
+    "date_time": "2023-07-16T17:02",
+    "duration": 14.0,
     "price": 23.0,
-    "firstname": "Jovan123",
+    "firstname": "Jovan",
     "lastname": "Katanic",
-    "status": "CANCELED",
+    "status": "PROCESSING",
     "username": "Jovan123"
   },
   {
-    "order_id": "EQg3YIyeWurCep",
+    "order_id": "kUB7XjmzD9zc77",
     "vehicles": [
       {
         "id": 1,
@@ -226,289 +139,12 @@
       }
     ],
     "agency_id": 1,
-    "date_time": "2023-07-04T22:39",
-    "duration": 25.0,
+    "date_time": "2023-07-16T17:02",
+    "duration": 14.0,
     "price": 23.0,
-    "firstname": "Jovan123",
+    "firstname": "Jovan",
     "lastname": "Katanic",
-    "status": "CANCELED",
+    "status": "PROCESSING",
     "username": "Jovan123"
-  },
-  {
-    "order_id": "Zp0Zo5g2P9ZtG1",
-    "vehicles": [
-      {
-        "id": 0,
-        "brand": "hah",
-        "model": "haha",
-        "price": 23.0,
-        "vehicle_type": "CAR",
-        "rental_object_id": 4,
-        "transmission_type": "AUTOMATIC",
-        "fuel_type": "DIESEL",
-        "fuel_consumption": 22.0,
-        "doors": 3,
-        "people": 3,
-        "description": "opis",
-        "picture": "http://example.com",
-        "available": true
-      }
-    ],
-    "agency_id": 4,
-    "date_time": "2023-07-04T22:39",
-    "duration": 25.0,
-    "price": 23.0,
-    "firstname": "Jovan123",
-    "lastname": "Katanic",
-    "status": "CANCELED",
-    "username": "Jovan123"
-  },
-  {
-    "order_id": "FFSl1e8tybtUCK",
-    "vehicles": [
-      {
-        "id": 2,
-        "brand": "hah",
-        "model": "haha",
-        "price": 23.0,
-        "vehicle_type": "CAR",
-        "rental_object_id": 2,
-        "transmission_type": "AUTOMATIC",
-        "fuel_type": "HYBRID",
-        "fuel_consumption": 22.0,
-        "doors": 3,
-        "people": 3,
-        "description": "opis",
-        "picture": "https://images.unsplash.com/photo-1559416523-140ddc3d238c?ixlib\u003drb-4.0.3\u0026ixid\u003dM3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\u0026auto\u003dformat\u0026fit\u003dcrop\u0026w\u003d1151\u0026q\u003d80",
-        "available": true
-      },
-      {
-        "id": 4,
-        "brand": "hah",
-        "model": "haha",
-        "price": 23.0,
-        "vehicle_type": "VAN",
-        "rental_object_id": 2,
-        "transmission_type": "AUTOMATIC",
-        "fuel_type": "DIESEL",
-        "fuel_consumption": 22.0,
-        "doors": 3,
-        "people": 3,
-        "description": "opis",
-        "picture": "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?ixlib\u003drb-4.0.3\u0026ixid\u003dM3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\u0026auto\u003dformat\u0026fit\u003dcrop\u0026w\u003d1170\u0026q\u003d80",
-        "available": true
-      }
-    ],
-    "agency_id": 2,
-    "date_time": "2023-07-15T13:48",
-    "duration": 15.0,
-    "price": 46.0,
-    "firstname": "Pas",
-    "lastname": "Pas",
-    "status": "PROCESSING",
-    "username": "Jovann1"
-  },
-  {
-    "order_id": "VmGCT9GlJvoV25",
-    "vehicles": [
-      {
-        "id": 0,
-        "brand": "hah",
-        "model": "haha",
-        "price": 23.0,
-        "vehicle_type": "CAR",
-        "rental_object_id": 4,
-        "transmission_type": "AUTOMATIC",
-        "fuel_type": "DIESEL",
-        "fuel_consumption": 22.0,
-        "doors": 3,
-        "people": 3,
-        "description": "opis",
-        "picture": "http://example.com",
-        "available": true
-      }
-    ],
-    "agency_id": 4,
-    "date_time": "2023-07-23T14:18",
-    "duration": 7.0,
-    "price": 23.0,
-    "firstname": "Neki",
-    "lastname": "Nesto",
-    "status": "CANCELED",
-    "username": "Nesto123"
-  },
-  {
-    "order_id": "c52jQ1005WJWFV",
-    "vehicles": [
-      {
-        "id": 1,
-        "brand": "hah",
-        "model": "haha",
-        "price": 23.0,
-        "vehicle_type": "CAR",
-        "rental_object_id": 1,
-        "transmission_type": "AUTOMATIC",
-        "fuel_type": "HYBRID",
-        "fuel_consumption": 22.0,
-        "doors": 3,
-        "people": 3,
-        "description": "opis",
-        "picture": "http://example.com",
-        "available": true
-      }
-    ],
-    "agency_id": 1,
-    "date_time": "2023-07-23T14:18",
-    "duration": 7.0,
-    "price": 23.0,
-    "firstname": "Neki",
-    "lastname": "Nesto",
-    "status": "CANCELED",
-    "username": "Nesto123"
-  },
-  {
-    "order_id": "hceMM4fl1QvTzr",
-    "vehicles": [
-      {
-        "id": 3,
-        "brand": "hah",
-        "model": "haha",
-        "price": 23.0,
-        "vehicle_type": "VAN",
-        "rental_object_id": 6,
-        "transmission_type": "AUTOMATIC",
-        "fuel_type": "HYBRID",
-        "fuel_consumption": 22.0,
-        "doors": 3,
-        "people": 3,
-        "description": "opis",
-        "picture": "http://example.com",
-        "available": true
-      }
-    ],
-    "agency_id": 6,
-    "date_time": "2023-07-23T14:18",
-    "duration": 7.0,
-    "price": 23.0,
-    "firstname": "Neki",
-    "lastname": "Nesto",
-    "status": "PROCESSING",
-    "username": "Nesto123"
-  },
-  {
-    "order_id": "xITAPYhrDyoef2",
-    "vehicles": [
-      {
-        "id": 0,
-        "brand": "hah",
-        "model": "haha",
-        "price": 23.0,
-        "vehicle_type": "CAR",
-        "rental_object_id": 4,
-        "transmission_type": "AUTOMATIC",
-        "fuel_type": "DIESEL",
-        "fuel_consumption": 22.0,
-        "doors": 3,
-        "people": 3,
-        "description": "opis",
-        "picture": "http://example.com",
-        "available": true
-      }
-    ],
-    "agency_id": 4,
-    "date_time": "2023-07-23T14:46",
-    "duration": 7.0,
-    "price": 23.0,
-    "firstname": "Kk",
-    "lastname": "Pac",
-    "status": "PROCESSING",
-    "username": "Kupac123"
-  },
-  {
-    "order_id": "ZLPV0EaUX3d4NM",
-    "vehicles": [
-      {
-        "id": 1,
-        "brand": "hah",
-        "model": "haha",
-        "price": 23.0,
-        "vehicle_type": "CAR",
-        "rental_object_id": 1,
-        "transmission_type": "AUTOMATIC",
-        "fuel_type": "HYBRID",
-        "fuel_consumption": 22.0,
-        "doors": 3,
-        "people": 3,
-        "description": "opis",
-        "picture": "http://example.com",
-        "available": true
-      }
-    ],
-    "agency_id": 1,
-    "date_time": "2023-07-23T14:46",
-    "duration": 7.0,
-    "price": 23.0,
-    "firstname": "Kk",
-    "lastname": "Pac",
-    "status": "PROCESSING",
-    "username": "Kupac123"
-  },
-  {
-    "order_id": "NJoyifftYTkuUt",
-    "vehicles": [
-      {
-        "id": 0,
-        "brand": "hah",
-        "model": "haha",
-        "price": 23.0,
-        "vehicle_type": "CAR",
-        "rental_object_id": 4,
-        "transmission_type": "AUTOMATIC",
-        "fuel_type": "DIESEL",
-        "fuel_consumption": 22.0,
-        "doors": 3,
-        "people": 3,
-        "description": "opis",
-        "picture": "http://example.com",
-        "available": true
-      }
-    ],
-    "agency_id": 4,
-    "date_time": "2023-08-06T14:51",
-    "duration": 7.0,
-    "price": 23.0,
-    "firstname": "Kk",
-    "lastname": "Pac",
-    "status": "PROCESSING",
-    "username": "Kupac123"
-  },
-  {
-    "order_id": "0T2ZeYg6fmKma3",
-    "vehicles": [
-      {
-        "id": 2,
-        "brand": "hah",
-        "model": "haha",
-        "price": 23.0,
-        "vehicle_type": "CAR",
-        "rental_object_id": 2,
-        "transmission_type": "AUTOMATIC",
-        "fuel_type": "HYBRID",
-        "fuel_consumption": 22.0,
-        "doors": 3,
-        "people": 3,
-        "description": "opis",
-        "picture": "https://images.unsplash.com/photo-1559416523-140ddc3d238c?ixlib\u003drb-4.0.3\u0026ixid\u003dM3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\u0026auto\u003dformat\u0026fit\u003dcrop\u0026w\u003d1151\u0026q\u003d80",
-        "available": true
-      }
-    ],
-    "agency_id": 2,
-    "date_time": "2023-08-06T14:51",
-    "duration": 7.0,
-    "price": 23.0,
-    "firstname": "Kk",
-    "lastname": "Pac",
-    "status": "PROCESSING",
-    "username": "Kupac123"
   }
 ]

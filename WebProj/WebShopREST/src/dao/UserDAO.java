@@ -34,7 +34,7 @@ public class UserDAO {
 	}
 	public Collection<User> getAll() {
 		return users;
-	}
+	} 
 	
 	public User banUser(String username) {
 		for(User u : users) {
