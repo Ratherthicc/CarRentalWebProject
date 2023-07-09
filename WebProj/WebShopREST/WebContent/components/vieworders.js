@@ -53,10 +53,10 @@ Vue.component("vieworders", {
 				<table id="table-vieworders">
 			      <tr class="tableHeader">
 			        <th>Order Id</th>
-			        <th @click="sortByAgencyName">Agency Name</th>
-			        <th @click="sortByDate">Start Date Time</th>
+			        <th @click="sortByAgencyName">Agency Name <i class="fa fa-sort custom-icon"></i></th>
+			        <th @click="sortByDate">Start Date Time <i class="fa fa-sort custom-icon"></i></th>
 			        <th>Duration(in days)</th>
-			        <th @click="sortByPrice">Price</th>
+			        <th @click="sortByPrice">Price <i class="fa fa-sort custom-icon"></i></th>
 			        <th>Firstname</th>
 			        <th>Lastname</th>
 			        <th>Status</th>

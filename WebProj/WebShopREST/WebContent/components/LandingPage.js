@@ -16,7 +16,7 @@ Vue.component("landingpage", {
 	template: ` 
     <div class="landingPage">
         <header>
-            <label class="header">Rent a car</label>
+            <label class="header">Rent a car </label>
             <nav>
                 <ul class="nav_links">
                     <li class="nav_li"><a class="nav_a" v-on:click="SignInButton">Sign in</a></li>
@@ -75,9 +75,9 @@ Vue.component("landingpage", {
         <table style="position:relative;top:6%;" id="myTable">
             <tr class="tableHeader">
                 <th>Logo</th>
-                <th v-on:click="sortName">Name</th>
-                <th v-on:click="sortLocation">Location</th>
-                <th v-on:click="sortRating">Rating</th>
+                <th  v-on:click="sortName">Name <i class="fa fa-sort custom-icon"></i></th>
+                <th v-on:click="sortLocation">Location <i class="fa fa-sort custom-icon"></i></th>
+                <th v-on:click="sortRating">Rating <i class="fa fa-sort custom-icon"></i></th>
             </tr>
             <tr v-for="r in SearchedAgencies" class="dataRow" v-on:click="checkRentalAgency(r)">
                 <td>
@@ -85,7 +85,7 @@ Vue.component("landingpage", {
             			<img v-bind:src="r.logoURI" class="rowDataImage"/>
        				</div>
                 </td>
-                <td>{{r.name}}</td>
+                <td >{{r.name}} </td>
                 <td @click="viewOnMap(r.location.geographicHeight,r.location.geographicWidth)">{{r.location.street + ', ' + r.location.streetNumber + ', ' + r.location.city}}</td>
                 <td>{{r.rating}}</td>
             </tr>

@@ -146,5 +146,137 @@
     "lastname": "Katanic",
     "status": "PROCESSING",
     "username": "Jovan123"
+  },
+  {
+    "order_id": "xTINJudMdux3eh",
+    "vehicles": [
+      {
+        "id": 0,
+        "brand": "hah",
+        "model": "haha",
+        "price": 23.0,
+        "vehicle_type": "CAR",
+        "rental_object_id": 4,
+        "transmission_type": "AUTOMATIC",
+        "fuel_type": "DIESEL",
+        "fuel_consumption": 22.0,
+        "doors": 3,
+        "people": 3,
+        "description": "opis",
+        "picture": "http://example.com",
+        "available": true
+      }
+    ],
+    "agency_id": 4,
+    "date_time": "2023-07-16T20:41",
+    "duration": 7.0,
+    "price": 23.0,
+    "firstname": "Kooo",
+    "lastname": "Kooo",
+    "status": "PROCESSING",
+    "username": "Kooo"
+  },
+  {
+    "order_id": "zrm8eNl9xIL5bc",
+    "vehicles": [
+      {
+        "id": 8,
+        "brand": "asdasd",
+        "model": "asd",
+        "price": 123.0,
+        "vehicle_type": "CAR",
+        "rental_object_id": 2,
+        "transmission_type": "MANUEL",
+        "fuel_type": "BENZENE",
+        "fuel_consumption": 123.0,
+        "doors": 123,
+        "people": 123,
+        "description": "asdasddas",
+        "picture": "https://images.unsplash.com/photo-1555652736-e92021d28a10?ixlib\u003drb-4.0.3\u0026ixid\u003dM3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\u0026auto\u003dformat\u0026fit\u003dcrop\u0026w\u003d1170\u0026q\u003d80",
+        "available": false
+      }
+    ],
+    "agency_id": 2,
+    "date_time": "2023-07-16T20:41",
+    "duration": 7.0,
+    "price": 123.0,
+    "firstname": "Kooo",
+    "lastname": "Kooo",
+    "status": "CANCELED",
+    "username": "Kooo"
+  },
+  {
+    "order_id": "oiIueH3AoTpeij",
+    "vehicles": [
+      {
+        "id": 3,
+        "brand": "hah",
+        "model": "haha",
+        "price": 23.0,
+        "vehicle_type": "VAN",
+        "rental_object_id": 6,
+        "transmission_type": "AUTOMATIC",
+        "fuel_type": "HYBRID",
+        "fuel_consumption": 22.0,
+        "doors": 3,
+        "people": 3,
+        "description": "opis",
+        "picture": "http://example.com",
+        "available": true
+      }
+    ],
+    "agency_id": 6,
+    "date_time": "2023-07-30T20:46",
+    "duration": 7.0,
+    "price": 23.0,
+    "firstname": "Kooo",
+    "lastname": "Kooo",
+    "status": "CANCELED",
+    "username": "Kooo"
+  },
+  {
+    "order_id": "lUqBY5IXL9D3lx",
+    "vehicles": [
+      {
+        "id": 4,
+        "brand": "hah",
+        "model": "haha",
+        "price": 23.0,
+        "vehicle_type": "VAN",
+        "rental_object_id": 2,
+        "transmission_type": "AUTOMATIC",
+        "fuel_type": "DIESEL",
+        "fuel_consumption": 22.0,
+        "doors": 3,
+        "people": 3,
+        "description": "opis",
+        "picture": "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?ixlib\u003drb-4.0.3\u0026ixid\u003dM3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\u0026auto\u003dformat\u0026fit\u003dcrop\u0026w\u003d1170\u0026q\u003d80",
+        "available": true
+      },
+      {
+        "id": 8,
+        "brand": "asdasd",
+        "model": "asd",
+        "price": 123.0,
+        "vehicle_type": "CAR",
+        "rental_object_id": 2,
+        "transmission_type": "MANUEL",
+        "fuel_type": "BENZENE",
+        "fuel_consumption": 123.0,
+        "doors": 123,
+        "people": 123,
+        "description": "asdasddas",
+        "picture": "https://images.unsplash.com/photo-1555652736-e92021d28a10?ixlib\u003drb-4.0.3\u0026ixid\u003dM3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\u0026auto\u003dformat\u0026fit\u003dcrop\u0026w\u003d1170\u0026q\u003d80",
+        "available": false
+      }
+    ],
+    "agency_id": 2,
+    "date_time": "2023-07-30T20:46",
+    "duration": 7.0,
+    "price": 146.0,
+    "firstname": "Kooo",
+    "lastname": "Kooo",
+    "status": "CANCELED",
+    "username": "Kooo"
   }
 ]

@@ -948,3 +948,8 @@ height: 100px;
     transform: translateX(0);
   }
 }
+
+.custom-icon {
+      color: blue;
+    }
+

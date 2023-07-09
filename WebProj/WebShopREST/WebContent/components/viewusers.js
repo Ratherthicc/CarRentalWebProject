@@ -35,13 +35,13 @@ Vue.component("viewusers", {
 	
 		<table id="myTable3">
 	        <tr>
-	            <th @click="sortUsernameName">Username</th>
+	            <th @click="sortUsernameName">Username <i class="fa fa-sort custom-icon"></i></th>
 	            <th>Password</th>
-	            <th @click="sortFirstName">First_name</th>
-	            <th @click="sortLastName">Last_name</th>
+	            <th @click="sortFirstName">First_name <i class="fa fa-sort custom-icon"></i></th>
+	            <th @click="sortLastName">Last_name <i class="fa fa-sort custom-icon"></i></th>
 	            <th>Gender</th>
 	            <th>Birth_date</th>
-	            <th @click="sortPoints">Points</th>
+	            <th @click="sortPoints">Points <i class="fa fa-sort custom-icon"></i></th>
 	            <th>Rank</th>
 	            <th>Blocked</th>
 	            
