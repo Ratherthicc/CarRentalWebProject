@@ -45,7 +45,7 @@ Vue.component("agencyview", {
         <label>Additional info:</label>
         <div class="separator-line"></div>
         <div class="agency-additional-info">
-            <span><label>Rating:</label><label class="add-info-values">{{RentalAgency.rating}}</label><label>/5</label></span>
+            <span><label>Rating:</label><label class="add-info-values">{{RentalAgency.rating?.toFixed(2)}}</label><label>/5</label></span>
             <span><label>Working hours:</label><label class="add-info-values">{{RentalAgency.openingTime?.hour + 'h - ' + RentalAgency.closingTime?.hour + 'h'}}</label></span>
             <span><label>Location:</label><label class="add-info-values">{{RentalAgency.location?.street + ', ' + RentalAgency.location?.streetNumber + ', ' + RentalAgency.location?.city}}</label></span>
         </div>

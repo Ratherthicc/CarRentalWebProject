@@ -102,17 +102,20 @@ Vue.component("vehicleview", {
 			router.push(`/viewOrders`);
 		},
 		ValidateForm: function(){
+			
 				try{
-					this.validModel = this.Vehicle.model != "";
+					this.validModel = (this.Vehicle.model !== "") && (this.Vehicle.model!==null);
 				}
 				catch(error){
 					this.validModel = false;
+					return false;
 				}
 				try{
-					this.validBrand = this.Vehicle.brand != "";
+					this.validBrand = (this.Vehicle.brand != "") && (this.Vehicle.brand!=null);
 				}
 				catch(error){
 					this.validBrand = false;
+					return false;
 				}
 				
 				const numberPattern = /^-?\d*\.?\d+$/;
@@ -122,36 +125,50 @@ Vue.component("vehicleview", {
 				}
 				catch(error){
 					this.validPrice = false;
+					return false;
 				}
 				try{
 					this.validConsumtion = this.Vehicle.fuel_consumption > 0 && numberPattern.test(this.Vehicle.fuel_consumption);
 				}
 				catch(error){
 					this.validConsumtion = false;
+					return false;
 				}
 				try{
 					this.validDoorNumber = this.Vehicle.doors > 0 && numberPattern.test(this.Vehicle.doors);
 				}
 				catch(error){
 					this.validDoorNumber = false;
+					return false;
 				}
 				try{
 					this.validSeats = this.Vehicle.people > 0 && numberPattern.test(this.Vehicle.people);
 				}
 				catch(error){
 					this.validSeats = false;
+					return false;
 				}
 				
 				try{
 					const url = new URL(this.Vehicle.picture);
 					this.validPicture = true;
+					
 				}
 				catch(error){
 					this.validPicture = false;
+					return false;
 				}
+				return true;
 		},
 		AddVehicle: function(){
 			event.preventDefault();
+			if(!this.ValidateForm()){
+				alert("Please enter data");
+				return;
+			}
+				
+				
+			
 			var vehicle_id = this.$route.params.vehicle_id;
 			var agency_id = this.$route.params.rental_agency_id;
 			
@@ -175,6 +192,7 @@ Vue.component("vehicleview", {
 		          axios.post(`rest/vehicles/saveVehicle`, this.Vehicle)
 		            .then(response => {
 		              alert("Successfully added a vehicle!");
+		              router.go(-1);
 		            })
 		            .catch(error => {
 		              console.error("Error adding a vehicle:", error);
@@ -184,6 +202,7 @@ Vue.component("vehicleview", {
 		          axios.put(`rest/vehicles/updateVehicle`, this.Vehicle)
 		            .then(response => {
 		              alert("Successfully updated vehicle!");
+		              router.go(-1);
 		            })
 		            .catch(error => {
 		              console.error("Error updating vehicle:", error);

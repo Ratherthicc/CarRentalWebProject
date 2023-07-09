@@ -88,7 +88,16 @@ public class VehicleDAO {
 			System.out.println("Greska pri azuriranju vozila(ID: " + vehicle.getId() + ")");
 		}
 	}
-	
+	public int MakeID() {
+		int max=0;
+		for(Vehicle v : vehicles) {
+			if(v.getId()>max) {
+				max=v.getId();
+			}
+		}
+		max++;
+		return max;
+	}
 	public Collection<Vehicle> getByRentalObjectId(int id){
 		List<Vehicle> vehicle_list=new ArrayList<Vehicle>();
 		for(Vehicle item:vehicles) {
@@ -109,7 +118,7 @@ public class VehicleDAO {
 	}
 	public void Add(Vehicle vehicle) {
 		loadAll();
-		vehicle.setId(vehicles.size());
+		vehicle.setId(MakeID());
 		vehicles.add(vehicle);
 		saveAll();
 	}

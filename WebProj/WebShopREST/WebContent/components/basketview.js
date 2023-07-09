@@ -22,7 +22,7 @@
 		     <input type="button" @click="addOrder" value="Confirm order" style="cursor:pointer;font-size:12px;padding-left:8px;padding-right:8px;height:40px;" class="button-confirm">
 		     <div >	
 		      	<h3>Total price of the order without discount is: <label style="font-size:30px;color:#00E676;text-decoration:underline;">{{total_price}}</label></h3>
-		      	<h5 style="text-align:center;">Discount:<label style="font-size:18px;color:#FB8C00;">{{'  ' + discount}}%</h5>
+		      	<h5 style="text-align:center;">Discount:<label style="font-size:18px;color:#FB8C00;">{{'  ' + discount}}% </label></h5>
 		     </div>
 		</div> 
 			<table style="margin-top:32px;position:relative;top:0%;left:6vw;right:6vw;width:88%" id="table-vieworders">

@@ -1,6 +1,6 @@
 0,Agencija1,12:00,18:00,WORKING,https://i.guim.co.uk/img/media/63de40b99577af9b867a9c57555a432632ba760b/0_266_5616_3370/master/5616.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=93458bbe24b9f88451ea08197888ab8e,0.0,1
 1,Agencija2,12:00,18:00,NOT_WORKING,https://i.guim.co.uk/img/media/63de40b99577af9b867a9c57555a432632ba760b/0_266_5616_3370/master/5616.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=93458bbe24b9f88451ea08197888ab8e,0.0,2
-2,Agencija3,12:00,18:00,NOT_WORKING,https://i.guim.co.uk/img/media/63de40b99577af9b867a9c57555a432632ba760b/0_266_5616_3370/master/5616.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=93458bbe24b9f88451ea08197888ab8e,4.0,4
+2,Agencija3,12:00,18:00,NOT_WORKING,https://i.guim.co.uk/img/media/63de40b99577af9b867a9c57555a432632ba760b/0_266_5616_3370/master/5616.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=93458bbe24b9f88451ea08197888ab8e,3.6666666666666665,4
 3,Agencija4,12:00,18:00,WORKING,https://i.guim.co.uk/img/media/63de40b99577af9b867a9c57555a432632ba760b/0_266_5616_3370/master/5616.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=93458bbe24b9f88451ea08197888ab8e,4.0,7
 4,Agencija5,12:00,18:00,WORKING,https://i.guim.co.uk/img/media/63de40b99577af9b867a9c57555a432632ba760b/0_266_5616_3370/master/5616.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=93458bbe24b9f88451ea08197888ab8e,0.0,3
 5,Agencija11,12:00,18:00,WORKING,https://i.guim.co.uk/img/media/63de40b99577af9b867a9c57555a432632ba760b/0_266_5616_3370/master/5616.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=93458bbe24b9f88451ea08197888ab8e,0.0,1
@@ -8,11 +8,4 @@
 7,Agencija11111,12:00,18:00,WORKING,https://i.guim.co.uk/img/media/63de40b99577af9b867a9c57555a432632ba760b/0_266_5616_3370/master/5616.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=93458bbe24b9f88451ea08197888ab8e,0.0,1
 8,Agencija1123456,12:00,18:00,NOT_WORKING,https://i.guim.co.uk/img/media/63de40b99577af9b867a9c57555a432632ba760b/0_266_5616_3370/master/5616.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=93458bbe24b9f88451ea08197888ab8e,0.0,1
 9,Agencija4567,12:00,18:00,NOT_WORKING,https://i.guim.co.uk/img/media/63de40b99577af9b867a9c57555a432632ba760b/0_266_5616_3370/master/5616.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=93458bbe24b9f88451ea08197888ab8e,0.0,1
-10,asd,16:46,19:46,WORKING,https://aa,0.0,12
-11,Nekiag,15:05,19:05,WORKING,https://aa,0.0,0
-12,Jjj,14:20,18:20,WORKING,https://aa,0.0,0
-13,Jj,15:24,18:24,WORKING,https://aa,0.0,0
-14,Jjj,15:28,18:29,WORKING,https://aa,0.0,0
-15,Jjjaaa,15:33,19:33,WORKING,https://aa,0.0,13
-16,Agencijaaaa,20:44,23:44,WORKING,https://aa,0.0,14
-17,Ime,21:30,23:30,WORKING,https://aa,0.0,15
+10,Ime,22:06,23:06,WORKING,https://aa,0.0,16

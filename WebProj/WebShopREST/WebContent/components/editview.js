@@ -23,7 +23,7 @@ Vue.component("editview", {
     <table>
     	<tr style="border: none;">
     		<td style="border: none;" colspan="2">
-    			<p style="text-decoration:underline;font-size:24px;font-weight:900;text-align:center;">Edit user:<p>
+    			<p style="text-decoration:underline;font-size:24px;font-weight:900;text-align:center;">Edit user:</p>
         	</td>
         </tr>
         <tr style="border: none;">
@@ -70,7 +70,7 @@ Vue.component("editview", {
 	, 
 	methods : {
 		ConfirmButton:function(username){
-			
+			event.preventDefault();
 			this.invalidName = false;
 			this.invalidSurname = false;
 			this.invalidDateBirth = false;
@@ -97,7 +97,7 @@ Vue.component("editview", {
 															
 														}
 														if(self.user.type === 'Administrator'){
-															router.push(`/view/${self.user.username}`);
+															router.push(`/administratorView/${self.user.username}`);
 															
 														}
 														if(self.user.type === 'Buyer'){

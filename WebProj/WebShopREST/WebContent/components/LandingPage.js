@@ -87,7 +87,7 @@ Vue.component("landingpage", {
                 </td>
                 <td >{{r.name}} </td>
                 <td @click="viewOnMap(r.location.geographicHeight,r.location.geographicWidth)">{{r.location.street + ', ' + r.location.streetNumber + ', ' + r.location.city}}</td>
-                <td>{{r.rating}}</td>
+                <td>{{r.rating.toFixed(2)}}</td>
             </tr>
         </table>
         
