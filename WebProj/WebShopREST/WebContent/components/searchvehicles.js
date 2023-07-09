@@ -34,7 +34,7 @@ Vue.component("searchvehicles", {
 		        <input type="button" value="View basket" @click="goBasketView(username)" id="go-basket-button">
 		    </div>    
 	    </div>
-	        <table style="position:relative;top:0%;left:6vh;right:6vh;width:88%" id="table-vieworders">
+	        <table style="position:relative;top:0%;left:6vw;right:6vw;width:88%;margin-bottom:32px;" id="table-vieworders">
 	        	<tr class="tableHeader">
 	        		<th>Picture</th>
 	        		<th>Rental Object Name</th>

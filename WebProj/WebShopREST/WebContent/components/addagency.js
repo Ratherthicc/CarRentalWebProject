@@ -1,7 +1,7 @@
 Vue.component("addagency", {
 	data: function () {
 		    return {
-		      	username:"haha",
+		      	username:"",
 		      	agency:{
 					  id:-1,
 					  name:"",
@@ -31,62 +31,70 @@ Vue.component("addagency", {
 	},
 	template: `
 	 
-		<div>
-			<table>
-				<tr>
-		            <td>Manager:</td>
-		            <td>
-		            	<select v-model="selectedManager">
-					        <option v-for="m in managers" :value="m">{{m.username}}</option>
-					    </select>
-					    <input type="button" value="add manager" @click="addManager">
-		            </td>
-		        </tr>
-		        <tr>
-		            <td>Name:</td>
-		            <td><input type="text" v-model="agency.name"></td>
-		        </tr>
-		        
-		        <tr>
-		            <td>Opening time:</td>
-		            <td> <input type="time" v-model="openingTime"></td>
-		        </tr>
-		        <tr>
-		            <td>Closing time:</td>
-		            <td> <input type="time" v-model="closingTime"></td>
-		        </tr>
-		        <tr>
-		            <td>Logo:</td>
-		            <td><input type="url" v-model="agency.logoURI"></td>
-		        </tr>
-		        
-		        <tr>
-		            <td>Location:</td>
-		            <td>
-		            	<label>{{agency.location.city}}, {{agency.location.street}} {{agency.location.streetNumber}}</label>
-		            </td>
-		        </tr>
-		        <tr>
-		            <td></td>
-		            <td>
-		            	<input type="button" value="add" @click="addObject">
-		            </td>
-		        </tr>
-		        <tr>
-		            <td colspan="2"><div id="map" style="width: 100%; height: 400px;"></div></td>
-		            
-		        </tr>
-	    	</table>
-	    	
-	    </div>
+		<div style="overflow:auto;height:100vh;">
+    <header>
+        <label class="header">Rent a car</label>
+        <nav>
+            <ul class="nav_links">
+                <li class="nav_li"><a class="nav_a" v-on:click="EditUser">Edit</a></li>
+            </ul>
+        </nav>
+        <a class="nav_a"><button class="nav_button">{{this.username}}</button></a>
+    </header>
+
+<div class="signup_form_div">
+    <form class="signup_form">
+    
+    	<label style="min-width:150px;text-align:center;display:inline-block;text-decoration:underline;font-weight:900;font-size:20px;margin-left:25%;margin-bottom:32px;">Add agency</label><br>
+    	
+        <label style="min-width:150px;display:inline-block;">Manager:</label>
+        <select style="border-radius:15px;width:90px;display:inline-block;margin-bottom:12px;" v-model="selectedManager">
+            <option v-for="m in managers" :value="m">{{m.username}}</option>
+        </select>
+
+        <input type="button" class="table-button" style="margin-left:14px;margin-right:0px;width:60px;height50px;padding:4px;" value="Add" @click="addManager"><br>
+
+        <label style="min-width:150px;display:inline-block;">Name:</label>
+        <input style="border-radius:15px;width:90px;display:inline-block;margin-bottom:12px;" type="text" v-model="agency.name"><br>
+
+        <label style="min-width:150px;display:inline-block;">Opening time:</label>
+        <input style="border-radius:15px;width:90px;display:inline-block;margin-bottom:12px;" type="time" v-model="openingTime"><br>
+
+        <label style="min-width:150px;display:inline-block;">Closing time:</label>
+        <input style="border-radius:15px;width:90px;display:inline-block;margin-bottom:12px;" type="time" v-model="closingTime"><br>
+
+        <label style="min-width:150px;display:inline-block;">Logo:</label>
+        <input style="border-radius:15px;width:90px;display:inline-block;margin-bottom:12px;" type="url" v-model="agency.logoURI"><br>
+
+        <label style="min-width:150px;display:inline-block;">Location:</label>
+        <label>{{agency.location.city}}, {{agency.location.street}} {{agency.location.streetNumber}}</label>
+        <br>
+
+        <div id="map" style="border: 3px solid black;width: 100%; height: 350px;"></div>
+
+        <input type="button" class="nav_button" style="width:90%;margin-top:32px;display:inline-block;" value="add" @click="addObject">
+    </form>
+</div>
+</div>
+
 	    
     
     
     ` 
 	, 
 	methods : {
+		EditUser:function(){
+			router.push(`/edit/${this.user.username}`);
+		},
 		addObject:function(){
-			axios.post('rest/locations/',this.agency.location)
+			event.preventDefault();
+			
+			if(!this.validateInput()){
+				alert("You need to enter all credentials viably!");
+				return;
+			}
+			else{
+				axios.post('rest/locations/',this.agency.location)
 			.then(response=>{
 				var loc=response.data;
 				this.agency.location.id=loc.id;
@@ -94,13 +102,13 @@ Vue.component("addagency", {
 				.then(response=>{
 					var id=response.data;
 					return axios.put('rest/users/updateAgencyId/'+this.selectedManager.username+'/'+id)
-					.then(response=>(router.push(`/administratorView/${this.username}`)))
+					.then(response=>{
+						alert("Successfully added agency!");
+						router.push(`/administratorView/${this.username}`);
+						})
 				})
-				
-				
 			})
-			
-			
+			}
 		},
 		addManager:function(){
 			router.push(`/addManager/${this.username}`);
@@ -119,11 +127,28 @@ Vue.component("addagency", {
 		      zoom: 2, // Initial zoom level
 		    }),
 		  });
+		},
+		validateInput: function(){
+			if(this.selectedManager === null
+			   || this.agency.name === ""
+			   || this.openingTime === null
+			   || this.closingTime === null
+			   || this.agency.location.geographicHeight === -1
+			   || this.agency.location.geographicWidth === -1
+			   || this.agency.location.street ===""
+			   || this.agency.location.streetNumber === ""
+			   || this.agency.location.postcode ===""
+			   || this.agency.location.city === ""){
+				return false;
+			}
+			return true;
 		}
 		
 	},
 	mounted () {
 		this.initializeMap();
+		
+		this.username = this.$route.params.username;
 		
 		var view = new ol.View({
 			  center: ol.proj.fromLonLat([21.0059, 44.0165]), // Convert coordinates to the map's projection

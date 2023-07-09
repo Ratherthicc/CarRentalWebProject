@@ -19,14 +19,13 @@
         </header>
         
 		<div class="confirm-div">	
-		     <input type="button" @click="addOrder" value="Confirm order" class="button-confirm">
+		     <input type="button" @click="addOrder" value="Confirm order" style="cursor:pointer;font-size:12px;padding-left:8px;padding-right:8px;height:40px;" class="button-confirm">
 		     <div >	
-		      	<p>Total price of the order without discount is: {{total_price}}</p>
-		      	<p>Discount:{{discount}}%</p>
+		      	<h3>Total price of the order without discount is: <label style="font-size:30px;color:#00E676;text-decoration:underline;">{{total_price}}</label></h3>
+		      	<h5 style="text-align:center;">Discount:<label style="font-size:18px;color:#FB8C00;">{{'  ' + discount}}%</h5>
 		     </div>
 		</div> 
-		<div class="basic-div-basketview">
-			<table id="table-vieworders">
+			<table style="margin-top:32px;position:relative;top:0%;left:6vw;right:6vw;width:88%" id="table-vieworders">
 		        <tr class="tableHeader">
 		            <th>Picture</th>
 			        <th>Brand</th>
@@ -63,8 +62,6 @@
 	
 	
 	      	</table>
-	     </div> 
-	        {{vehicles}}
      </div>	
     
     `

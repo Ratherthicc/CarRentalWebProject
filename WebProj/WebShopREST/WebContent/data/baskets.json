@@ -4,5 +4,11 @@
     "username": "Jovan123",
     "price": 0.0,
     "vehicles": []
+  },
+  {
+    "id": 1,
+    "username": "Nevena",
+    "price": 0.0,
+    "vehicles": []
   }
- ]
+]
