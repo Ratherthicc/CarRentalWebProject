@@ -13,6 +13,7 @@ Vue.component("managerprofile", {
 	<div style="overflow: auto;">
 	
 	  <header>
+	  		{{rentalAgency.id}}
             <label class="header">Rent a car</label>
             <nav>
                 <ul class="nav_links">
@@ -47,9 +48,9 @@ Vue.component("managerprofile", {
 	  <div class="separator-line"></div>
 	
 	  <div class="agency-additional-info">
-	    <span><label>Rating:</label><label class="add-info-values">{{this.rentalAgency.rating}}</label><label>/5</label></span>
-	    <span><label>Working hours:</label><label class="add-info-values">{{this.rentalAgency.openingTime?.hour + 'h - ' + this.rentalAgency.closingTime?.hour + 'h'}}</label></span>
-	    <span><label>Location:</label><label class="add-info-values">{{this.rentalAgency.location?.street + ', ' + this.rentalAgency.location?.streetNumber + ', ' + this.rentalAgency.location?.city}}</label></span>
+	    <span><label>Rating:</label><label class="add-info-values">{{rentalAgency.rating}}</label><label>/5</label></span>
+	    <span><label>Working hours:</label><label class="add-info-values">{{rentalAgency.openingTime?.hour + 'h - ' + rentalAgency.closingTime?.hour + 'h'}}</label></span>
+	    <span><label>Location:</label><label class="add-info-values">{{rentalAgency.location?.street + ', ' + rentalAgency.location?.streetNumber + ', ' + rentalAgency.location?.city}}</label></span>
 	    
 	    <button v-on:click="EditVehicle(rentalAgency.id,-1)" class="nav_button" style="display:block;margin-right:0px;margin-left:0px; left:70%;position: relative; margin-top: 10px; margin-bottom: 0px; width: 200px; height: 40px;">Add vehicle</button><br>
 	  </div>
@@ -57,7 +58,7 @@ Vue.component("managerprofile", {
 	  <label class="my-profile-label">Available Vehicles:</label>
 	  <div class="separator-line"></div>
 	  <div class="vehicles">
-	    <div v-for="v in this.rentalAgency.vehicles" class="vehicle-card">
+	    <div v-for="v in rentalAgency.vehicles" class="vehicle-card">
 	    <label class="mark">{{v.model + ' ' + v.brand}}</label>
 	    <label class="price">{{'Price: $' + v.price}}<label>/day</label></label>
 	    <img v-bind:src="v.picture">
@@ -69,7 +70,7 @@ Vue.component("managerprofile", {
 	        <label class="doors">{{'Number of Doors: ' + v.doors}}</label><br>
 	        <label class="status">{{ 'Status: ' + (v.available ? 'Free' : 'Taken') }}</label>
 	        
-	  		<button class="nav_button" style="margin-left: 20px; position: relative;margin-top: 10px; margin-bottom: 0px; width: 115px; margin-right: 0px; height: 40px;">Remove</button>
+	  		<button class="nav_button" @click="removeVehicle(v)" style="margin-left: 20px; position: relative;margin-top: 10px; margin-bottom: 0px; width: 115px; margin-right: 0px; height: 40px;">Remove</button>
             <button v-on:click="EditVehicle(rentalAgency.id,v.id)" class="nav_button" style="margin-left: 0px; position: relative;margin-top: 10px; margin-bottom: 0px; width: 115px; margin-right: 0px; height: 40px;">Edit</button><br>
 	      </span>
 	    </div>
@@ -168,6 +169,16 @@ Vue.component("managerprofile", {
     `
 	, 
 	methods : {
+		removeVehicle:function(v){
+			axios.delete('rest/vehicles/removeVehicle/'+v.id)
+			.then(response=>{
+				return axios.get('rest/rentalAgency/getById/' + this.user.agencyId);
+			})
+			.then(response=>{
+				this.rentalAgency = response.data;
+			})
+			
+		},
 		acceptComment: function(c) {
 			c.is_rated = "APPROVED";
 			axios.put('rest/comments/updateComment', c)
@@ -250,6 +261,7 @@ Vue.component("managerprofile", {
 			  })
 			  .then(response => {
 				  this.comments = response.data;
+				  
 			  })	
     }
 });

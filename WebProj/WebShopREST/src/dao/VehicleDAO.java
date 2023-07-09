@@ -49,6 +49,19 @@ public class VehicleDAO {
 		loadAll();
 		return vehicles;
 	}
+	
+	public void removeVehicle(int id) {
+		for(Vehicle v:vehicles) {
+			if(v.getId()==id) {
+				vehicles.remove(v);
+				saveAll();
+				return;
+			}
+		}
+		
+		
+	}
+	
 	public void Update(Vehicle vehicle) {
 		try {
 			for (Vehicle v : vehicles) {
@@ -172,6 +185,12 @@ public class VehicleDAO {
 		return jsonObject;
 	}
 	
-	
+	private boolean validate(Vehicle v) {
+		if(v.getBrand().isBlank() || v.getModel().isBlank() || v.getPrice()<0 || v.getDoors()<=0 || v.getPeople()<=0 ) {
+			return false;
+		}
+		
+		return true;
+	}
 	
 }

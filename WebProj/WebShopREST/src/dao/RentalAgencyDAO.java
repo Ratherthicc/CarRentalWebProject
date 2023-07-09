@@ -8,6 +8,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URI;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -20,6 +21,7 @@ import model.RentalAgency.AgencyState;
 import model.User;
 import model.User.Gender;
 import model.User.UserType;
+import model.Vehicle;
 import model.RentalAgency;
 
 public class RentalAgencyDAO {
@@ -51,8 +53,10 @@ public class RentalAgencyDAO {
 		return max;
 	}
 	
+	
 	public int addAgency(RentalAgency agency,String open,String close) {
 		loadAll();
+		if(validate(agency,open,close)){
 		int a=MakeID();
 		agency.setId(a);
 		agency.setOpeningTime(LocalTime.parse(open));
@@ -61,8 +65,8 @@ public class RentalAgencyDAO {
 		
 		saveAll();
 		return a;
-		
-		
+		}
+		return -1;
 	}
 	
 	public RentalAgency getById(int id) {
@@ -136,5 +140,26 @@ public class RentalAgencyDAO {
         }
 		
 	}
-	
+	private boolean validate(RentalAgency agency,String open,String closed) {
+		if(open.isBlank() || closed.isBlank() || agency.getName().isBlank() || agency.getRating()<0) {
+			return false;
+		}
+		try {
+			LocalTime openTime = LocalTime.parse(open);
+			LocalTime closedTime = LocalTime.parse(closed);
+			int comparison=openTime.compareTo(closedTime);
+			if (comparison >= 0) {
+				
+	            return false;
+	        }
+		}
+		catch (Exception e) {
+			
+			System.out.println("greska pri parsiranju vremena");
+			return false;
+		}
+		
+		
+		return true;
+	}
 }

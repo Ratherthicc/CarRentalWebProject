@@ -62,6 +62,7 @@ public class OrderDAO {
 	}
 	
 	public Order updateStatus(String order_id,Order.Status status) {
+		
 		for(Order order:orders) {
 			if(order.getOrder_id().equals(order_id)) {
 				order.setStatus(status);
@@ -93,10 +94,12 @@ public class OrderDAO {
 	
 	
 	public void addOrder(Order o) {
-		loadAll();
-		o.setOrder_id(makeId());
-		orders.add(o);
-		saveAll();
+		if(validate(o)) {
+			loadAll();
+			o.setOrder_id(makeId());
+			orders.add(o);
+			saveAll();
+		}
 	}
 	
 	
@@ -220,7 +223,6 @@ public class OrderDAO {
         	jsonVehicle.addProperty("picture", item.getPicture().toString());
         	jsonVehicle.addProperty("available", item.isAvailable());
         	
-
             jsonArray.add(jsonVehicle);
         }
         jsonObject.add("vehicles", jsonArray);
@@ -235,6 +237,15 @@ public class OrderDAO {
 		jsonObject.addProperty("username", objekat.getUsername());
 		return jsonObject;
 	}
-	
+	private boolean validate(Order order) {
+		
+		if(order.getFirstname().isBlank() || order.getLastname().isBlank() ||
+				order.getPrice()<=0 || order.getUsername().isBlank() || 
+				order.getVehicles().isEmpty() || order.getAgency_id()<0) {
+			return false;
+		}
+
+		return true;
+	}
 	
 }

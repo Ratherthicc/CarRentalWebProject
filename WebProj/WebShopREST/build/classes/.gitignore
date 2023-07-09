@@ -1,3 +1,6 @@
-/model/
+/.DS_Store
 /dao/
+/dto/
+/model/
+/serializers/
 /services/

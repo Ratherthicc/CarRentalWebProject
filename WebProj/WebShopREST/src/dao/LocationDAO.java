@@ -17,6 +17,7 @@ import org.jvnet.hk2.internal.PerLookupContext;
 import model.Location;
 import model.RentalAgency;
 import model.RentalAgency.AgencyState;
+import model.User.Gender;
 
 public class LocationDAO {
 	private List<Location> locations=new ArrayList<Location>();
@@ -46,10 +47,14 @@ public class LocationDAO {
 	}
 	
 	public Location addLocation(Location loc) {
+		if(validate(loc)) {
 		loc.setId(MakeId());
 		locations.add(loc);
 		saveAll();
 		return loc;
+		}
+		System.out.println("Greska pri upisu datuma");
+		return null;
 	}
 	
 	public Location GetById(int id) {
@@ -120,5 +125,18 @@ public class LocationDAO {
             System.err.println("Error writing to CSV file: " + e.getMessage());
         }
 		
+	}
+	
+	private boolean validate(Location loc) {
+		if(loc.getCity().isBlank() || loc.getStreet().isBlank() || loc.getPostcode().isBlank() ||
+				loc.getStreetNumber().isBlank() || loc.getGeographicHeight()==-1 || loc.getGeographicWidth()==-1) {
+			return false;
+		}
+		
+		if(loc.getGeographicHeight()<0 || loc.getGeographicWidth()<0) {
+			return false;
+		}
+		
+		return true;
 	}
 }

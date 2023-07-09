@@ -131,7 +131,7 @@ public class OrderService {
 			else if(user.getRank().equals("SILVER")) {
 				price=price*0.97;
 			}
-			Order order=new Order("0",listToAdd,agency_id,startDate,len,price,username,user.getLast_name(),Order.Status.PROCESSING,username);
+			Order order=new Order("0",listToAdd,agency_id,startDate,len,price,user.getFirst_name(),user.getLast_name(),Order.Status.PROCESSING,username);
 			dao.addOrder(order);
 		}
 	}

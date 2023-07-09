@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -107,6 +108,14 @@ public class VehicleService {
 		dao.Add(vehicle);
 	}
 	
+	@DELETE
+	@Path("/removeVehicle/{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void removeVehicle(@PathParam("id")int id) {
+		VehicleDAO dao = (VehicleDAO)ctx.getAttribute("VehicleDAO");
+		dao.removeVehicle(id);
+	}
+	
 	@PUT
 	@Path("/updateVehicle")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -114,6 +123,5 @@ public class VehicleService {
 		VehicleDAO dao = (VehicleDAO)ctx.getAttribute("VehicleDAO");
 		dao.Update(vehicle);
 	}
-	
 	
 }

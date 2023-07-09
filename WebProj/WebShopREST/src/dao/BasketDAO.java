@@ -58,10 +58,13 @@ public class BasketDAO {
 	
 	
 	public Basket createBasket(String username) {
-		Basket basket=new Basket(MakeId(),username,0,new ArrayList<Vehicle>());
-		baskets.add(basket);
-		saveAll();
-		return basket;
+		//if(validate(username)) {
+			Basket basket=new Basket(MakeId(),username,0,new ArrayList<Vehicle>());
+			baskets.add(basket);
+			saveAll();
+			return basket;
+		//}
+		//return null;
 	}
 	
 	
@@ -210,4 +213,14 @@ public class BasketDAO {
 		
 		return jsonObject;
 	}
+	/*
+	private boolean validate(String username) {
+		String regexUsername="[a-zA-Z].*";
+		if(!username.matches(regexUsername)){
+			System.out.println("Greska pri parsiranju imena");
+			return false;
+		}
+		
+		return true;
+	}*/
 }
