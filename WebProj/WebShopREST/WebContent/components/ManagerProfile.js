@@ -70,7 +70,7 @@ Vue.component("managerprofile", {
 	        <label class="doors">{{'Number of Doors: ' + v.doors}}</label><br>
 	        <label class="status">{{ 'Status: ' + (v.available ? 'Free' : 'Taken') }}</label>
 	        
-	  		<button class="nav_button" style="margin-left: 20px; position: relative;margin-top: 10px; margin-bottom: 0px; width: 115px; margin-right: 0px; height: 40px;">Remove</button>
+	  		<button class="nav_button" @click="removeVehicle(v)" style="margin-left: 20px; position: relative;margin-top: 10px; margin-bottom: 0px; width: 115px; margin-right: 0px; height: 40px;">Remove</button>
             <button v-on:click="EditVehicle(rentalAgency.id,v.id)" class="nav_button" style="margin-left: 0px; position: relative;margin-top: 10px; margin-bottom: 0px; width: 115px; margin-right: 0px; height: 40px;">Edit</button><br>
 	      </span>
 	    </div>
@@ -169,6 +169,16 @@ Vue.component("managerprofile", {
     `
 	, 
 	methods : {
+		removeVehicle:function(v){
+			axios.delete('rest/vehicles/removeVehicle/'+v.id)
+			.then(response=>{
+				return axios.get('rest/rentalAgency/getById/' + this.user.agencyId);
+			})
+			.then(response=>{
+				this.rentalAgency = response.data;
+			})
+			
+		},
 		acceptComment: function(c) {
 			c.is_rated = "APPROVED";
 			axios.put('rest/comments/updateComment', c)

@@ -21,6 +21,7 @@ import model.RentalAgency.AgencyState;
 import model.User;
 import model.User.Gender;
 import model.User.UserType;
+import model.Vehicle;
 import model.RentalAgency;
 
 public class RentalAgencyDAO {
@@ -51,6 +52,7 @@ public class RentalAgencyDAO {
 		max++;
 		return max;
 	}
+	
 	
 	public int addAgency(RentalAgency agency,String open,String close) {
 		loadAll();

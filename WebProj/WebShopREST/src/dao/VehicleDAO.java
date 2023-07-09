@@ -49,6 +49,19 @@ public class VehicleDAO {
 		loadAll();
 		return vehicles;
 	}
+	
+	public void removeVehicle(int id) {
+		for(Vehicle v:vehicles) {
+			if(v.getId()==id) {
+				vehicles.remove(v);
+				saveAll();
+				return;
+			}
+		}
+		
+		
+	}
+	
 	public void Update(Vehicle vehicle) {
 		try {
 			for (Vehicle v : vehicles) {
