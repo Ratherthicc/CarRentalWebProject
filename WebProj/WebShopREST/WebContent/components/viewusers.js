@@ -17,15 +17,29 @@ Vue.component("viewusers", {
 		    }
 	},
 	template: ` 
+	<div style="overflow: auto;height:100vh;">
+	
+	<header>
+            <label class="header">Rent a car</label>
+            <nav>
+                <ul class="nav_links">
+                    <li class="nav_li"><a class="nav_a" v-on:click="EditUser">Edit</a></li>
+                </ul>
+            </nav>
+            <a class="nav_a"><button class="nav_button">{{this.username}}</button></a>
+        </header>
+	
+	<label class="my-profile-label">Overview of all users:</label>
+	  <div class="separator-line"></div>
 	<div>
 		<div>
-			<input type="text" v-model="textbox" @keyup="updateGrid">
-		    <select v-model="role_user" @change="updateGrid">
+			<input placeholder="Search" style="border-radius:15px;margin:24px 8px 24px 6vw;"  type="text" v-model="textbox" @keyup="updateGrid">
+		    <select style="border-radius:15px;margin:12px 8px 12px 8px;" v-model="role_user" @change="updateGrid">
 		        <option value="None">None</option>
 		        <option value="Buyer">Buyer</option>
 		        <option value="Manager">Manager</option>
 		    </select>
-		    <select v-model="rank_user" @change="updateGrid">
+		    <select style="border-radius:15px;margin:12px 8px 12px 8px;" v-model="rank_user" @change="updateGrid">
 		        <option value="None">None</option>
 		        <option value="GOLD">Gold</option>
 		        <option value="SILVER">Silver</option>
@@ -33,9 +47,9 @@ Vue.component("viewusers", {
 		    </select>
 		</div>
 	
-		<table id="myTable3">
-	        <tr>
-	            <th @click="sortUsernameName">Username <i class="fa fa-sort custom-icon"></i></th>
+		<table style="position:relative;top:0%;left:6vw;right:6vw;width:88%;margin-bottom:32px;" id="myTable3">
+	        <tr class="tableHeader">
+	            <th @click="sortUsernameName">Username</th>
 	            <th>Password</th>
 	            <th @click="sortFirstName">First_name <i class="fa fa-sort custom-icon"></i></th>
 	            <th @click="sortLastName">Last_name <i class="fa fa-sort custom-icon"></i></th>
@@ -44,7 +58,7 @@ Vue.component("viewusers", {
 	            <th @click="sortPoints">Points <i class="fa fa-sort custom-icon"></i></th>
 	            <th>Rank</th>
 	            <th>Blocked</th>
-	            
+	            <th></th>
 	        </tr>
 	        <tr v-for="u in search_users">
 	            <td>{{u.username}}</td>
@@ -57,16 +71,19 @@ Vue.component("viewusers", {
 	            <td>{{u.rank}}</td>
 	            <td v-if="u.blocked!==0">blocked</td>
 	            <td v-else>active</td>
-	            <td v-if="checkUser(u.username) && u.blocked==0"><input type="button" @click="banUser(u)" value="ban"></td>
+	            <td v-if="checkUser(u.username) && u.blocked==0"><input class="table-button" type="button" @click="banUser(u)" value="ban"></td>
 	            <td v-else>...</td>
 	        </tr>
    		</table>
-   		{{bannable_users}}
 	</div>	
     
+    </div>
     `
 	, 
 	methods : {
+		EditUser:function(){
+			router.push(`/edit/${this.username}`);
+		},
 		checkUser:function(username){
 			
 			

@@ -152,10 +152,10 @@ Vue.component("mainview", {
 	, 
 	methods : {
 		EditUser:function(username){
-			router.push(`/edit/${username}`);
+			router.push(`/edit/${this.username}`);
 		},
 		findVehicles:function(username){
-			router.push(`/searchVehicles/${username}`);
+			router.push(`/searchVehicles/${this.username}`);
 		},
 		viewOrders:function(){
 			router.push(`/viewOrders/${this.username}`);

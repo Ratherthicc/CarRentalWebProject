@@ -13,7 +13,6 @@ Vue.component("managerprofile", {
 	<div style="overflow: auto;">
 	
 	  <header>
-	  		{{rentalAgency.id}}
             <label class="header">Rent a car</label>
             <nav>
                 <ul class="nav_links">

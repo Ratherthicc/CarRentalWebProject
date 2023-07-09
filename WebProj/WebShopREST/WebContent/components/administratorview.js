@@ -65,10 +65,10 @@ Vue.component("administratorview", {
 	  </tr>
 	</table>
 	
-	<div style="padding-top:12px;">
-	<input class="nav_button" style="height:70px;" type="button" value="Administrator View Users" @click="viewUsers" >
-	<input class="nav_button" style="height:70px;" type="button" value="Administrator Add Menager" @click="addManager" >
-	<input class="nav_button" style="height:70px;" type="button" value="Add Rental Agency" @click="addAgency" >
+	<div style="padding-top:12px;display:flex;gap:10px;">
+	<input class="nav_button" style="height:70px;width:12vw;" type="button" value="View Users" @click="viewUsers" >
+	<input class="nav_button" style="height:70px;width:12vw;" type="button" value="Add Manager" @click="addManager" >
+	<input class="nav_button" style="height:70px;width:12vw;" type="button" value="Add Agency" @click="addAgency" >
 	</div>
 	
 	</div>	

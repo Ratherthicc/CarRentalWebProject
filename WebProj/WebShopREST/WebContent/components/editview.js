@@ -8,45 +8,58 @@ Vue.component("editview", {
 		      	invalidBirthDate: null
 		    }
 	},
-	template: ` 
-		<form>
-		
+	template: `
+		<form style="overflow:auto;height:100vh;background-color:#dbf9f0">
+
+<header>
+            <label class="header">Rent a car</label>
+            <nav>
+                <ul class="nav_links">
+                </ul>
+            </nav>
+            <a class="nav_a"><button class="nav_button">{{this.username}}</button></a>
+        </header>
+	
     <table>
-        <tr>
-            <td><label>First name:</label></td>
-            <td>
+    	<tr style="border: none;">
+    		<td style="border: none;" colspan="2">
+    			<p style="text-decoration:underline;font-size:24px;font-weight:900;text-align:center;">Edit user:<p>
+        	</td>
+        </tr>
+        <tr style="border: none;">
+            <td style="border: none;"><label>First name:</label></td>
+            <td style="border: none;">
             	<input type="text" v-model="user.first_name">
             	<label v-if="invalidName" class="invalid_input_label">Invalid name!</label>
             </td>
         </tr>
-        <tr>
-            <td><label>Last name:</label></td>
-            <td>
+        <tr style="border: none;">
+            <td style="border: none;"><label>Last name:</label></td>
+            <td style="border: none;">
             	<input type="text" v-model="user.last_name">
             	<label v-if="invalidSurname" class="invalid_input_label">Invalid surname!</label>
             </td>
         </tr>
-        <tr>
-            <td><label>Gender:</label></td>
-            <td>
+        <tr style="border: none;">
+            <td style="border: none;"><label>Gender:</label></td>
+            <td style="border: none;">
                 <select v-model="user.gender">
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
                 </select>
             </td>
         </tr>
-        <tr>
-            <td><label>Date of birth:</label></td>
-            <td>
+        <tr style="border: none;">
+            <td style="border: none;"><label>Date of birth:</label></td>
+            <td style="border: none;">
             	<input type="date" v-model="user.birth_date">
             	<label v-if="invalidBirthDate" class="invalid_input_label">Invalid birth date!</label>
             </td>
             
         </tr>
-        <tr>
-            <td></td>
-            <td>
-                <input type="submit" value="Confirm" v-on:click="ConfirmButton(username)">
+        <tr style="border: none;">
+            <td style="border: none;" colspan="2">
+                <input type="submit" class="nav_button" value="Confirm" v-on:click="ConfirmButton(username)">
             </td>
         </tr>
     </table>
