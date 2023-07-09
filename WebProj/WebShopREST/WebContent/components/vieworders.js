@@ -24,33 +24,41 @@ Vue.component("vieworders", {
             <label class="header">Rent a car</label>
             
         </header>
+        
+        <label class="my-profile-label">Orders preview:</label>
+	  	<div class="separator-line"></div>
+	  	
         <div class="container">
 			<div class="vieworders-div-search">
-				<label class="underline-label">Search:</label>
-				<div class="basic-div-orderview">
-					<input type="text" v-model="search_text" @keyup="updateGrid" placeholder="Search by agency name!" style="text-align: center;">
+			
+				<div style="margin-top:0px;">
+				<label style="position:absolute;margin-top:0vh;margin-bottom:0px;position:relative;font-weight:800; font-size: 24px;display: inline-block;" class="underline-label">Search:</label>
+				<div style="position:relative;margin-top:0px;margin-bottom:0px;" class="basic-div-orderview">
+					<input type="text" v-model="search_text" @keyup="updateGrid" placeholder="Search by agency name" style="text-indent:8px;border-radius:15px;">
 				</div>
-				<label class="underline-label">Pick a price range: </label>
+				</div>
+				
 				<div basic-div-orderview>
+					<label class="underline-label">Price range:</label>
+					
 					<label>Min: </label><input type="number" v-model="min_price" @keyup="updateGrid">
-					&nbsp;
 					<label>Max : </label><input type="number" v-model="max_price" @keyup="updateGrid">
 				</div>
-				<label class="underline-label">Picka a date range: </label>
+				
 				<div basic-div-orderview>
+					<label class="underline-label">Date range:</label>
 					<label>From: </label><input type="datetime-local" v-model="min_date" @change="updateGrid">
-				</div>	
-				<div basic-div-orderview>
 					<label>To: </label>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<input type="datetime-local" v-model="max_date" @change="updateGrid">
 				</div>	
+				<div basic-div-orderview>
+					
+				</div>	
 				
-				<input  type="button" value="refresh" @click="refreshGrid">
+				<input class="nav_button" style="margin-top:8px;width:120px;height:50px;" type="button" value="Refresh" @click="refreshGrid">
 				
 			</div>
-			<div class="vieworders-table-div">
-				<table id="table-vieworders">
+				<table style="position:relative;left:6vw;right:6vw;top:0%;margin-top:32px;width:88%;" id="table-vieworders">
 			      <tr class="tableHeader">
 			        <th>Order Id</th>
 			        <th @click="sortByAgencyName">Agency Name</th>
@@ -76,9 +84,8 @@ Vue.component("vieworders", {
 	      		  </tr>
 	    		</table>
     		</div>
-    	</div>
-    		<div class="vieworders-table-div2">
-				<table id="table-vieworders">
+    			<label style="margin:12px 40% 8px 45%;font-size:24px;text-decoration:underline;" v-if="vehicles.length !== 0" class="my-profile-label">Orders preview:</label>
+				<table v-if="vehicles.length !== 0" style="margin-bottom:32px;position:relative;left:6vw;right:6vw;top:0%;margin-top:32px;width:88%;" id="table-vieworders">
 			      <tr class="tableHeader">
 			        <th>Image</th>
 			        <th>Brand</th>
@@ -100,7 +107,6 @@ Vue.component("vieworders", {
 			
 			      </tr>
 			    </table>
-			</div>
 
 		</div>
     
