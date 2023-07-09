@@ -64,7 +64,7 @@
 	
 	      	</table>
 	     </div> 
-	        
+	        {{vehicles}}
      </div>	
     
     `
@@ -85,6 +85,9 @@
 			axios.delete('rest/baskets/deleteOne/'+this.username+'/'+v.id)
 		},
 		addOrder:function(){
+			if(this.vehicles.length){
+				
+			
 			var points=this.total_price*133/1000;
 			axios.post('rest/orders/'+this.username+'/'+this.from_date+'/'+this.to_date)
 			.then(response=>{
@@ -95,7 +98,10 @@
 							router.push(`/view/${this.username}`);
 						})
 			})
-
+			}
+			else{
+				alert("empty basket");
+			}
 			
 		}
 	},

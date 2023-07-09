@@ -288,7 +288,7 @@ Vue.component("vieworders", {
 			  
 			  
 			  for(var item of orders){
-				  const foundItem = this.orders_searched.find(item => item.order_id === item.order_id);
+				  const foundItem = this.orders_searched.find(item2 => item.order_id === item2.order_id);
 				  if(foundItem){
 					  array.push(item);
 				  }
@@ -301,7 +301,7 @@ Vue.component("vieworders", {
 	mounted () {
 		this.username=this.$route.params.username;
 		
-		axios.get('rest/orders/getUserOrders/'+this.username)
+		return axios.get('rest/orders/getUserOrders/'+this.username)
 		.then(response=>{
 			this.orders=response.data;
 			this.orders_searched=response.data;

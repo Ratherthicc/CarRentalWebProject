@@ -83,7 +83,7 @@ Vue.component("searchvehicles", {
 			searchVehicles:function(){
 				event.preventDefault();
 				 
-				axios.delete('rest/baskets/deleteAll/'+this.username)
+				
 				
 				var flag;
 				this.free_vehicles=[];
@@ -133,7 +133,7 @@ Vue.component("searchvehicles", {
 					
 					
 				}
-				
+				return axios.delete('rest/baskets/deleteAll/'+this.username)
 			},
 			addToBasket:function(vehicle){
 				axios.post('rest/baskets/'+this.username+"/"+vehicle.id)
@@ -157,10 +157,13 @@ Vue.component("searchvehicles", {
 	mounted () {
 		this.username=this.$route.params.username;
 		axios.get('rest/vehicles/')
-			.then(response => (this.vehicles=response.data))
+			.then(response => {
+				this.vehicles=response.data
+				return axios.get('rest/orders/')
+			.then(response=>(this.orders=response.data))
+				})
 			
-		axios.get('rest/orders/')
-			.then(response=>(this.orders=response.data))	
+			
     }
 });
 

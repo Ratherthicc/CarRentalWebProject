@@ -41,8 +41,11 @@ public class CanceledOrdersDAO {
 	}
 	
 	public void addCanceledOrder(String username) {
-		canceledOrders.add(new CanceledOrders(username,LocalDateTime.now()));
-		saveAll();
+		if(validate(username)) {
+			canceledOrders.add(new CanceledOrders(username,LocalDateTime.now()));
+			saveAll();
+		}
+		
 	}
 	
 	public boolean checkUser(String username) {
@@ -124,6 +127,15 @@ public class CanceledOrdersDAO {
 		jsonObject.addProperty("username", objekat.getUsername());
 		jsonObject.addProperty("date_time", objekat.getDate_time().toString());
 		return jsonObject;
+	}
+	private boolean validate(String username) {
+		String regexUsername="[a-zA-Z].*";
+		if(!username.matches(regexUsername)){
+			System.out.println("Greska pri parsiranju imena");
+			return false;
+		}
+		
+		return true;
 	}
 	
 }

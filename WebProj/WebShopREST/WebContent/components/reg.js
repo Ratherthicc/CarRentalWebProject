@@ -67,7 +67,6 @@ Vue.component("register", {
             
             <br><label class="register_message_label">Already got an account? <a href="/WebShopREST/#/login">Log in</a></a></label>
         </form>
-        {{user.rental_agency_id}}
         </div>
     `
 	, 
@@ -115,8 +114,8 @@ Vue.component("register", {
 								self.invalidBirthDate = false;
 								self.invalidPassword = false;
 								self.invalidGender = false;
-								axios.post('rest/baskets/createBasket/'+this.user.username)
-								return;	
+								var u=response.data;
+								return axios.post('rest/baskets/createBasket/'+u.username);	
 							}
 							else{
 								alert("User with username " + self.user.username + " already exists!");

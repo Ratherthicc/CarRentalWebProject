@@ -12,8 +12,8 @@ Vue.component("addagency", {
 					  rating:0,
 					  location:{
 						"id": -1,
-				        "geographicHeight": 0.0,
-				        "geographicWidth": 0.0,
+				        "geographicHeight": -1.0,
+				        "geographicWidth": -1.0,
 				        "street": "",
 				        "streetNumber": "",
 				        "city": "",
@@ -90,12 +90,12 @@ Vue.component("addagency", {
 			.then(response=>{
 				var loc=response.data;
 				this.agency.location.id=loc.id;
-			return axios.post('rest/rentalAgency/addAgency/'+this.openingTime+'/'+this.closingTime,this.agency)
-			.then(response=>{
-				var id=response.data;
-				return axios.put('rest/users/updateAgencyId/'+this.selectedManager.username+'/'+id)
-				.then(response=>(router.push(`/administratorView/${this.username}`)))
-			})
+				return axios.post('rest/rentalAgency/addAgency/'+this.openingTime+'/'+this.closingTime,this.agency)
+				.then(response=>{
+					var id=response.data;
+					return axios.put('rest/users/updateAgencyId/'+this.selectedManager.username+'/'+id)
+					.then(response=>(router.push(`/administratorView/${this.username}`)))
+				})
 				
 				
 			})
@@ -125,17 +125,18 @@ Vue.component("addagency", {
 	mounted () {
 		this.initializeMap();
 		
+		var view = new ol.View({
+			  center: ol.proj.fromLonLat([21.0059, 44.0165]), // Convert coordinates to the map's projection
+			  zoom: 7, // Adjust the zoom level as needed
+			});
+			this.map.setView(view);
+		
 		var ovo=this;
 	  	this.map.on('click', function (evt) {
-
-	
-    
+  
     	//console.log("evt.coordinate: " + evt.coordinate);
-
     	const coords_click = ol.proj.transform(evt.coordinate, 'EPSG:3857', 'EPSG:4326');
     	//console.log("Mouse Click coordinates: " + coords_click);
-
-    
     	const lon = coords_click[0];
     	const lat = coords_click[1];
     	
@@ -144,12 +145,9 @@ Vue.component("addagency", {
 	        return encodeURIComponent(k) + '=' + encodeURIComponent(data_for_url[k])
 	    }).join('&');
 
-
-    
     	const url_nominatim = 'https://nominatim.openstreetmap.org/reverse?' + encoded_data;
     	//console.log("URL Request NOMINATIM-Reverse: " + url_nominatim);
-    	
-    	
+
 		//ADDS TARGET ICON
 		const layer = new ol.layer.Vector({
 		source: new ol.source.Vector({

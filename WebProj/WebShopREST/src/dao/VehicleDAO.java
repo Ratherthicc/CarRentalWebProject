@@ -141,6 +141,12 @@ public class VehicleDAO {
 		return jsonObject;
 	}
 	
-	
+	private boolean validate(Vehicle v) {
+		if(v.getBrand().isBlank() || v.getModel().isBlank() || v.getPrice()<0 || v.getDoors()<=0 || v.getPeople()<=0 ) {
+			return false;
+		}
+		
+		return true;
+	}
 	
 }
